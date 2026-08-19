@@ -1,0 +1,369 @@
+<!--
+  ADOM SENIOR — Page catalogue produits
+  ======================================
+  Fichier prêt à intégrer dans le repo Wawa33230/WEB-ADOMSENIOR (Vite),
+  à placer dans un nouveau dossier /catalogue/index.html à la racine du site
+  (même structure que /solution/, /realisations/, /bailleurs/, /particuliers/).
+
+  Ce fichier réutilise EXACTEMENT les classes CSS déjà définies dans
+  src/styles.css (header, nav, section, product-section, card-grid, etc.)
+  et le script partagé src/main.js (thème, menu, .reveal, formulaire).
+  Aucune modification de main.js ou styles.css n'est nécessaire pour que
+  cette page s'affiche déjà correctement.
+
+  Un unique bloc <script> en bas de page ajoute l'interactivité propre au
+  catalogue (galeries "produit animé" par famille de produits) sans toucher
+  au script partagé, pour rester un ajout autonome et sans risque de
+  régression sur les autres pages.
+
+  À faire compléter par ADOM SENIOR / à la prochaine itération :
+  - Vidéos produit : chaque bloc [data-catalogue-story] accepte un
+    <video data-catalogue-video> optionnel (voir commentaire dans la
+    section "Receveurs de douche" plus bas) pour remplacer une photo par
+    une vidéo produit ou un time-lapse de pose, dès que des fichiers
+    vidéo (mp4, idéalement < 8 Mo, 16:9) seront disponibles.
+  - Tarifs : volontairement absents (catalogue "sur devis"), à ajouter
+    si ADOM SENIOR décide d'afficher des prix indicatifs.
+-->
+<!doctype html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f7f3ec" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<meta name="description" content="Le catalogue complet ADOM SENIOR : receveurs de douche, revêtement mural, parois, accessoires et travaux annexes. Les équipements réellement posés lors de nos transformations de baignoire en douche sécurisée.">
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="apple-touch-icon" sizes="96x96" href="/favicon-96.png">
+<title>Catalogue produits — ADOM SENIOR</title>
+<link rel="canonical" href="https://adomsenior.fr/catalogue/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ADOM SENIOR" />
+<meta property="og:locale" content="fr_FR" />
+<meta property="og:title" content="Catalogue produits — ADOM SENIOR" />
+<meta property="og:description" content="Receveurs, revêtement mural, parois, accessoires et travaux annexes : le catalogue complet des équipements posés par ADOM SENIOR.">
+<meta property="og:url" content="https://adomsenior.fr/catalogue/" />
+<meta property="og:image" content="https://adomsenior.fr/media/project-feature-after.webp" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Catalogue produits — ADOM SENIOR" />
+<meta name="twitter:description" content="Receveurs, revêtement mural, parois, accessoires et travaux annexes : le catalogue complet des équipements posés par ADOM SENIOR.">
+<meta name="twitter:image" content="https://adomsenior.fr/media/project-feature-after.webp" />
+
+<style>
+  /* ---- Additions propres à la page catalogue uniquement ---- */
+  /* (styles complémentaires, ne redéfinissent aucune règle de styles.css) */
+
+  .cat-subnav { position: sticky; top: 84px; z-index: 30; background: var(--paper, #fffdf8); border-bottom: 1px solid var(--line, rgba(14,76,90,.16)); backdrop-filter: blur(6px); }
+  .cat-subnav .wrap { display: flex; gap: 6px; overflow-x: auto; padding: 12px 20px; scrollbar-width: none; }
+  .cat-subnav .wrap::-webkit-scrollbar { display: none; }
+  .cat-pill { flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line, rgba(14,76,90,.16)); font-size: 12.5px; font-weight: 600; color: var(--ink-2, #0e4c5a); text-decoration: none; white-space: nowrap; transition: background .2s ease, color .2s ease, border-color .2s ease; }
+  .cat-pill b { font-family: var(--serif); font-weight: 600; color: var(--amber, #d98a3d); }
+  .cat-pill:hover, .cat-pill.is-active { background: var(--ink-2, #0e4c5a); color: #fff; border-color: var(--ink-2, #0e4c5a); }
+  .cat-pill:hover b, .cat-pill.is-active b { color: var(--amber-hot, #f1a252); }
+
+  .catalogue-story { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; align-items: stretch; border-radius: var(--radius, 24px); overflow: hidden; box-shadow: var(--shadow); }
+  .catalogue-story.flip { grid-template-columns: 1fr 1.1fr; }
+  .catalogue-story.flip .cs-copy { order: 2; }
+  .catalogue-story.flip .cs-media { order: 1; }
+  .cs-copy { background: var(--ink-2, #0e4c5a); color: #fff; padding: 40px 38px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+  .cs-copy .eyebrow { color: var(--amber-hot, #f1a252); }
+  .cs-copy h2 { font-family: var(--serif); font-size: clamp(24px, 2.6vw, 32px); margin: 0; }
+  .cs-copy p.lead { color: #d7e6e3; font-size: 14px; margin: 0; }
+  .cs-feat { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 8px; }
+  .cs-feat li { position: relative; padding-left: 18px; font-size: 13px; color: #e7f0ee; }
+  .cs-feat li::before { content: "＋"; position: absolute; left: 0; color: var(--amber-hot, #f1a252); font-weight: 700; }
+  .cs-ranges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .cs-ranges span { border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: 4px 11px; font-size: 11px; color: #cfe1de; }
+  .cs-note { font-size: 11.5px; color: #a9c2bf; margin-top: 6px; }
+
+  .cs-media { position: relative; min-height: 360px; background: #06262c; }
+  .cs-frame { position: absolute; inset: 0; opacity: 0; transition: opacity .5s ease; }
+  .cs-frame.is-active { opacity: 1; }
+  .cs-frame img, .cs-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cs-thumbs { position: absolute; left: 16px; right: 16px; bottom: 16px; display: flex; gap: 8px; z-index: 2; }
+  .cs-thumb { flex: 1; height: 5px; border-radius: 999px; background: rgba(255,255,255,.32); border: none; padding: 0; cursor: pointer; overflow: hidden; }
+  .cs-thumb.is-active { background: var(--amber-hot, #f1a252); }
+  .cs-caption { position: absolute; left: 16px; top: 16px; background: rgba(8,47,55,.72); color: #fff; font-size: 11px; padding: 5px 12px; border-radius: 999px; z-index: 2; }
+  .cs-playbtn { position: absolute; right: 16px; top: 16px; z-index: 2; display: inline-flex; align-items: center; gap: 6px; background: rgba(8,47,55,.72); color: #fff; border: none; border-radius: 999px; padding: 7px 13px 7px 10px; font-size: 11px; font-weight: 600; cursor: pointer; }
+  .cs-playbtn i { display: inline-block; width: 0; height: 0; border-left: 7px solid #fff; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
+
+  @media (max-width: 860px) {
+    .catalogue-story, .catalogue-story.flip { grid-template-columns: 1fr; }
+    .catalogue-story.flip .cs-copy, .catalogue-story.flip .cs-media { order: initial; }
+    .cs-media { min-height: 280px; }
+  }
+
+  .cat-toc-hero { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<div class="utility"><div class="wrap"><span><strong>Posée en une journée</strong></span><span>Interventions en France · équipes formées amiante</span></div></div>
+<header class="site-header"><div class="wrap nav-shell"><a class="brand" href="/" aria-label="ADOM SENIOR, accueil"><img class="brand-logo" src="/logo-adomsenior.svg" alt="ADOM SENIOR"></a><nav class="nav" data-navigation><a href="/solution/">La solution</a><a href="/catalogue/" aria-current="page">Catalogue</a><a href="/realisations/">Réalisations</a><a href="/bailleurs/">Bailleurs</a><a href="/particuliers/">Particuliers</a><a class="button button-primary button-sm" href="/contact/">Étudier mon projet <span class="arrow">↗</span></a></nav><div class="nav-actions"><button class="theme-toggle" data-theme-toggle aria-label="Activer le thème sombre">◐</button><button class="menu-toggle" data-menu-toggle aria-label="Ouvrir le menu" aria-expanded="false">☰</button></div></div></header>
+
+<main id="contenu">
+
+  <section class="page-hero">
+    <div class="wrap page-hero-grid">
+      <div class="reveal">
+        <div class="eyebrow">Catalogue produits</div>
+        <h1>Les équipements.<br><em>Sans surprise le jour J.</em></h1>
+        <p class="lead">Receveurs, revêtement mural, parois, accessoires et travaux annexes : voici l'ensemble des équipements réellement posés par ADOM SENIOR, en partenariat avec notre fournisseur LT&nbsp;Showertec.</p>
+        <div class="cat-toc-hero">
+          <a class="cat-pill" href="#receveurs"><b>01</b> Receveurs de douche</a>
+          <a class="cat-pill" href="#revetement-mural"><b>02</b> Revêtement mural</a>
+          <a class="cat-pill" href="#parois"><b>03</b> Parois de douche</a>
+          <a class="cat-pill" href="#accessoires"><b>04</b> Accessoires</a>
+          <a class="cat-pill" href="#travaux-annexes"><b>05</b> Travaux annexes</a>
+        </div>
+      </div>
+      <aside class="page-fact reveal"><b>5 familles</b><span>d'équipements réunies dans un même catalogue, du receveur aux petits travaux annexes.</span></aside>
+    </div>
+  </section>
+
+  <nav class="cat-subnav" aria-label="Catégories du catalogue">
+    <div class="wrap">
+      <a class="cat-pill" href="#receveurs" data-cat-link><b>01</b> Receveurs</a>
+      <a class="cat-pill" href="#revetement-mural" data-cat-link><b>02</b> Revêtement mural</a>
+      <a class="cat-pill" href="#parois" data-cat-link><b>03</b> Parois</a>
+      <a class="cat-pill" href="#accessoires" data-cat-link><b>04</b> Accessoires</a>
+      <a class="cat-pill" href="#travaux-annexes" data-cat-link><b>05</b> Travaux annexes</a>
+    </div>
+  </nav>
+
+  <!-- ============ 01. RECEVEURS DE DOUCHE ============ -->
+  <section class="section" id="receveurs">
+    <div class="wrap">
+      <div class="catalogue-story reveal" data-catalogue-story>
+        <div class="cs-copy">
+          <div class="eyebrow">01 · Fondation de la douche</div>
+          <h2>Receveurs de douche</h2>
+          <p class="lead">Posé bas, extra-plat et antidérapant, le receveur facilite le passage du pied et limite le risque de chute — tout en conservant l'esthétique d'une vraie salle de bain contemporaine.</p>
+          <ul class="cs-feat">
+            <li>Extra-plat, affleurant ou à seuil très réduit</li>
+            <li>Surface antidérapante, adaptée à l'usage senior</li>
+            <li>Découpé et ajusté sur mesure à l'emplacement de l'ancienne baignoire</li>
+            <li>Posé sur plots réglables, raccordé à l'évacuation existante</li>
+          </ul>
+          <div class="cs-ranges"><span>Gamme Slim</span><span>Gamme Futura</span><span>Gamme Moderna</span><span>Gamme Design</span></div>
+          <p class="cs-note">Gammes fournisseur LT Showertec — dimensions et coloris confirmés lors de la visite technique. Tarif sur devis personnalisé.</p>
+          <a class="button button-primary" style="align-self:flex-start;margin-top:6px;" href="/contact/">Étudier mon projet <span class="arrow">↗</span></a>
+        </div>
+        <div class="cs-media">
+          <span class="cs-caption">Réalisation ADOM SENIOR</span>
+          <!--
+            Emplacement vidéo (optionnel) : remplacez la 1ʳᵉ figure ci-dessous par
+            <div class="cs-frame is-active" data-cs-frame><video data-catalogue-video muted loop playsinline poster="/media/lt-receveur.jpg"><source src="/media/videos/receveur.mp4" type="video/mp4"></video></div>
+            et le bouton .cs-playbtn ci-dessous se chargera de lancer la lecture au clic.
+          -->
+          <div class="cs-frame is-active" data-cs-frame><img src="/media/project-marble-after-shower.webp" alt="Receveur extra-plat posé, finitions marbre — réalisation ADOM SENIOR"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/lt-receveur.jpg" alt="Receveur extra-plat antidérapant, rendu LT Showertec"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/product-metro.webp" alt="Receveur bas intégré, finition métro"></div>
+          <div class="cs-thumbs" role="tablist" aria-label="Photos du receveur"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02. REVETEMENT MURAL ============ -->
+  <section class="section paper" id="revetement-mural">
+    <div class="wrap">
+      <div class="catalogue-story flip reveal" data-catalogue-story>
+        <div class="cs-copy">
+          <div class="eyebrow">02 · Sans casser, sans carreler</div>
+          <h2>Revêtement mural</h2>
+          <p class="lead">Les murs existants sont conservés puis recouverts de panneaux étanches en PMMA, découpés à la mesure de la pièce. Fini la poussière du carrelage : un résultat net, lumineux et facile d'entretien.</p>
+          <ul class="cs-feat">
+            <li>Panneaux étanches posés directement sur le support existant</li>
+            <li>Découpés sur mesure en atelier, sans découpe sur site</li>
+            <li>Surface non poreuse, sans joint, entretien facilité</li>
+            <li>Chantier plus court, moins de nuisances</li>
+          </ul>
+          <div class="cs-ranges"><span>Effet marbre</span><span>Effet bois</span><span>Effet métro</span><span>Effet granit</span></div>
+          <p class="cs-note">Échantillons consultables lors de la visite technique. Tarif sur devis personnalisé.</p>
+          <a class="button button-dark" style="align-self:flex-start;margin-top:6px;" href="/contact/">Voir les finitions disponibles <span class="arrow">↗</span></a>
+        </div>
+        <div class="cs-media">
+          <span class="cs-caption">Rendus LT Showertec</span>
+          <div class="cs-frame is-active" data-cs-frame><img src="/media/lt-finition-marbre.jpg" alt="Panneaux muraux finition marbre"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/lt-finition-bois.jpg" alt="Panneaux muraux finition bois"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/lt-finition-metro.jpg" alt="Panneaux muraux finition carreau métro"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/project-gallery-marble-black.webp" alt="Douche terminée, panneaux marbre noir"></div>
+          <div class="cs-thumbs" role="tablist" aria-label="Finitions de revêtement mural"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03. PAROIS DE DOUCHE ============ -->
+  <section class="section" id="parois">
+    <div class="wrap">
+      <div class="catalogue-story reveal" data-catalogue-story>
+        <div class="cs-copy">
+          <div class="eyebrow">03 · Sécurité et transparence</div>
+          <h2>Parois de douche</h2>
+          <p class="lead">La paroi referme l'espace douche sans jamais l'enclaver. Battante, pivotante ou coulissante, elle est choisie selon l'ergonomie de la pièce et la facilité d'accès recherchée.</p>
+          <ul class="cs-feat">
+            <li>Verre trempé sécurisé, profilés chromés ou noirs</li>
+            <li>Ouverture battante, pivotante ou coulissante selon l'espace</li>
+            <li>Verre transparent ou dépoli, pour plus d'intimité</li>
+            <li>Dimensions ajustées à l'emprise du receveur posé</li>
+          </ul>
+          <div class="cs-ranges"><span>Panneaux vitrés fixes</span><span>Paroi pivotante</span><span>Paroi coulissante</span></div>
+          <p class="cs-note">Configuration confirmée avec le receveur et le mur associés. Tarif sur devis personnalisé.</p>
+          <a class="button button-primary" style="align-self:flex-start;margin-top:6px;" href="/contact/">Étudier mon projet <span class="arrow">↗</span></a>
+        </div>
+        <div class="cs-media">
+          <span class="cs-caption">Réalisation ADOM SENIOR</span>
+          <div class="cs-frame is-active" data-cs-frame><img src="/media/project-feature-detail-09.webp" alt="Paroi de douche vitrée avec vasque attenante"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/lt-espace-douche.jpg" alt="Espace douche de plain-pied, rendu LT Showertec"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/project-02-after.webp" alt="Paroi vitrée après adaptation"></div>
+          <div class="cs-thumbs" role="tablist" aria-label="Photos des parois"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04. ACCESSOIRES ============ -->
+  <section class="section paper" id="accessoires">
+    <div class="wrap">
+      <div class="catalogue-story flip reveal" data-catalogue-story>
+        <div class="cs-copy">
+          <div class="eyebrow">04 · Le confort sans l'étiquette</div>
+          <h2>Accessoires — barres, siège, robinetterie</h2>
+          <p class="lead">La sécurité est intégrée dans les détails ; elle ne doit jamais définir l'apparence de la pièce. Barres, siège et robinetterie sont positionnés selon les besoins réels de la personne.</p>
+          <ul class="cs-feat">
+            <li>Barres de maintien droites, coudées ou relevables</li>
+            <li>Siège de douche fixe ou rabattable, hauteur ajustée</li>
+            <li>Mitigeur thermostatique avec butée anti-brûlure</li>
+            <li>Set de douche à hauteur et inclinaison réglables</li>
+          </ul>
+          <div class="cs-ranges"><span>Barres d'appui</span><span>Siège rabattable</span><span>Robinetterie thermostatique</span></div>
+          <p class="cs-note">Sélection et implantation définies avec la personne concernée. Tarif sur devis personnalisé.</p>
+          <a class="button button-dark" style="align-self:flex-start;margin-top:6px;" href="/contact/">Étudier mon projet <span class="arrow">↗</span></a>
+        </div>
+        <div class="cs-media">
+          <span class="cs-caption">Sécurité intégrée</span>
+          <div class="cs-frame is-active" data-cs-frame><img src="/media/lt-securite.jpg" alt="Barre d'appui et siège de douche, rendu LT Showertec"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/project-06-after.webp" alt="Barre d'appui, siège et robinetterie thermostatique posés"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/product-access.webp" alt="Siège de douche et barre d'appui"></div>
+          <div class="cs-thumbs" role="tablist" aria-label="Photos des accessoires"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05. TRAVAUX ANNEXES ============ -->
+  <section class="section" id="travaux-annexes">
+    <div class="wrap">
+      <div class="catalogue-story reveal" data-catalogue-story>
+        <div class="cs-copy">
+          <div class="eyebrow">05 · Une salle de bain cohérente</div>
+          <h2>Travaux annexes — lavabo, WC</h2>
+          <p class="lead">Au-delà de la douche, ADOM SENIOR peut prendre en charge le remplacement des équipements attenants, pour une salle de bain cohérente du sol au plafond.</p>
+          <ul class="cs-feat">
+            <li>Remplacement du lavabo par un meuble vasque suspendu ou sur pied</li>
+            <li>WC surélevé, pour faciliter les transferts assis-debout</li>
+            <li>WC suspendu, pour un entretien facilité et un gain d'espace</li>
+            <li>Petits travaux de plomberie associés (évacuation, alimentation)</li>
+          </ul>
+          <div class="cs-ranges"><span>Meuble vasque</span><span>WC surélevé</span><span>WC suspendu</span></div>
+          <p class="cs-note">Travaux proposés en complément de la douche, selon le besoin identifié. Tarif sur devis personnalisé.</p>
+          <a class="button button-primary" style="align-self:flex-start;margin-top:6px;" href="/contact/">Étudier mon projet <span class="arrow">↗</span></a>
+        </div>
+        <div class="cs-media">
+          <span class="cs-caption">Réalisation ADOM SENIOR</span>
+          <div class="cs-frame is-active" data-cs-frame><img src="/media/project-marble-after-vanity.webp" alt="Meuble vasque double, remplacement lavabo"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/project-feature-detail-03.webp" alt="WC suspendu après travaux"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/project-feature-detail-08.webp" alt="WC et douche, finitions marbre noir"></div>
+          <div class="cs-thumbs" role="tablist" aria-label="Photos des travaux annexes"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap cta-grid">
+      <div><div class="eyebrow">Votre salle de bain, votre rythme</div><h2>Un catalogue, une infinité de configurations.</h2></div>
+      <div><p>Chaque équipement est ajusté à votre salle de bain lors de la visite technique. Un premier échange suffit pour qualifier le besoin.</p><div class="cta-actions mt-2"><a class="button button-dark" href="/contact/">Étudier mon projet <span class="arrow">↗</span></a></div></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand"><a class="brand" href="/" aria-label="ADOM SENIOR, accueil"><img class="brand-logo" src="/logo-adomsenior.svg" alt="ADOM SENIOR"></a><p>Transformation de baignoire en douche sécurisée, pour les particuliers, les bailleurs sociaux et les collectivités.</p></div>
+      <div class="footer-col"><h3>Découvrir</h3><a href="/solution/">La solution</a><a href="/catalogue/">Catalogue produits</a><a href="/realisations/">Réalisations</a></div>
+      <div class="footer-col"><h3>Professionnels</h3><a href="/bailleurs/">Bailleurs sociaux</a><a href="/particuliers/">Particuliers</a><a href="/contact/">Demander un échange</a></div>
+      <div class="footer-col"><h3>Contact</h3><a href="mailto:contact@adomsenior.fr">contact@adomsenior.fr</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 ADOM SENIOR. Tous droits réservés.</span><span>ADOM SENIOR · France</span></div>
+  </div>
+</footer>
+
+<script type="module" src="/src/main.js"></script>
+<script type="module">
+  // Interactivité propre à la page catalogue : galeries "produit animé" par famille.
+  // Autonome, ne dépend pas de src/main.js et ne modifie aucun comportement des autres pages.
+  document.querySelectorAll('[data-catalogue-story]').forEach((story) => {
+    const frames = [...story.querySelectorAll('[data-cs-frame]')];
+    const thumbRail = story.querySelector('.cs-thumbs');
+    if (!frames.length || !thumbRail) return;
+
+    frames.forEach((frame, i) => {
+      const b = document.createElement('button');
+      b.className = 'cs-thumb' + (i === 0 ? ' is-active' : '');
+      b.type = 'button';
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-label', `Photo ${i + 1} sur ${frames.length}`);
+      thumbRail.appendChild(b);
+    });
+    const thumbs = [...thumbRail.children];
+
+    let active = 0;
+    let timer = 0;
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const show = (index) => {
+      active = (index + frames.length) % frames.length;
+      frames.forEach((f, i) => f.classList.toggle('is-active', i === active));
+      thumbs.forEach((t, i) => t.classList.toggle('is-active', i === active));
+    };
+    const start = () => {
+      if (reducedMotion || frames.length < 2) return;
+      clearInterval(timer);
+      timer = window.setInterval(() => show(active + 1), 4500);
+    };
+
+    thumbs.forEach((t, i) => t.addEventListener('click', () => { show(i); start(); }));
+
+    // Lecture vidéo au clic si un <video data-catalogue-video> est présent dans le bloc actif
+    const playBtn = story.querySelector('[data-cs-play]');
+    playBtn?.addEventListener('click', () => {
+      const video = frames[active]?.querySelector('video');
+      video?.play();
+    });
+
+    show(0);
+    start();
+  });
+
+  // Scrollspy : met en surbrillance la catégorie visible dans la sous-navigation
+  const catLinks = [...document.querySelectorAll('[data-cat-link]')];
+  const catSections = catLinks
+    .map((link) => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
+  if (catLinks.length && catSections.length && 'IntersectionObserver' in window) {
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const id = `#${entry.target.id}`;
+        catLinks.forEach((link) => link.classList.toggle('is-active', link.getAttribute('href') === id));
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    catSections.forEach((section) => spy.observe(section));
+  }
+</script>
+</body>
+</html>
