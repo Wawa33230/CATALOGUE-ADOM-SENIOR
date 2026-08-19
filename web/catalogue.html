@@ -16,6 +16,15 @@
   au script partagé, pour rester un ajout autonome et sans risque de
   régression sur les autres pages.
 
+  IMPORTANT — nouveaux visuels à déployer :
+  Cette page utilise des visuels 3D et photos produit LT Showertec (issus
+  du catalogue fournisseur), volontairement DIFFÉRENTS des photos de
+  réalisations déjà publiées sur adomsenior.fr, pour éviter tout doublon
+  visuel entre le catalogue produits et le reste du site. Ces images sont
+  fournies à part, dans le dossier media/catalogue/ (16 fichiers .png) —
+  à copier tel quel dans public/media/catalogue/ du repo avant déploiement,
+  aux côtés de ce fichier (placé en /catalogue/index.html).
+
   À faire compléter par ADOM SENIOR / à la prochaine itération :
   - Vidéos produit : chaque bloc [data-catalogue-story] accepte un
     <video data-catalogue-video> optionnel (voir commentaire dans la
@@ -149,15 +158,15 @@
           <a class="button button-primary" style="align-self:flex-start;margin-top:6px;" href="/contact/">Étudier mon projet <span class="arrow">↗</span></a>
         </div>
         <div class="cs-media">
-          <span class="cs-caption">Réalisation ADOM SENIOR</span>
+          <span class="cs-caption">Gamme Futura · LT Showertec</span>
           <!--
             Emplacement vidéo (optionnel) : remplacez la 1ʳᵉ figure ci-dessous par
-            <div class="cs-frame is-active" data-cs-frame><video data-catalogue-video muted loop playsinline poster="/media/lt-receveur.jpg"><source src="/media/videos/receveur.mp4" type="video/mp4"></video></div>
+            <div class="cs-frame is-active" data-cs-frame><video data-catalogue-video muted loop playsinline poster="/media/catalogue/receveur-futura.png"><source src="/media/videos/receveur.mp4" type="video/mp4"></video></div>
             et le bouton .cs-playbtn ci-dessous se chargera de lancer la lecture au clic.
           -->
-          <div class="cs-frame is-active" data-cs-frame><img src="/media/project-marble-after-shower.webp" alt="Receveur extra-plat posé, finitions marbre — réalisation ADOM SENIOR"></div>
-          <div class="cs-frame" data-cs-frame><img src="/media/lt-receveur.jpg" alt="Receveur extra-plat antidérapant, rendu LT Showertec"></div>
-          <div class="cs-frame" data-cs-frame><img src="/media/product-metro.webp" alt="Receveur bas intégré, finition métro"></div>
+          <div class="cs-frame is-active" data-cs-frame><img src="/media/catalogue/receveur-futura.png" alt="Receveur FUTURA PN24, rendu LT Showertec"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/catalogue/receveur-moderna.png" alt="Receveur MODERNA, rendu LT Showertec"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/catalogue/receveur-slim.png" alt="Receveur SLIM extra-plat, rendu LT Showertec"></div>
           <div class="cs-thumbs" role="tablist" aria-label="Photos du receveur"></div>
         </div>
       </div>
@@ -183,11 +192,10 @@
           <a class="button button-dark" style="align-self:flex-start;margin-top:6px;" href="/contact/">Voir les finitions disponibles <span class="arrow">↗</span></a>
         </div>
         <div class="cs-media">
-          <span class="cs-caption">Rendus LT Showertec</span>
-          <div class="cs-frame is-active" data-cs-frame><img src="/media/lt-finition-marbre.jpg" alt="Panneaux muraux finition marbre"></div>
-          <div class="cs-frame" data-cs-frame><img src="/media/lt-finition-bois.jpg" alt="Panneaux muraux finition bois"></div>
-          <div class="cs-frame" data-cs-frame><img src="/media/lt-finition-metro.jpg" alt="Panneaux muraux finition carreau métro"></div>
-          <div class="cs-frame" data-cs-frame><img src="/media/project-gallery-marble-black.webp" alt="Douche terminée, panneaux marbre noir"></div>
+          <span class="cs-caption">Panneaux Relief · LT Showertec</span>
+          <div class="cs-frame is-active" data-cs-frame><img src="/media/catalogue/panneau-relief-beton.png" alt="Panneaux RELIEF finition béton, LT Showertec"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/catalogue/panneau-relief-metro-bois.png" alt="Panneaux RELIEF finitions métro et bois, LT Showertec"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/catalogue/dalle-murale-carrelage.png" alt="Dalles murales effet carrelage, LT Showertec"></div>
           <div class="cs-thumbs" role="tablist" aria-label="Finitions de revêtement mural"></div>
         </div>
       </div>
@@ -213,10 +221,10 @@
           <a class="button button-primary" style="align-self:flex-start;margin-top:6px;" href="/contact/">Étudier mon projet <span class="arrow">↗</span></a>
         </div>
         <div class="cs-media">
-          <span class="cs-caption">Réalisation ADOM SENIOR</span>
-          <div class="cs-frame is-active" data-cs-frame><img src="/media/project-feature-detail-09.webp" alt="Paroi de douche vitrée avec vasque attenante"></div>
-          <div class="cs-frame" data-cs-frame><img src="/media/lt-espace-douche.jpg" alt="Espace douche de plain-pied, rendu LT Showertec"></div>
-          <div class="cs-frame" data-cs-frame><img src="/media/project-02-after.webp" alt="Paroi vitrée après adaptation"></div>
+          <span class="cs-caption">Parois pliantes · LT Showertec</span>
+          <div class="cs-frame is-active" data-cs-frame><img src="/media/catalogue/paroi-pliante-mosaique.png" alt="Paroi pliante, finition mosaïque, LT Showertec"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/catalogue/ambiance-06.png" alt="Paroi vitrée sur mesure, rendu LT Showertec"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/catalogue/ambiance-02.png" alt="Paroi vitrée, finition carrelage métro, rendu LT Showertec"></div>
           <div class="cs-thumbs" role="tablist" aria-label="Photos des parois"></div>
         </div>
       </div>
@@ -242,10 +250,10 @@
           <a class="button button-dark" style="align-self:flex-start;margin-top:6px;" href="/contact/">Étudier mon projet <span class="arrow">↗</span></a>
         </div>
         <div class="cs-media">
-          <span class="cs-caption">Sécurité intégrée</span>
-          <div class="cs-frame is-active" data-cs-frame><img src="/media/lt-securite.jpg" alt="Barre d'appui et siège de douche, rendu LT Showertec"></div>
-          <div class="cs-frame" data-cs-frame><img src="/media/project-06-after.webp" alt="Barre d'appui, siège et robinetterie thermostatique posés"></div>
-          <div class="cs-frame" data-cs-frame><img src="/media/product-access.webp" alt="Siège de douche et barre d'appui"></div>
+          <span class="cs-caption">Robinetterie &amp; confort · LT Showertec</span>
+          <div class="cs-frame is-active" data-cs-frame><img src="/media/catalogue/robinetterie-duo.png" alt="Set de douche thermostatique, noir mat et chromé, LT Showertec"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/catalogue/barre-en-t.png" alt="Barre en T, support de douchette, LT Showertec"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/catalogue/siege-design.png" alt="Siège de douche rabattable Design, LT Showertec"></div>
           <div class="cs-thumbs" role="tablist" aria-label="Photos des accessoires"></div>
         </div>
       </div>
@@ -271,10 +279,10 @@
           <a class="button button-primary" style="align-self:flex-start;margin-top:6px;" href="/contact/">Étudier mon projet <span class="arrow">↗</span></a>
         </div>
         <div class="cs-media">
-          <span class="cs-caption">Réalisation ADOM SENIOR</span>
-          <div class="cs-frame is-active" data-cs-frame><img src="/media/project-marble-after-vanity.webp" alt="Meuble vasque double, remplacement lavabo"></div>
-          <div class="cs-frame" data-cs-frame><img src="/media/project-feature-detail-03.webp" alt="WC suspendu après travaux"></div>
-          <div class="cs-frame" data-cs-frame><img src="/media/project-feature-detail-08.webp" alt="WC et douche, finitions marbre noir"></div>
+          <span class="cs-caption">Meuble vasque · LT Showertec</span>
+          <div class="cs-frame is-active" data-cs-frame><img src="/media/catalogue/meuble-vasque.png" alt="Meuble vasque inox avec miroir et éclairage, LT Showertec"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/catalogue/ambiance-travertin.png" alt="Salle de bain rénovée, finition travertin, rendu LT Showertec"></div>
+          <div class="cs-frame" data-cs-frame><img src="/media/catalogue/avant-apres-gris.png" alt="Douche et vasque après travaux, finition gris minéral, rendu LT Showertec"></div>
           <div class="cs-thumbs" role="tablist" aria-label="Photos des travaux annexes"></div>
         </div>
       </div>

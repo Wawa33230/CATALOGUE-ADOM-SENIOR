@@ -16,6 +16,14 @@ Structure du catalogue (identique dans les deux versions) :
 6. Accessoires — barres, siège, robinetterie
 7. Travaux annexes — lavabo, WC
 
+## Visuels : source unique, le catalogue fournisseur LT Showertec
+
+Sur demande explicite, **aucune photo du site adomsenior.fr n'est réutilisée** (ni les vraies photos de chantiers, ni les rendus 3D déjà publiés en ligne), pour éviter tout doublon entre le catalogue produits et le reste du site.
+
+Tous les visuels (21 images) proviennent du **catalogue fournisseur LT Showertec** que vous avez transmis (`Catalogue_LT_SHOWERTEC.pdf`) : photos produit détourées (robinetterie, barre en T, siège) et rendus d'ambiance de salle de bain (receveurs Futura/Moderna/Slim, panneaux Relief, dalles murales, parois pliantes, meuble vasque). Chaque image a été extraite proprement du PDF fournisseur (fond blanc restitué, pas de fond noir parasite) puis réutilisée une seule fois dans tout le document — zéro répétition.
+
+Les gammes citées (Slim, Futura, Moderna, Design pour les receveurs ; Relief et dalles clipsables pour les murs ; parois pliantes Intimity ; barres en T ; sièges Design) sont les gammes réellement commercialisées par LT Showertec, telles que documentées dans leur catalogue.
+
 ## 1. Version PDF (`print/`)
 
 - `catalogue-print.html` : la mise en page complète (15 pages A4), avec les images embarquées dans `print/media/`.
@@ -28,7 +36,7 @@ cd print
 node build-pdf.mjs
 ```
 
-Le fichier est produit dans `dist/catalogue-adomsenior.pdf`.
+Le fichier est produit dans `dist/catalogue-adomsenior.pdf` (~7 Mo).
 
 **Charte graphique reprise à l'identique** de vos documents existants (`pv-reception-adomsenior.html`, `notice-entretien-adomsenior.html`) : bleu profond `#0e4c5a`, ambre `#d98a3d`/`#e7a551`, titres en serif (Iowan Old Style / Georgia), logo maison.
 
@@ -36,16 +44,16 @@ Le fichier est produit dans `dist/catalogue-adomsenior.pdf`.
 
 Un **fichier HTML unique et autonome**, à transmettre tel quel à ChatGPT avec l'instruction :
 
-> « Intègre ce fichier comme nouvelle page `/catalogue/index.html` sur le site adomsenior.fr (repo Wawa33230/WEB-ADOMSENIOR), et ajoute un lien "Catalogue" dans la navigation du header, entre "La solution" et "Réalisations". »
+> « Intègre ce fichier comme nouvelle page `/catalogue/index.html` sur le site adomsenior.fr (repo Wawa33230/WEB-ADOMSENIOR), copie le dossier `web/media/catalogue/` dans `public/media/catalogue/`, et ajoute un lien "Catalogue" dans la navigation du header, entre "La solution" et "Réalisations". »
 
 Points importants :
 
 - Le fichier **réutilise à 100 % les classes CSS déjà définies** dans `src/styles.css` du site (header, nav, `section`, `card-grid`, boutons, `.reveal`, etc.) et le script partagé `src/main.js` (thème clair/sombre, menu mobile, animations au scroll, formulaire de contact). **Aucune modification de `main.js` ou `styles.css` n'est nécessaire.**
-- Il ajoute son propre `<style>` (styles complémentaires only, aucune redéfinition) et un petit `<script type="module">` en bas de page, autonome, pour :
+- Il ajoute son propre `<style>` (styles complémentaires uniquement, aucune redéfinition) et un petit `<script type="module">` en bas de page, autonome, pour :
   - une **galerie « produit animé »** par famille de produits (identique dans l'esprit à celle déjà présente sur la page d'accueil), avec vignettes cliquables et rotation automatique ;
   - une **sous-navigation collante** avec les 5 catégories, dont l'onglet actif se met à jour automatiquement au scroll (scrollspy).
-- Toutes les images référencées (`/media/...`) sont déjà présentes dans le repo du site — aucun nouvel asset à copier.
-- Testé en conditions réelles avec le vrai `styles.css` du site (rendu conforme à la charte, cf. captures fournies en aparté).
+- **16 nouvelles images** sont fournies dans `web/media/catalogue/` — à copier dans `public/media/catalogue/` du repo du site avant déploiement (elles n'existent pas encore sur adomsenior.fr).
+- Testé en conditions réelles avec le vrai `styles.css` du site (rendu conforme à la charte).
 
 ### Vidéos produit (prêt, mais pas encore alimenté)
 
@@ -53,12 +61,12 @@ Chaque bloc `[data-catalogue-story]` peut accueillir une vidéo à la place d'un
 
 ## 3. Ce qui a servi de base
 
-- Le site `adomsenior.fr` (repo `Wawa33230/WEB-ADOMSENIOR`, cloné en lecture seule pour cette mission) : présentation de l'activité, secteurs d'intervention, charte graphique, photos réelles de chantiers, et références produit du fournisseur **LT Showertec**.
-- Les gammes citées (Slim, Futura, Moderna, Design pour les receveurs ; panneaux vitrés fixes ; panneaux muraux design) sont les gammes réellement commercialisées par LT Showertec — sourcées publiquement, pas inventées.
+- Le site `adomsenior.fr` (repo `Wawa33230/WEB-ADOMSENIOR`, cloné en lecture seule pour cette mission) : présentation de l'activité, secteurs d'intervention, charte graphique et méthode déjà en place.
+- Le catalogue fournisseur `Catalogue_LT_SHOWERTEC.pdf` que vous avez transmis : contenu produit détaillé (caractéristiques techniques, gammes, finitions) et l'intégralité des visuels du catalogue.
+- Accès direct à `ltshowertec.com` et `akw.fr` bloqué par le proxy réseau de cet environnement — sans impact, le PDF fournisseur transmis contenait tout le nécessaire (et davantage) pour construire un catalogue fidèle et visuel.
 
 ## 4. Ce qu'il reste à trancher avec vous
 
 - **Tarifs** : volontairement absents (mention « sur devis personnalisé » partout). Dites-moi si vous voulez afficher des tarifs indicatifs par gamme.
-- **Fiches produit détaillées** : le catalogue présente les 5 familles avec leurs caractéristiques génériques (celles réellement mises en avant par ADOM SENIOR). Si vous voulez des fiches par référence précise (dimensions, coloris exacts, réf. fournisseur), il faudra les données LT Showertec correspondantes — je n'ai pas pu accéder à ltshowertec.com ni akw.fr directement (bloqués par le proxy réseau de cet environnement) : je me suis basé sur les informations publiques déjà indexées.
-- **Photos par produit** : chaque famille a 3 à 4 photos réelles (réalisations ADOM SENIOR + rendus LT Showertec). Si vous avez d'autres visuels fournisseur (notamment pour les accessoires et les travaux annexes, moins couverts sur le site actuel), transmettez-les pour enrichir encore le catalogue.
+- **Fiches produit avec références précises** : le catalogue présente les 5 familles avec leurs caractéristiques et gammes réelles, mais sans tableau de références/dimensions détaillé comme dans le PDF fournisseur d'origine. Dites-moi si vous voulez ce niveau de détail (référence, dimensions, poids) repris dans le catalogue ADOM SENIOR.
 - **Mentions légales** : SIRET, adresse, téléphone n'apparaissent nulle part sur le site actuel (seul `contact@adomsenior.fr` est public). Je ne les ai donc pas ajoutés au catalogue — à compléter si vous voulez qu'ils apparaissent en pied du PDF.
