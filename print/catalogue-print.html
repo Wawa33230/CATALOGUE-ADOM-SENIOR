@@ -130,6 +130,10 @@
   .gallery figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .gallery .main { grid-row: 1 / 3; }
   .gallery figcaption { position: absolute; left: 8px; bottom: 8px; background: rgba(8,47,55,.82); color: #fff; font-size: 9px; padding: 3px 9px; border-radius: 999px; }
+  .gallery-duo { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr; }
+  .gallery-duo .main { grid-row: auto; }
+  .gallery-quad { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+  .gallery-quad .main { grid-row: auto; }
 
   .feat-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; }
   .feat-cols h2.sec { font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: var(--ink-2); margin: 0 0 8px; padding-bottom: 5px; border-bottom: 1px solid var(--line); }
@@ -138,6 +142,9 @@
   .feat-list li::before { content: "•"; color: var(--amber); font-weight: 800; position: absolute; left: 2px; }
   .devis-box { margin-top: 8px; background: var(--sand); border: 1px solid var(--line); border-radius: 10px; padding: 10px 13px; font-size: 10.5px; color: #55635f; }
   .devis-box b { color: var(--ink-2); }
+
+  .dim-chips { display: flex; flex-wrap: wrap; gap: 5px; margin: 2px 0 8px; }
+  .dim-chips span { background: var(--sand); border: 1px solid var(--line); border-radius: 6px; padding: 3px 8px; font-size: 10px; color: var(--ink-2); font-weight: 600; }
 
   /* ---------- contact / closing ---------- */
   .closing { background: var(--ink); color: #fff; }
@@ -203,10 +210,11 @@
         <div class="toc-row"><span class="n">02</span><span class="t">Revêtement mural</span><span class="p">08</span></div>
         <div class="toc-row"><span class="n">03</span><span class="t">Parois de douche</span><span class="p">10</span></div>
         <div class="toc-row"><span class="n">04</span><span class="t">Accessoires — barres, siège, robinetterie</span><span class="p">12</span></div>
-        <div class="toc-row"><span class="n">05</span><span class="t">Travaux annexes — lavabo, WC</span><span class="p">14</span></div>
-        <div class="toc-row"><span class="n">—</span><span class="t">Contact &amp; prise de rendez-vous</span><span class="p">16</span></div>
+        <div class="toc-row"><span class="n">05</span><span class="t">Travaux complémentaires — lavabo, WC</span><span class="p">14</span></div>
+        <div class="toc-row"><span class="n">06</span><span class="t">Sols</span><span class="p">16</span></div>
+        <div class="toc-row"><span class="n">—</span><span class="t">Contact &amp; prise de rendez-vous</span><span class="p">17</span></div>
       </div>
-      <div class="toc-note">Les équipements présentés sont ceux réellement posés par les équipes ADOM SENIOR, en partenariat avec notre fournisseur LT&nbsp;Showertec. Finitions, coloris et dimensions sont ajustés à chaque salle de bain lors de la visite technique — <b>tarifs sur devis personnalisé</b>.</div>
+      <div class="toc-note">Les équipements présentés sont ceux réellement posés par les équipes ADOM SENIOR, en partenariat avec notre fournisseur LT&nbsp;Showertec. Chaque produit est recoupé et ajusté sur mesure, au millimètre, à la configuration réelle de votre salle de bain — ce support vous accompagne pour visualiser et composer votre projet.</div>
     </div>
     <figure class="toc-photo"><img src="media/paroi-pliante-intimity.png" alt=""><figcaption>Paroi pliante Intimity · LT Showertec</figcaption></figure>
   </div>
@@ -219,12 +227,12 @@
     <div class="pres-head">
       <div class="eyebrow">Qui sommes-nous</div>
       <h1 class="serif">Retrouver l'aisance.<br><em style="color:var(--amber);font-style:italic;">Sans tout refaire.</em></h1>
-      <p class="pres-lead">ADOM SENIOR transforme la baignoire en une douche contemporaine et sécurisée, sans casser ni recarreler. Le matin, l'équipe dépose l'ancienne baignoire ; le soir, la nouvelle douche est posée. Après 36 heures de séchage, elle est prête à vivre.</p>
+      <p class="pres-lead">ADOM SENIOR transforme la baignoire en une douche contemporaine et sécurisée, sans casser ni recarreler. Pour une douche seule, une journée de 8&nbsp;h suffit : le matin, l'équipe dépose l'ancienne baignoire ; le soir, la nouvelle douche est posée. Pour une rénovation complète — sol, WC, lavabo — comptez 2 jours. Après 36 heures de séchage, la douche est prête à vivre.</p>
     </div>
     <div class="stat-row">
-      <div class="stat"><b>1 jour</b><span>pour réaliser la pose complète</span></div>
+      <div class="stat"><b>1 jour</b><span>pour une douche seule (journée de 8 h)</span></div>
+      <div class="stat"><b>2 jours</b><span>pour une rénovation complète (sol, WC, lavabo…)</span></div>
       <div class="stat"><b>36 h</b><span>de séchage avant la première utilisation</span></div>
-      <div class="stat"><b>≈ 50</b><span>poses réalisées chaque mois</span></div>
       <div class="stat"><b>10 ans</b><span>de garantie sur les matériaux posés</span></div>
     </div>
     <div class="two-col">
@@ -237,7 +245,7 @@
         <div class="badge-row">
           <span class="badge">Sans casser, sans carreler</span>
           <span class="badge">Protocole amiante SS4</span>
-          <span class="badge">Suivi numérique InterFast</span>
+          <span class="badge">Sur mesure, au millimètre</span>
         </div>
         <figure class="pres-photo" style="margin-top:8mm;flex:1;min-height:0;"><img src="media/ambiance-01.png" alt=""></figure>
       </div>
@@ -258,7 +266,7 @@
     <div class="audience-grid">
       <div class="audience-card"><span class="tag">Particuliers</span><h3>Rester chez soi, en toute sécurité</h3><p>Une solution sur mesure, contemporaine et non stigmatisante, avec un premier éclairage sur les aides MaPrimeAdapt'.</p></div>
       <div class="audience-card"><span class="tag">Aidants &amp; familles</span><h3>Accompagner un proche</h3><p>Conseils adaptés à la personne, finitions choisies pour l'intérieur, sans transformer la salle de bain en espace médicalisé.</p></div>
-      <div class="audience-card"><span class="tag">Bailleurs sociaux</span><h3>Des programmes suivis logement par logement</h3><p>Équipes formées SS4, méthode documentée et suivi numérique InterFast pour garder une lecture claire de chaque intervention.</p></div>
+      <div class="audience-card"><span class="tag">Bailleurs sociaux</span><h3>Des programmes suivis logement par logement</h3><p>Équipes formées SS4, méthode documentée et suivi rigoureux pour garder une lecture claire de chaque intervention.</p></div>
       <div class="audience-card"><span class="tag">Collectivités &amp; EHPAD</span><h3>Adapter un patrimoine, à grande échelle</h3><p>Réponse aux marchés publics comme aux besoins ponctuels, intervention en site occupé, réception tracée et documentée.</p></div>
     </div>
     <div class="devis-box" style="margin-top:10mm;max-width:170mm;">
@@ -291,30 +299,29 @@
       <span class="cat-n">01</span>
     </div>
     <p class="spread-lead">Le receveur est l'élément fondateur de la douche sécurisée : posé bas, il facilite le passage du pied et limite le risque de chute, tout en conservant une esthétique proche d'une vraie salle de bain contemporaine.</p>
-    <div class="gallery">
+    <div class="gallery gallery-duo">
       <figure class="main"><img src="media/receveur-futura.png" alt="Receveur FUTURA PN24, rendu LT Showertec"><figcaption>Gamme Futura</figcaption></figure>
       <figure><img src="media/receveur-moderna.png" alt="Receveur MODERNA, rendu LT Showertec"><figcaption>Gamme Moderna</figcaption></figure>
-      <figure><img src="media/receveur-slim.png" alt="Receveur SLIM extra-plat, rendu LT Showertec"><figcaption>Gamme Slim</figcaption></figure>
     </div>
     <div class="feat-cols">
       <div>
         <h2 class="sec">Caractéristiques</h2>
         <ul class="feat-list">
           <li>Receveur extra-plat, affleurant ou à seuil très réduit</li>
-          <li>Surface antidérapante, classe de sécurité adaptée à l'usage senior</li>
-          <li>Découpé et ajusté sur mesure à l'emplacement de l'ancienne baignoire</li>
-          <li>Posé sur plots réglables, raccordé à l'évacuation existante</li>
+          <li>Surface antidérapante <b>PN24</b>, antibactérienne et hautement résistante — conçue pour un usage intensif</li>
+          <li>Gammes fournisseur LT Showertec : Futura, Moderna, à carreler</li>
+          <li>Coloris blanc, gris ou minéral selon l'ambiance choisie</li>
         </ul>
       </div>
       <div>
-        <h2 class="sec">Finitions &amp; options</h2>
+        <h2 class="sec">Sur mesure, au millimètre</h2>
+        <div class="dim-chips"><span>80×80</span><span>90×90</span><span>100×100</span><span>120×100</span><span>140×100</span><span>160×100</span><span>180×90</span><span>200×100</span></div>
         <ul class="feat-list">
-          <li>Gammes fournisseur LT Showertec : Futura, Moderna, Slim, à carreler</li>
-          <li>Coloris blanc, gris ou minéral selon l'ambiance choisie</li>
-          <li>Dimensions adaptées à la configuration réelle de la pièce</li>
+          <li>8 dimensions de base (en cm), recoupables de 15 cm de chaque côté — hors face avant — pour une adaptation parfaite à l'existant</li>
+          <li>Posé sur plots réglables, raccordé à l'évacuation existante</li>
           <li>Compatible avec l'ensemble des parois et panneaux muraux du catalogue</li>
         </ul>
-        <div class="devis-box">Dimensions et finitions confirmées lors de la visite technique — <b>tarif sur devis personnalisé</b>.</div>
+        <div class="devis-box">Ce n'est pas une simple cabine posée : chaque receveur est ajusté sur mesure lors de la visite technique, pour une finition parfaitement intégrée.</div>
       </div>
     </div>
   </div>
@@ -339,7 +346,7 @@
       <div><div class="eyebrow">Équipement 02</div><h1 class="serif">Revêtement mural</h1></div>
       <span class="cat-n">02</span>
     </div>
-    <p class="spread-lead">Les murs existants sont conservés, puis recouverts de panneaux étanches en PMMA, découpés à la mesure de la pièce. Fini la poussière et les nuisances d'un chantier de carrelage : le résultat est net, lumineux et facile d'entretien.</p>
+    <p class="spread-lead">Les murs existants sont conservés, puis recouverts de panneaux étanches, découpés sur place à la mesure exacte de la pièce. Fini la poussière et les nuisances d'un chantier de carrelage : le résultat est net, lumineux et facile d'entretien.</p>
     <div class="gallery">
       <figure class="main"><img src="media/panneau-relief-beton.png" alt="Panneaux RELIEF finition béton, LT Showertec"><figcaption>Panneaux Relief · effet béton</figcaption></figure>
       <figure><img src="media/panneau-relief-metro-bois.png" alt="Panneaux RELIEF finitions métro et bois, LT Showertec"><figcaption>Finitions métro &amp; bois</figcaption></figure>
@@ -347,12 +354,12 @@
     </div>
     <div class="feat-cols">
       <div>
-        <h2 class="sec">Caractéristiques</h2>
+        <h2 class="sec">Sur mesure, pas une simple cabine</h2>
         <ul class="feat-list">
-          <li>Panneaux étanches en PMMA, posés directement sur le support existant</li>
-          <li>Découpés sur mesure en atelier, sans découpe de carreaux sur site</li>
-          <li>Surface non poreuse, sans joint, facile à entretenir au quotidien</li>
-          <li>Réduction très nette de la poussière et de la durée d'intervention</li>
+          <li>Panneaux fournis en format <b>2,50 m de hauteur × 1,20 m de largeur</b></li>
+          <li>Redécoupés sur place aux mesures exactes de votre salle de bain</li>
+          <li>Posés directement sur le support existant, sans démolition</li>
+          <li>Résultat : des finitions optimales, ajustées pièce par pièce</li>
         </ul>
       </div>
       <div>
@@ -361,9 +368,10 @@
           <li>Effet marbre clair ou marbre noir veiné</li>
           <li>Effet bois, pour une ambiance chaleureuse</li>
           <li>Effet carreau métro, pour une ligne contemporaine</li>
-          <li>Effet granit et unis, sur demande</li>
+          <li>Effet béton, granit et unis, sur demande</li>
+          <li>Surface non poreuse, sans joint, facile à entretenir au quotidien</li>
         </ul>
-        <div class="devis-box">Échantillons consultables lors de la visite technique — <b>tarif sur devis personnalisé</b>.</div>
+        <div class="devis-box">Échantillons de finitions consultables lors de la visite technique, pour composer votre projet.</div>
       </div>
     </div>
   </div>
@@ -388,29 +396,30 @@
       <div><div class="eyebrow">Équipement 03</div><h1 class="serif">Parois de douche</h1></div>
       <span class="cat-n">03</span>
     </div>
-    <p class="spread-lead">La paroi referme l'espace douche sans jamais l'enclaver. Battante, pivotante ou coulissante, elle est choisie selon l'ergonomie de la pièce et la facilité d'accès recherchée.</p>
+    <p class="spread-lead">La paroi referme l'espace douche sans jamais l'enclaver. Composée d'une partie fixe et d'un volet rabattable ajoutable indépendamment, elle se compose sur mesure selon l'ergonomie de la pièce et la facilité d'accès recherchée.</p>
     <div class="gallery">
       <figure class="main"><img src="media/paroi-pliante-mosaique.png" alt="Paroi pliante, finition mosaïque, LT Showertec"><figcaption>Paroi pliante</figcaption></figure>
+      <figure><img src="media/paroi-pliante-intimity.png" alt="Paroi finition Intimity, LT Showertec"><figcaption>Finition Intimity</figcaption></figure>
       <figure><img src="media/ambiance-06.png" alt="Paroi vitrée sur mesure, rendu LT Showertec"><figcaption>Paroi vitrée fixe</figcaption></figure>
-      <figure><img src="media/ambiance-02.png" alt="Paroi vitrée, finition carrelage métro, rendu LT Showertec"><figcaption>Finition métro</figcaption></figure>
     </div>
     <div class="feat-cols">
       <div>
-        <h2 class="sec">Caractéristiques</h2>
+        <h2 class="sec">Composition sur mesure</h2>
         <ul class="feat-list">
-          <li>Verre trempé sécurisé, profilés chromés ou noirs</li>
-          <li>Ouverture battante, pivotante ou coulissante selon l'espace disponible</li>
-          <li>Poignée et fixations positionnées pour un usage aisé au quotidien</li>
+          <li>Hauteur 1,95 m — partie <b>fixe</b> : largeurs 40, 50, 60, 70, 80, 90, 100 ou 120 cm</li>
+          <li><b>Volet rabattable</b>, ajoutable indépendamment : largeurs 40, 60 ou 70 cm</li>
+          <li>Parois <b>coulissantes</b> également disponibles et adaptables (dimensions : voir catalogue fournisseur)</li>
+          <li>Dimensions ajustées à l'emprise réelle du receveur posé</li>
         </ul>
       </div>
       <div>
-        <h2 class="sec">Finitions &amp; options</h2>
+        <h2 class="sec">Finition Intimity &amp; options</h2>
         <ul class="feat-list">
-          <li>Verre transparent ou dépoli, pour plus d'intimité</li>
-          <li>Profilés assortis à la robinetterie choisie</li>
-          <li>Dimensions ajustées à l'emprise réelle du receveur posé</li>
+          <li>Finition <b>Intimity</b> : une bande floutée au centre du fixe et du rabat, pour un sentiment d'intimité sans perdre en luminosité</li>
+          <li>Verre trempé sécurisé</li>
+          <li>Profilés disponibles en <b>chromé</b> ou <b>noir</b></li>
         </ul>
-        <div class="devis-box">Configuration confirmée avec le receveur et le mur associés — <b>tarif sur devis personnalisé</b>.</div>
+        <div class="devis-box">Configuration (fixe, rabat, coulissante) composée avec vous, selon le receveur et le mur associés.</div>
       </div>
     </div>
   </div>
@@ -436,17 +445,19 @@
       <span class="cat-n">04</span>
     </div>
     <p class="spread-lead">La sécurité est intégrée dans les détails ; elle ne doit jamais définir l'apparence de la pièce. Barres, siège et robinetterie sont positionnés selon les besoins réels de la personne.</p>
-    <div class="gallery">
-      <figure class="main"><img src="media/robinetterie-duo.png" alt="Set de douche thermostatique, noir mat et chromé, LT Showertec"><figcaption>Robinetterie thermostatique</figcaption></figure>
-      <figure><img src="media/barre-en-t.png" alt="Barre en T, support de douchette, LT Showertec"><figcaption>Barre en T</figcaption></figure>
+    <div class="gallery gallery-quad">
+      <figure><img src="media/robinetterie-duo.png" alt="Set de douche thermostatique, noir mat et chromé, LT Showertec"><figcaption>Robinetterie thermostatique</figcaption></figure>
+      <figure><img src="media/barre-droite-trio.png" alt="Barres droites, finitions chromé, noir et blanc, LT Showertec"><figcaption>Barres droites</figcaption></figure>
+      <figure><img src="media/barre-t-ergonomique.png" alt="Barre en T avec support de douchette, LT Showertec"><figcaption>Barre en T</figcaption></figure>
       <figure><img src="media/siege-design.png" alt="Siège de douche rabattable Design, LT Showertec"><figcaption>Siège rabattable</figcaption></figure>
     </div>
     <div class="feat-cols">
       <div>
         <h2 class="sec">Appuis &amp; assise</h2>
         <ul class="feat-list">
-          <li>Barres de maintien droites, coudées ou relevables</li>
-          <li>Siège de douche fixe ou rabattable, hauteur ajustée à la personne</li>
+          <li>Barres de maintien droites, en S, à 135° ou en T avec support de douchette</li>
+          <li>Toutes les barres disponibles en <b>chromé, noir ou blanc</b></li>
+          <li>Siège de douche rabattable, en <b>noir ou blanc</b>, avec version à accoudoirs disponible</li>
           <li>Fixations ancrées dans les panneaux renforcés, jamais dans le mur seul</li>
         </ul>
       </div>
@@ -457,7 +468,7 @@
           <li>Set de douche à hauteur et inclinaison réglables</li>
           <li>Finitions chromées ou noir mat, assorties à la paroi</li>
         </ul>
-        <div class="devis-box">Sélection et implantation définies avec la personne concernée — <b>tarif sur devis personnalisé</b>.</div>
+        <div class="devis-box">Sélection et implantation des accessoires définies avec la personne concernée, pour un usage vraiment adapté au quotidien.</div>
       </div>
     </div>
   </div>
@@ -470,19 +481,19 @@
   <div class="divider-scrim"></div>
   <div class="divider-content">
     <div class="divider-num">05</div>
-    <h1 class="serif">Travaux annexes</h1>
-    <p>Remplacement de lavabo, de meuble vasque ou de WC : les travaux complémentaires qui achèvent la rénovation de la salle de bain.</p>
+    <h1 class="serif">Travaux complémentaires</h1>
+    <p>Remplacement de lavabo, de meuble vasque ou de WC : les travaux qui achèvent la rénovation complète de la salle de bain.</p>
   </div>
 </div>
 
-<!-- 05 TRAVAUX ANNEXES -->
+<!-- 05 TRAVAUX COMPLEMENTAIRES -->
 <div class="page">
   <div class="spread">
     <div class="spread-head">
-      <div><div class="eyebrow">Équipement 05</div><h1 class="serif">Travaux annexes — lavabo, WC</h1></div>
+      <div><div class="eyebrow">Équipement 05</div><h1 class="serif">Travaux complémentaires — lavabo, WC</h1></div>
       <span class="cat-n">05</span>
     </div>
-    <p class="spread-lead">Au-delà de la douche, ADOM SENIOR peut prendre en charge le remplacement des équipements attenants, pour une salle de bain cohérente du sol au plafond.</p>
+    <p class="spread-lead">Au-delà de la douche, ADOM SENIOR peut prendre en charge le remplacement des équipements attenants, pour une salle de bain cohérente du sol au plafond. Ces travaux prolongent l'intervention sur une seconde journée.</p>
     <div class="gallery">
       <figure class="main"><img src="media/meuble-vasque.png" alt="Meuble vasque inox avec miroir et éclairage, LT Showertec"><figcaption>Meuble vasque</figcaption></figure>
       <figure><img src="media/ambiance-travertin.png" alt="Salle de bain rénovée, finition travertin, rendu LT Showertec"><figcaption>Rénovation complète</figcaption></figure>
@@ -504,11 +515,59 @@
           <li>WC suspendu, pour un entretien facilité et un gain d'espace</li>
           <li>Petits travaux de plomberie associés (évacuation, alimentation)</li>
         </ul>
-        <div class="devis-box">Travaux proposés en complément de la douche, selon le besoin identifié — <b>tarif sur devis personnalisé</b>.</div>
+        <div class="devis-box">Travaux proposés en complément de la douche, composés avec vous selon le besoin identifié lors de la visite.</div>
       </div>
     </div>
   </div>
-  <div class="folio"><span>Travaux annexes</span><b>14</b></div>
+  <div class="folio"><span>Travaux complémentaires</span><b>14</b></div>
+</div>
+
+<!-- DIVIDER 06 -->
+<div class="page divider">
+  <div class="divider-photo"><img src="media/sol-antiderapant-texture.png" alt=""></div>
+  <div class="divider-scrim"></div>
+  <div class="divider-content">
+    <div class="divider-num">06</div>
+    <h1 class="serif">Sols</h1>
+    <p>Un revêtement de sol antidérapant, chaleureux ou contemporain, pensé pour compléter la sécurité de toute la salle de bain.</p>
+  </div>
+</div>
+
+<!-- 06 SOLS -->
+<div class="page">
+  <div class="spread">
+    <div class="spread-head">
+      <div><div class="eyebrow">Équipement 06</div><h1 class="serif">Sols</h1></div>
+      <span class="cat-n">06</span>
+    </div>
+    <p class="spread-lead">Partie intégrante du confort et de la sécurité de la salle de bain, le revêtement de sol SPC complète la douche sécurisée sur l'ensemble de la pièce, sans altérer son esthétique.</p>
+    <div class="gallery gallery-duo">
+      <figure class="main"><img src="media/sol-antiderapant-texture.png" alt="Sol SPC antidérapant, finition chêne blanchi, LT Showertec"><figcaption>Sol SPC · chêne blanchi</figcaption></figure>
+      <figure><img src="media/ambiance-01.png" alt="Ambiance salle de bain avec sol imitation bois, rendu LT Showertec"><figcaption>Intégration en situation</figcaption></figure>
+    </div>
+    <div class="feat-cols">
+      <div>
+        <h2 class="sec">Caractéristiques</h2>
+        <ul class="feat-list">
+          <li>Sol SPC composite, antidérapant <b>PN18</b>, épaisseur 5 mm</li>
+          <li>Clipsable, étanche, sous-couche EVA intégrée</li>
+          <li>Isolant thermique, phonique et antifongique</li>
+          <li>Résistant aux impacts, aux rayures, au feu et à l'eau</li>
+          <li>Sans formaldéhyde, non toxique, antistatique, 100 % recyclable</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="sec">Finitions &amp; pose</h2>
+        <ul class="feat-list">
+          <li>2 finitions : chêne blanchi ou ciment gris</li>
+          <li>Plinthes assorties disponibles en finition chêne blanchi</li>
+          <li>Facilité de mise en œuvre, adapté à toutes les pièces de la maison</li>
+        </ul>
+        <div class="devis-box">Garantie 5 ans. Surface et raccords ajustés à votre salle de bain lors de la visite technique.</div>
+      </div>
+    </div>
+  </div>
+  <div class="folio"><span>Sols</span><b>16</b></div>
 </div>
 
 <!-- CONTACT -->
