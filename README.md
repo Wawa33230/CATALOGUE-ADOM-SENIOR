@@ -24,10 +24,13 @@ Tous les visuels (21 images) proviennent du **catalogue fournisseur LT Showertec
 
 Les gammes citées (Slim, Futura, Moderna, Design pour les receveurs ; Relief et dalles clipsables pour les murs ; parois pliantes Intimity ; barres en T ; sièges Design) sont les gammes réellement commercialisées par LT Showertec, telles que documentées dans leur catalogue.
 
+**Netteté des visuels** : certaines photos sources sont plus petites que la zone qu'elles remplissent dans la mise en page (notamment les fonds pleine page des séparateurs de section). `print/prepare-media.py` reprend chaque photo, l'agrandit en Lanczos jusqu'à 2000 px de long côté puis applique un léger renforcement de netteté (unsharp mask) pour compenser le flou inhérent à l'agrandissement — sans recadrer ni modifier le contenu. Les fichiers sont exportés en `.jpg` (qualité 92), ce qui a aussi divisé par ~1,5 le poids du PDF par rapport aux `.png` d'origine.
+
 ## 1. Version PDF (`print/`)
 
-- `catalogue-print.html` : la mise en page complète (15 pages A4), avec les images embarquées dans `print/media/`.
+- `catalogue-print.html` : la mise en page complète (17 pages A4), avec les images embarquées dans `print/media/`.
 - `build-pdf.mjs` : script Playwright qui reproduit exactement la méthode déjà utilisée par ADOM SENIOR pour ses autres documents (`documents/gen.mjs` dans le repo du site).
+- `prepare-media.py` : à relancer depuis `print/media/` après avoir ajouté ou remplacé une photo source (`.png`), avant de régénérer le PDF.
 
 Pour régénérer le PDF après une modification :
 
