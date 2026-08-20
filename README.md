@@ -24,7 +24,12 @@ Tous les visuels (21 images) proviennent du **catalogue fournisseur LT Showertec
 
 Les gammes citées (Slim, Futura, Moderna, Design pour les receveurs ; Relief et dalles clipsables pour les murs ; parois pliantes Intimity ; barres en T ; sièges Design) sont les gammes réellement commercialisées par LT Showertec, telles que documentées dans leur catalogue.
 
-**Netteté des visuels** : certaines photos sources sont plus petites que la zone qu'elles remplissent dans la mise en page (notamment les fonds pleine page des séparateurs de section). `print/prepare-media.py` reprend chaque photo, l'agrandit en Lanczos jusqu'à 2000 px de long côté puis applique un léger renforcement de netteté (unsharp mask) pour compenser le flou inhérent à l'agrandissement — sans recadrer ni modifier le contenu. Les fichiers sont exportés en `.jpg` (qualité 92), ce qui a aussi divisé par ~1,5 le poids du PDF par rapport aux `.png` d'origine.
+**Netteté des visuels** : certaines photos sources sont plus petites que la zone qu'elles remplissent dans la mise en page (notamment les fonds pleine page des séparateurs de section). `print/prepare-media.py` reprend chaque photo, l'agrandit en Lanczos jusqu'à 3200 px de long côté (~300 dpi sur une page A4 pleine) puis applique un renforcement de netteté (unsharp mask) pour compenser le flou inhérent à l'agrandissement — sans recadrer ni modifier le contenu. Export en `.jpg` qualité 96. Cela reste un agrandissement algorithmique : sur les textures très douces (ex. béton ciré en fond de page de garde), un zoom extrême (>250 %) dans le PDF peut encore laisser deviner un léger flou — c'est la limite physique de la photo source (max ~1300 px de large dans le catalogue LT fourni), pas un réglage à corriger. Pour une netteté parfaite à très fort zoom sur ces images précises, il faudrait un fichier source encore plus défini auprès de LT Showertec.
+
+**Bugs corrigés** :
+- Page « Qui sommes-nous » (page 3) : les deux photos débordaient parfois sur le bas de page à cause d'un souci de calcul de hauteur en grille CSS — corrigé.
+- Séparateurs de section et page de contact (pages 5, 7, 9, 11, 13, 15, 17) : les images de fond utilisaient une transparence (`opacity`) directement sur la photo, ce que certains lecteurs PDF mobiles ne savent pas restituer et qui les rendait invisibles à l'écran (l'assombrissement se fait maintenant uniquement via le calque de couleur superposé, la photo elle-même reste pleinement opaque — plus fiable sur tous les lecteurs).
+- Page Accessoires (page 12) : le set de douche et la barre en T étaient recadrés/tronqués par le format de la vignette ; ils s'affichent maintenant en entier (sur fond blanc, sans recadrage).
 
 ## 1. Version PDF (`print/`)
 

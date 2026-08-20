@@ -19,7 +19,7 @@ from PIL import Image, ImageFilter
 import glob
 import os
 
-TARGET_LONG = 2000  # px ceiling — comfortably covers a full-bleed A4 page
+TARGET_LONG = 3200  # px ceiling — covers a full-bleed A4 page at ~300dpi print resolution
 
 for f in sorted(glob.glob("*.png")):
     im = Image.open(f).convert("RGB")
@@ -30,7 +30,7 @@ for f in sorted(glob.glob("*.png")):
     else:
         nw, nh = round(w * scale), round(h * scale)
         up = im.resize((nw, nh), Image.LANCZOS)
-        out = up.filter(ImageFilter.UnsharpMask(radius=1.6, percent=110, threshold=2))
+        out = up.filter(ImageFilter.UnsharpMask(radius=1.8, percent=120, threshold=2))
     out_path = f.replace(".png", ".jpg")
-    out.save(out_path, "JPEG", quality=92, optimize=True)
+    out.save(out_path, "JPEG", quality=96, optimize=True)
     print(f"{f} {w}x{h} -> {out_path} {out.size[0]}x{out.size[1]} ({os.path.getsize(out_path)//1024} KB)")

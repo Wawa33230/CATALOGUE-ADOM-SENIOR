@@ -90,7 +90,8 @@
   .stat { background: var(--ink-2); color: #fff; border-radius: 12px; padding: 12px 14px; }
   .stat b { display: block; font-family: "Iowan Old Style", Georgia, serif; font-size: 20px; color: var(--amber-hot); }
   .stat span { font-size: 10px; color: #cfe1de; }
-  .two-col { display: grid; grid-template-columns: 1.05fr .95fr; gap: 10mm; align-items: stretch; flex: 1; min-height: 0; }
+  .two-col { display: grid; grid-template-columns: 1.05fr .95fr; grid-template-rows: minmax(0,1fr); gap: 10mm; align-items: stretch; flex: 1; min-height: 0; }
+  .two-col > * { min-height: 0; overflow: hidden; }
   .pres-photo { border-radius: 14px; overflow: hidden; }
   .pres-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .method-list { list-style: none; margin: 0; padding: 0; }
@@ -111,8 +112,8 @@
   /* ---------- section divider ---------- */
   .divider { background: var(--ink-2); color: #fff; }
   .divider-photo { position: absolute; inset: 0; }
-  .divider-photo img { width: 100%; height: 100%; object-fit: cover; opacity: .32; }
-  .divider-scrim { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8,47,55,.96) 0%, rgba(8,47,55,.72) 46%, rgba(8,47,55,.2) 100%); }
+  .divider-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .divider-scrim { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8,47,55,.97) 0%, rgba(8,47,55,.86) 46%, rgba(8,47,55,.62) 100%); }
   .divider-content { position: absolute; left: 20mm; bottom: 30mm; right: 20mm; }
   .divider-num { font-family: "Iowan Old Style", Georgia, serif; font-size: 90px; color: var(--amber-hot); line-height: 1; opacity: .9; }
   .divider h1 { font-family: "Iowan Old Style", Georgia, serif; font-size: 36px; margin: 4px 0 10px; }
@@ -134,6 +135,8 @@
   .gallery-duo .main { grid-row: auto; }
   .gallery-quad { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
   .gallery-quad .main { grid-row: auto; }
+  .fit-contain { background: #fff; }
+  .fit-contain img { object-fit: contain; padding: 10px; }
 
   .feat-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; }
   .feat-cols h2.sec { font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: var(--ink-2); margin: 0 0 8px; padding-bottom: 5px; border-bottom: 1px solid var(--line); }
@@ -149,8 +152,8 @@
   /* ---------- contact / closing ---------- */
   .closing { background: var(--ink); color: #fff; }
   .closing-photo { position: absolute; inset: 0; }
-  .closing-photo img { width: 100%; height: 100%; object-fit: cover; opacity: .28; }
-  .closing-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,47,55,.55), rgba(8,47,55,.97)); }
+  .closing-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .closing-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,47,55,.72), rgba(8,47,55,.98)); }
   .closing-content { position: absolute; left: 20mm; right: 20mm; top: 30mm; bottom: 26mm; display: flex; flex-direction: column; }
   .closing-gallery { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 14mm; }
   .closing-gallery figure { margin: 0; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,.2); }
@@ -446,9 +449,9 @@
     </div>
     <p class="spread-lead">La sécurité est intégrée dans les détails ; elle ne doit jamais définir l'apparence de la pièce. Barres, siège et robinetterie sont positionnés selon les besoins réels de la personne.</p>
     <div class="gallery gallery-quad">
-      <figure><img src="media/robinetterie-duo.jpg" alt="Set de douche thermostatique, noir mat et chromé, LT Showertec"><figcaption>Robinetterie thermostatique</figcaption></figure>
+      <figure class="fit-contain"><img src="media/robinetterie-duo.jpg" alt="Set de douche thermostatique, noir mat et chromé, LT Showertec"><figcaption>Robinetterie thermostatique</figcaption></figure>
       <figure><img src="media/barre-droite-trio.jpg" alt="Barres droites, finitions chromé, noir et blanc, LT Showertec"><figcaption>Barres droites</figcaption></figure>
-      <figure><img src="media/barre-t-ergonomique.jpg" alt="Barre en T avec support de douchette, LT Showertec"><figcaption>Barre en T</figcaption></figure>
+      <figure class="fit-contain"><img src="media/barre-t-ergonomique.jpg" alt="Barre en T avec support de douchette, LT Showertec"><figcaption>Barre en T</figcaption></figure>
       <figure><img src="media/siege-design.jpg" alt="Siège de douche rabattable Design, LT Showertec"><figcaption>Siège rabattable</figcaption></figure>
     </div>
     <div class="feat-cols">
