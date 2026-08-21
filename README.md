@@ -6,16 +6,17 @@ Ce repo contient le catalogue produits complet d'ADOM SENIOR, décliné en deux 
 - **`web/`** — la version destinée au site adomsenior.fr (repo `Wawa33230/WEB-ADOMSENIOR`), à transmettre telle quelle à ChatGPT pour intégration et déploiement.
 - **`dist/catalogue-adomsenior.pdf`** — le PDF déjà généré, prêt à l'emploi.
 
-Structure du catalogue PDF (20 pages — la version web n'a pas encore été synchronisée avec les derniers ajouts, voir section 2) :
+Structure du catalogue PDF (21 pages — la version web n'a pas encore été synchronisée avec les derniers ajouts, voir section 2) :
 
 1. Couverture
 2. Sommaire
 3. Présentation d'ADOM SENIOR
-4. Notre activité & nos secteurs d'intervention (avec carte des zones d'intervention)
-5. Receveurs de douche
-6. Revêtement mural — avec nuancier détaillé (9 gammes, 36 finitions)
-7. Parois de douche — avec page de configurations (vues de dessus)
-8. Accessoires — barres, siège, robinetterie
+4. Notre activité & nos secteurs d'intervention
+5. Zones d'intervention — carte des départements (Nord-Ouest, Sud-Ouest, Sud-Est)
+6. Receveurs de douche
+7. Revêtement mural — avec nuancier détaillé (9 gammes, 36 finitions)
+8. Parois de douche — avec page de configurations (vues de dessus)
+9. Accessoires — barres, siège, robinetterie
 9. Travaux complémentaires — lavabo, WC
 10. Sols
 11. Contact
