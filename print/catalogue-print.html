@@ -149,7 +149,7 @@
   .gallery-quad { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
   .gallery-quad .main { grid-row: auto; }
   .fit-contain { background: #fff; }
-  .fit-contain img { object-fit: contain; padding: 10px; }
+  .fit-contain img { object-fit: contain !important; padding: 10px; }
 
   .feat-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; }
   .feat-cols h2.sec { font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: var(--ink-2); margin: 0 0 8px; padding-bottom: 5px; border-bottom: 1px solid var(--line); }
@@ -173,15 +173,6 @@
   .nuancier-swatch { flex: 1; min-height: 0; background: #fff; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: center; padding: 6px; }
   .nuancier-swatch img { width: 100%; height: 100%; object-fit: contain; }
   .nuancier-span2 { grid-column: 1 / 3; }
-
-  /* ---------- configurations de parois ---------- */
-  .config-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3,1fr); gap: 6mm; flex: 1; min-height: 0; }
-  .config-grid > * { min-height: 0; }
-  .config-card { border: 1px solid var(--line); border-radius: 12px; background: var(--paper); display: flex; align-items: center; gap: 10px; padding: 10px 14px; }
-  .config-diagram { flex: none; width: 40mm; height: 100%; background: #fff; border: 1px solid var(--line); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
-  .config-diagram svg { width: 88%; height: 88%; }
-  .config-text h3 { margin: 0 0 3px; font-size: 12px; color: var(--ink-2); }
-  .config-text p { margin: 0; font-size: 10px; color: #6b7a76; line-height: 1.4; }
 
   /* ---------- contact / closing ---------- */
   .closing { background: var(--ink); color: #fff; }
@@ -246,10 +237,10 @@
         <div class="toc-row"><span class="n">01</span><span class="t">Receveurs de douche</span><span class="p">07</span></div>
         <div class="toc-row"><span class="n">02</span><span class="t">Revêtement mural</span><span class="p">09</span></div>
         <div class="toc-row"><span class="n">03</span><span class="t">Parois de douche</span><span class="p">13</span></div>
-        <div class="toc-row"><span class="n">04</span><span class="t">Accessoires — barres, siège, robinetterie</span><span class="p">16</span></div>
-        <div class="toc-row"><span class="n">05</span><span class="t">Travaux complémentaires — lavabo, WC</span><span class="p">18</span></div>
-        <div class="toc-row"><span class="n">06</span><span class="t">Sols</span><span class="p">20</span></div>
-        <div class="toc-row"><span class="n">—</span><span class="t">Contact &amp; prise de rendez-vous</span><span class="p">21</span></div>
+        <div class="toc-row"><span class="n">04</span><span class="t">Accessoires — barres, siège, robinetterie</span><span class="p">15</span></div>
+        <div class="toc-row"><span class="n">05</span><span class="t">Travaux complémentaires — lavabo, WC</span><span class="p">17</span></div>
+        <div class="toc-row"><span class="n">06</span><span class="t">Sols</span><span class="p">19</span></div>
+        <div class="toc-row"><span class="n">—</span><span class="t">Contact &amp; prise de rendez-vous</span><span class="p">20</span></div>
       </div>
       <div class="toc-note">Les équipements présentés sont ceux réellement posés par les équipes ADOM SENIOR, en partenariat avec notre fournisseur LT&nbsp;Showertec. Chaque produit est recoupé et ajusté sur mesure, au millimètre, à la configuration réelle de votre salle de bain — ce support vous accompagne pour visualiser et composer votre projet.</div>
     </div>
@@ -597,8 +588,8 @@
     </div>
     <p class="spread-lead">Les murs existants sont conservés, puis recouverts de panneaux étanches, découpés sur place à la mesure exacte de la pièce. Fini la poussière et les nuisances d'un chantier de carrelage : le résultat est net, lumineux et facile d'entretien.</p>
     <div class="gallery">
-      <figure class="main"><img src="media/panneau-relief-beton.jpg" alt="Panneaux RELIEF finition béton, LT Showertec"><figcaption>Panneaux Relief · effet béton</figcaption></figure>
-      <figure><img src="media/panneau-relief-metro-bois.jpg" alt="Panneaux RELIEF finitions métro et bois, LT Showertec"><figcaption>Finitions métro &amp; bois</figcaption></figure>
+      <figure class="main"><img src="media/panneau-relief-beton.jpg" alt="Panneaux RELIEF finition carrelage métro, LT Showertec"><figcaption>Finition carrelage métro</figcaption></figure>
+      <figure><img src="media/panneau-relief-metro-bois.jpg" alt="Panneaux RELIEF finition carrelage, LT Showertec"><figcaption>Finition carrelage</figcaption></figure>
       <figure><img src="media/dalle-murale-carrelage.jpg" alt="Dalles murales effet carrelage, LT Showertec"><figcaption>Dalles murales clipsables</figcaption></figure>
     </div>
     <div class="feat-cols" style="grid-template-columns:1fr;">
@@ -697,7 +688,7 @@
     </div>
     <p class="spread-lead">La paroi referme l'espace douche sans jamais l'enclaver. Composée d'une partie fixe et d'un volet rabattable ajoutable indépendamment, ou d'une paroi coulissante, elle se compose sur mesure selon l'ergonomie de la pièce et la facilité d'accès recherchée.</p>
     <div class="gallery">
-      <figure class="main"><img src="media/paroi-pliante-mosaique.jpg" alt="Paroi pliante, finition mosaïque, LT Showertec"><figcaption>Paroi pliante</figcaption></figure>
+      <figure class="main"><img src="media/paroi-pliante-mosaique.jpg" alt="Paroi fixe avec volet rabattable, finition mosaïque, LT Showertec"><figcaption>Paroi fixe + volet rabattable</figcaption></figure>
       <figure><img src="media/paroi-pliante-intimity.jpg" alt="Paroi finition Intimity, LT Showertec"><figcaption>Finition Intimity</figcaption></figure>
       <figure><img src="media/paroi-coulissante-hd.jpg" alt="Paroi coulissante, LT Showertec"><figcaption>Paroi coulissante</figcaption></figure>
     </div>
@@ -723,105 +714,6 @@
     </div>
   </div>
   <div class="folio"><span>Parois de douche</span><b>13</b></div>
-</div>
-
-<!-- 03b CONFIGURATIONS DE PAROIS -->
-<div class="page">
-  <div class="spread">
-    <div class="spread-head">
-      <div><div class="eyebrow">Équipement 03 · Vues de dessus</div><h1 class="serif">Configurations de parois</h1></div>
-      <span class="cat-n">03</span>
-    </div>
-    <p class="spread-lead">Chaque paroi se compose selon l'implantation réelle de la douche — en niche, en L ou en applique. Schémas vus de dessus, à titre d'illustration.</p>
-    <div class="config-grid">
-
-      <div class="config-card">
-        <div class="config-diagram">
-          <svg viewBox="0 0 160 110" fill="none">
-            <rect x="18" y="8" width="124" height="94" fill="var(--sand)"/>
-            <path d="M20 10H140V100" stroke="#0e4c5a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-            <line x1="20" y1="100" x2="108" y2="100" stroke="#d98a3d" stroke-width="4" stroke-linecap="round"/>
-            <circle cx="108" cy="100" r="2.4" fill="#0e4c5a"/>
-            <path d="M108 100 L108 82" stroke="#d98a3d" stroke-width="4" stroke-linecap="round"/>
-            <path d="M108 82 A26 26 0 0 1 134 100" stroke="#d98a3d" stroke-width="1.4" stroke-dasharray="2 3" fill="none"/>
-          </svg>
-        </div>
-        <div class="config-text"><h3>Parois fixes</h3><p>De différentes largeurs, avec ou sans volet rabattable (symbole en pointillés) — configuration en niche ou en L.</p></div>
-      </div>
-
-      <div class="config-card">
-        <div class="config-diagram">
-          <svg viewBox="0 0 160 110" fill="none">
-            <rect x="18" y="8" width="124" height="94" fill="var(--sand)"/>
-            <path d="M140 10H20V100" stroke="#0e4c5a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-            <line x1="20" y1="100" x2="140" y2="100" stroke="#d98a3d" stroke-width="4" stroke-linecap="round"/>
-            <line x1="140" y1="10" x2="140" y2="100" stroke="#d98a3d" stroke-width="4" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="config-text"><h3>Parois fixes, avec paroi latérale</h3><p>Un panneau fixe en façade et un panneau de retour — configuration en L ou en applique.</p></div>
-      </div>
-
-      <div class="config-card">
-        <div class="config-diagram">
-          <svg viewBox="0 0 160 110" fill="none">
-            <rect x="18" y="8" width="124" height="94" fill="var(--sand)"/>
-            <path d="M20 10H140V100" stroke="#0e4c5a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-            <line x1="20" y1="100" x2="140" y2="100" stroke="#0e4c5a" stroke-width="1.2" stroke-dasharray="1 3" opacity=".5"/>
-            <line x1="20" y1="100" x2="82" y2="100" stroke="#d98a3d" stroke-width="4" stroke-linecap="round"/>
-            <line x1="82" y1="96" x2="132" y2="96" stroke="#d98a3d" stroke-width="4" stroke-linecap="round"/>
-            <path d="M100 96 l-9 0 m3 -4 l-6 4 l6 4" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          </svg>
-        </div>
-        <div class="config-text"><h3>Porte coulissante</h3><p>1 panneau fixe, 1 panneau coulissant — configuration en niche, en L, ou en applique avec une paroi.</p></div>
-      </div>
-
-      <div class="config-card">
-        <div class="config-diagram">
-          <svg viewBox="0 0 160 110" fill="none">
-            <rect x="18" y="8" width="124" height="94" fill="var(--sand)"/>
-            <path d="M20 10H140V100" stroke="#0e4c5a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-            <line x1="20" y1="100" x2="140" y2="100" stroke="#0e4c5a" stroke-width="1.2" stroke-dasharray="1 3" opacity=".5"/>
-            <line x1="20" y1="100" x2="46" y2="100" stroke="#d98a3d" stroke-width="4" stroke-linecap="round"/>
-            <line x1="114" y1="100" x2="140" y2="100" stroke="#d98a3d" stroke-width="4" stroke-linecap="round"/>
-            <line x1="46" y1="96" x2="80" y2="96" stroke="#d98a3d" stroke-width="4" stroke-linecap="round"/>
-            <line x1="80" y1="96" x2="114" y2="96" stroke="#d98a3d" stroke-width="4" stroke-linecap="round"/>
-            <path d="M68 96 l-8 0 m2 -4 l-5 4 l5 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            <path d="M92 96 l8 0 m-2 -4 l5 4 l-5 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          </svg>
-        </div>
-        <div class="config-text"><h3>Portes coulissantes, ouverture centrale</h3><p>2 panneaux fixes, 2 panneaux coulissants qui s'effacent chacun vers son côté.</p></div>
-      </div>
-
-      <div class="config-card">
-        <div class="config-diagram">
-          <svg viewBox="0 0 160 110" fill="none">
-            <rect x="18" y="8" width="124" height="94" fill="var(--sand)"/>
-            <path d="M20 10H140V100" stroke="#0e4c5a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M20 100 L80 78 L140 100" stroke="#d98a3d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            <circle cx="20" cy="100" r="2.6" fill="#0e4c5a"/>
-            <circle cx="80" cy="78" r="2.6" fill="#0e4c5a"/>
-            <circle cx="140" cy="100" r="2.6" fill="#0e4c5a"/>
-          </svg>
-        </div>
-        <div class="config-text"><h3>Parois pliantes</h3><p>La solution idéale pour les petits espaces ou les accès encombrés — configuration en niche ou en L.</p></div>
-      </div>
-
-      <div class="config-card">
-        <div class="config-diagram">
-          <svg viewBox="0 0 160 110" fill="none">
-            <rect x="18" y="8" width="124" height="94" fill="var(--sand)"/>
-            <path d="M20 10H140V100" stroke="#0e4c5a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-            <line x1="20" y1="100" x2="88" y2="100" stroke="#d98a3d" stroke-width="4" stroke-linecap="round"/>
-            <path d="M88 92 q6 -8 12 0 t12 0 t12 0" stroke="#d98a3d" stroke-width="2.6" stroke-linecap="round" fill="none"/>
-            <line x1="88" y1="80" x2="140" y2="80" stroke="#0e4c5a" stroke-width="2" stroke-linecap="round" opacity=".6"/>
-          </svg>
-        </div>
-        <div class="config-text"><h3>Portes basses avec rideau</h3><p>Idéales pour la douche assistée : le rideau protège des éclaboussures pour les personnes valides — configuration en niche ou en L.</p></div>
-      </div>
-
-    </div>
-  </div>
-  <div class="folio"><span>Parois de douche · Configurations</span><b>14</b></div>
 </div>
 
 <!-- DIVIDER 04 -->
@@ -870,7 +762,7 @@
       </div>
     </div>
   </div>
-  <div class="folio"><span>Accessoires</span><b>16</b></div>
+  <div class="folio"><span>Accessoires</span><b>15</b></div>
 </div>
 
 <!-- DIVIDER 05 -->
@@ -894,7 +786,7 @@
     <p class="spread-lead">Au-delà de la douche, ADOM SENIOR peut prendre en charge le remplacement des équipements attenants, pour une salle de bain cohérente du sol au plafond. Ces travaux prolongent l'intervention sur une seconde journée.</p>
     <div class="gallery">
       <figure class="main"><img src="media/meuble-vasque.jpg" alt="Meuble vasque inox avec miroir et éclairage, LT Showertec"><figcaption>Meuble vasque</figcaption></figure>
-      <figure><img src="media/ambiance-travertin.jpg" alt="Salle de bain rénovée, finition travertin, rendu LT Showertec"><figcaption>Rénovation complète</figcaption></figure>
+      <figure><img src="media/ambiance-travertin.jpg" alt="Salle de bain rénovée, finition travertin, rendu LT Showertec"><figcaption>Finition travertin</figcaption></figure>
       <figure><img src="media/avant-apres-gris.jpg" alt="Douche et vasque après travaux, finition gris minéral, rendu LT Showertec"><figcaption>Résultat après travaux</figcaption></figure>
     </div>
     <div class="feat-cols">
@@ -917,7 +809,7 @@
       </div>
     </div>
   </div>
-  <div class="folio"><span>Travaux complémentaires</span><b>18</b></div>
+  <div class="folio"><span>Travaux complémentaires</span><b>17</b></div>
 </div>
 
 <!-- DIVIDER 06 -->
@@ -941,7 +833,7 @@
     <p class="spread-lead">Partie intégrante du confort et de la sécurité de la salle de bain, le revêtement de sol SPC complète la douche sécurisée sur l'ensemble de la pièce, sans altérer son esthétique.</p>
     <div class="gallery gallery-duo">
       <figure class="main"><img src="media/sol-antiderapant-texture.jpg" alt="Sol SPC antidérapant, finition chêne blanchi, LT Showertec"><figcaption>Sol SPC · chêne blanchi</figcaption></figure>
-      <figure><img src="media/sol-chene-blanchi-situation.jpg" alt="Sol PVC clipsable chêne blanchi installé devant une douche, LT Showertec"><figcaption>Intégration en situation · chêne blanchi</figcaption></figure>
+      <figure class="fit-contain"><img src="media/sol-chene-blanchi-situation.jpg" alt="Sol PVC clipsable chêne blanchi installé devant une douche, LT Showertec"><figcaption>Intégration en situation · chêne blanchi</figcaption></figure>
     </div>
     <div class="feat-cols">
       <div>
@@ -965,7 +857,7 @@
       </div>
     </div>
   </div>
-  <div class="folio"><span>Sols</span><b>20</b></div>
+  <div class="folio"><span>Sols</span><b>19</b></div>
 </div>
 
 <!-- CONTACT -->
