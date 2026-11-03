@@ -4,7 +4,12 @@ Ce repo contient le catalogue produits complet d'ADOM SENIOR, décliné en deux 
 
 - **`print/`** — la source du catalogue imprimable (PDF), prêt à envoyer à un imprimeur.
 - **`web/`** — la version destinée au site adomsenior.fr (repo `Wawa33230/WEB-ADOMSENIOR`), à transmettre telle quelle à ChatGPT pour intégration et déploiement.
-- **`dist/catalogue-adomsenior.pdf`** — le PDF déjà généré, prêt à l'emploi.
+- **`dist/catalogue-adomsenior.pdf`** — le PDF A4 (écran, e-mail, impression bureautique).
+- **`dist/catalogue-adomsenior-imprimeur.pdf`** — le PDF à envoyer à l'imprimeur : A4 + 3 mm de fonds perdus sur chaque bord (216 × 303 mm), TrimBox/BleedBox renseignées.
+
+La 4e de couverture (page 20) contient un **encart « Votre conseiller ADOM SENIOR »** à remplir à la main par le commercial en rendez-vous (nom, téléphone, e-mail, date du RDV, prochaine étape) avec un emplacement 85 × 55 mm pour agrafer une carte de visite ou apposer un cachet.
+
+Les polices sont embarquées dans `print/fonts/` (Gelasio, équivalent libre de Georgia, et Inter — licence SIL OFL) : le PDF est identique quel que soit l'ordinateur qui le génère.
 
 Structure du catalogue PDF (20 pages — la version web n'a pas encore été synchronisée avec les derniers ajouts, voir section 2) :
 
@@ -57,7 +62,7 @@ cd print
 node build-pdf.mjs
 ```
 
-Le fichier est produit dans `dist/catalogue-adomsenior.pdf` (~23 Mo — poids plus élevé du fait des 36 finitions du nuancier et de la résolution ~300 dpi ; toujours raisonnable pour un envoi à un imprimeur).
+Les deux fichiers sont produits dans `dist/` (~23 Mo chacun — poids plus élevé du fait des 36 finitions du nuancier et de la résolution ~300 dpi ; toujours raisonnable pour un envoi à un imprimeur).
 
 **Charte graphique reprise à l'identique** de vos documents existants (`pv-reception-adomsenior.html`, `notice-entretien-adomsenior.html`) : bleu profond `#0e4c5a`, ambre `#d98a3d`/`#e7a551`, titres en serif (Iowan Old Style / Georgia), logo maison.
 
