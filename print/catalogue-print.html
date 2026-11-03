@@ -20,24 +20,27 @@
   @page { size: A4; margin: 0; }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
-  body {
-    font-family: "Inter", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    color: #16211f;
-    font-size: 12.5px;
-    line-height: 1.55;
-  }
-  .serif { font-family: "Gelasio", "Iowan Old Style", Georgia, "Times New Roman", serif; }
-
   :root {
+    --bleed: 0mm;           /* passe à 3 mm dans la version imprimeur (build-pdf.mjs) */
     --ink: #082f37;
     --ink-2: #0e4c5a;
-    --ink-3: #176677;
-    --amber: #d98a3d;
+    --amber: #c97a2c;       /* ambre un peu plus soutenu : lisible sur fond blanc */
     --amber-hot: #e7a551;
     --sand: #f5f1ea;
     --paper: #fffdf8;
-    --line: #e1ddd2;
+    --line: #ddd7ca;
+    --text: #22302c;
+    --muted: #46534f;
   }
+  body {
+    font-family: "Inter", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .serif, h1, .serif-n { font-family: "Gelasio", "Iowan Old Style", Georgia, "Times New Roman", serif; }
+  .nw { white-space: nowrap; }
+  figure { margin: 0; }
 
   .page {
     position: relative;
@@ -49,209 +52,217 @@
   }
   .page:last-child { page-break-after: auto; }
 
-  /* ---------- shared chrome ---------- */
+  /* ---------- éléments communs ---------- */
   .brandmark { display: flex; align-items: center; gap: 10px; }
   .brandmark svg { flex: none; }
-  .brandmark .lt { font-family: "Gelasio", "Iowan Old Style", Georgia, serif; font-size: 20px; font-weight: 600; color: #fff; letter-spacing: .01em; }
+  .brandmark .lt { font-family: "Gelasio", Georgia, serif; font-size: 22px; font-weight: 600; color: #fff; letter-spacing: .01em; }
   .brandmark .lt b { color: var(--amber-hot); font-weight: 700; }
 
   .folio {
-    position: absolute; bottom: 10mm; left: 16mm; right: 16mm;
+    position: absolute; bottom: 9mm; left: 16mm; right: 16mm;
     display: flex; justify-content: space-between; align-items: center;
-    font-size: 9px; letter-spacing: .04em; text-transform: uppercase; color: #8a9a97;
+    font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase; color: #6f7f7b;
     padding-top: 6px; border-top: 1px solid var(--line);
   }
-  .folio b { color: var(--ink-2); }
+  .folio .r { display: flex; gap: 14px; align-items: center; }
+  .folio b { color: var(--ink-2); font-size: 12px; }
 
-  .eyebrow { font-size: 10.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--amber); font-weight: 700; }
+  .eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--amber); font-weight: 700; }
+  .cap { position: absolute; left: 8px; bottom: 8px; background: rgba(8,47,55,.86); color: #fff; font-size: 11.5px; font-weight: 500; padding: 4px 11px; border-radius: 999px; }
 
-  /* ---------- cover ---------- */
+  /* ---------- couverture ---------- */
   .cover { background: var(--ink); color: #fff; }
-  .cover-photo { position: absolute; inset: 0; }
-  .cover-photo img { width: 100%; height: 100%; object-fit: cover; }
-  .cover-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,47,55,.55) 0%, rgba(8,47,55,.35) 38%, rgba(8,47,55,.92) 88%); }
-  .cover-top { position: absolute; top: 16mm; left: 18mm; right: 18mm; display: flex; justify-content: space-between; align-items: center; }
-  .cover-bottom { position: absolute; left: 18mm; right: 18mm; bottom: 16mm; }
-  .cover-tag { display: inline-block; border: 1px solid rgba(255,255,255,.5); border-radius: 999px; padding: 5px 14px; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 14px; }
-  .cover h1 { font-family: "Gelasio", "Iowan Old Style", Georgia, serif; font-weight: 500; font-size: 44px; line-height: 1.08; margin: 0 0 10px; max-width: 174mm; }
+  .cover-photo { position: absolute; left: 0; right: 0; top: 0; height: calc(176mm + var(--bleed)); }
+  .cover-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; display: block; }
+  .cover-fade { position: absolute; left: 0; right: 0; top: 0; height: calc(42mm + var(--bleed)); background: linear-gradient(180deg, rgba(8,47,55,.62), rgba(8,47,55,0)); }
+  .cover-panel-bg { position: absolute; left: 0; right: 0; top: calc(176mm + var(--bleed)); bottom: 0; background: var(--ink); }
+  .cover-top { position: absolute; top: 13mm; left: 16mm; right: 16mm; display: flex; justify-content: space-between; align-items: center; }
+  .cover-top .site { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #fff; font-weight: 600; }
+  .cover-panel { position: absolute; left: 16mm; right: 16mm; top: 176mm; bottom: 12mm; display: flex; flex-direction: column; padding-top: 10mm; }
+  .cover-tag { align-self: flex-start; border: 1px solid rgba(255,255,255,.55); border-radius: 999px; padding: 5px 14px; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 5mm; }
+  .cover h1 { font-weight: 500; font-size: 40px; line-height: 1.1; margin: 0 0 4mm; }
   .cover h1 em { font-style: italic; color: var(--amber-hot); }
-  .cover .lead { font-size: 13.5px; color: #dfe9e6; max-width: 120mm; margin: 0 0 18px; }
-  .cover-meta { display: flex; gap: 26px; font-size: 10.5px; color: #cfe1de; }
-  .cover-meta b { display: block; color: #fff; font-size: 15px; font-family: "Gelasio", "Iowan Old Style", Georgia, serif; }
+  .cover .lead { font-size: 15.5px; color: #e3eeeb; max-width: 165mm; margin: 0; }
+  .cover-meta { display: flex; gap: 0; margin-top: auto; border-top: 1px solid rgba(255,255,255,.22); padding-top: 4mm; }
+  .cover-meta > div { flex: 1; font-size: 12.5px; color: #d3e4e1; line-height: 1.35; padding-right: 4mm; }
+  .cover-meta b { display: block; color: #fff; font-size: 20px; font-family: "Gelasio", Georgia, serif; font-weight: 700; margin-bottom: 1mm; }
 
   /* ---------- sommaire ---------- */
   .toc-page { display: flex; height: 100%; }
-  .toc-main { flex: 1.3; padding: 20mm 14mm 20mm 20mm; display: flex; flex-direction: column; }
+  .toc-main { flex: 1.35; padding: 18mm 12mm 20mm 16mm; display: flex; flex-direction: column; }
   .toc-photo { flex: 1; position: relative; margin: 0; }
-  .toc-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .toc-photo figcaption { position: absolute; left: 12px; bottom: 12px; right: 12px; color: #fff; font-size: 10px; background: rgba(8,47,55,.75); padding: 5px 10px; border-radius: 999px; display: inline-block; width: fit-content; }
-  .toc-head { margin-bottom: 6mm; }
-  .toc-head h1 { font-family: "Gelasio", "Iowan Old Style", Georgia, serif; font-size: 28px; margin: 6px 0 0; color: var(--ink-2); }
-  .toc-list { }
-  .toc-row { display: flex; align-items: baseline; gap: 10px; padding: 9px 0; border-bottom: 1px dashed var(--line); }
-  .toc-row .n { font-family: "Gelasio", "Iowan Old Style", Georgia, serif; font-size: 20px; color: var(--amber); width: 30px; flex: none; }
-  .toc-row .t { font-size: 14px; color: var(--ink-2); font-weight: 600; flex: 1; }
-  .toc-row .p { font-size: 12px; color: #8a9a97; }
-  .toc-note { margin-top: 8mm; padding: 12px 16px; background: var(--sand); border-radius: 10px; font-size: 11px; color: #55635f; }
+  .toc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; display: block; }
+  .toc-head { margin-bottom: 5mm; }
+  .toc-head h1 { font-size: 32px; line-height: 1.15; margin: 6px 0 0; color: var(--ink-2); }
+  .toc-row { display: flex; align-items: baseline; gap: 10px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
+  .toc-row .n { font-family: "Gelasio", Georgia, serif; font-size: 22px; color: var(--amber); width: 32px; flex: none; }
+  .toc-row .t { font-size: 15.5px; color: var(--ink-2); font-weight: 600; flex: 1; line-height: 1.3; }
+  .toc-row .p { font-size: 14px; color: var(--muted); font-weight: 600; }
+  .toc-note { margin-top: auto; padding: 13px 16px; background: var(--sand); border-radius: 10px; font-size: 13.5px; color: var(--muted); line-height: 1.5; }
 
-  /* ---------- presentation / activite pages ---------- */
-  .pres { padding: 18mm 16mm 24mm; height: 100%; display: flex; flex-direction: column; }
-  .pres-head { margin-bottom: 8mm; }
-  .pres-head h1 { font-family: "Gelasio", "Iowan Old Style", Georgia, serif; font-size: 27px; margin: 6px 0 0; color: var(--ink-2); max-width: 150mm; }
-  .pres-lead { font-size: 12.5px; color: #4c5b57; max-width: 150mm; margin-top: 8px; }
-  .stat-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin: 10mm 0; }
-  .stat { background: var(--ink-2); color: #fff; border-radius: 12px; padding: 12px 14px; }
-  .stat b { display: block; font-family: "Gelasio", "Iowan Old Style", Georgia, serif; font-size: 20px; color: var(--amber-hot); }
-  .stat span { font-size: 10px; color: #cfe1de; }
-  .two-col { display: grid; grid-template-columns: 1.05fr .95fr; grid-template-rows: minmax(0,1fr); gap: 10mm; align-items: stretch; flex: 1; min-height: 0; }
-  .two-col > * { min-height: 0; overflow: hidden; }
-  .pres-photo { border-radius: 14px; overflow: hidden; margin: 0; }
-  .pres-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* ---------- présentation / activité ---------- */
+  .pres { padding: 16mm 16mm 22mm; height: 100%; display: flex; flex-direction: column; }
+  .pres-head h1 { font-size: 32px; line-height: 1.15; margin: 6px 0 0; color: var(--ink-2); }
+  .pres-head h1 em { color: var(--amber); font-style: italic; }
+  .pres-lead { font-size: 15.5px; color: var(--muted); margin: 4mm 0 0; }
+  .stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 4mm; margin: 7mm 0; }
+  .stat { background: var(--ink-2); color: #fff; border-radius: 12px; padding: 12px 16px; }
+  .stat b { display: block; font-family: "Gelasio", Georgia, serif; font-size: 27px; line-height: 1.15; color: var(--amber-hot); }
+  .stat span { font-size: 13.5px; color: #dbe9e6; line-height: 1.35; display: block; margin-top: 2px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; flex: 1; min-height: 0; }
   .method-list { list-style: none; margin: 0; padding: 0; }
   .method-list li { display: flex; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line); }
-  .method-list b.num { font-family: "Gelasio", "Iowan Old Style", Georgia, serif; color: var(--amber); font-size: 15px; width: 22px; flex: none; }
-  .method-list h3 { margin: 0 0 2px; font-size: 12.5px; color: var(--ink-2); }
-  .method-list p { margin: 0; font-size: 11px; color: #55635f; }
+  .method-list b.num { font-family: "Gelasio", Georgia, serif; color: var(--amber); font-size: 18px; width: 26px; flex: none; }
+  .method-list h3 { margin: 0 0 2px; font-size: 16px; color: var(--ink-2); }
+  .method-list p { margin: 0; font-size: 14px; color: var(--muted); }
+  .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6mm; }
+  .badge { border: 1.2px solid var(--amber); color: var(--ink-2); border-radius: 999px; padding: 6px 14px; font-size: 13px; font-weight: 600; }
+  .ba { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0,1fr) auto; gap: 3mm; min-height: 0; }
+  .ba figure { position: relative; border-radius: 12px; overflow: hidden; min-height: 0; }
+  .ba img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ba .tagba { position: absolute; top: 8px; left: 8px; background: #fff; color: var(--ink-2); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; }
+  .ba .tagba.after { background: var(--amber-hot); color: var(--ink); }
+  .ba p { grid-column: 1 / 3; margin: 0; font-size: 12.5px; color: var(--muted); text-align: center; }
 
-  .audience-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8mm; margin-top: 8mm; }
-  .audience-card { border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; background: var(--paper); }
-  .audience-card .tag { font-size: 9.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--amber); font-weight: 700; }
-  .audience-card h3 { margin: 5px 0 6px; font-size: 13.5px; color: var(--ink-2); }
-  .audience-card p { margin: 0; font-size: 11px; color: #55635f; }
-
-  .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8mm; }
-  .badge { border: 1px solid var(--amber); color: var(--ink-2); border-radius: 999px; padding: 6px 13px; font-size: 10.5px; font-weight: 600; }
+  .audience-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 5mm; margin-top: 7mm; }
+  .audience-card { border: 1px solid var(--line); border-radius: 14px; padding: 13px 16px; background: var(--paper); }
+  .audience-card .tag { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--amber); font-weight: 700; }
+  .audience-card h3 { margin: 4px 0 5px; font-size: 16px; line-height: 1.3; color: var(--ink-2); }
+  .audience-card p { margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.45; }
+  .note-box { margin-top: 5mm; background: var(--sand); border: 1px solid var(--line); border-radius: 10px; padding: 11px 15px; font-size: 13.5px; color: var(--muted); line-height: 1.5; }
+  .note-box b { color: var(--ink-2); }
+  .real-head { display: flex; justify-content: space-between; align-items: baseline; margin: 7mm 0 3mm; }
+  .real-head h2 { font-family: "Gelasio", Georgia, serif; font-size: 20px; color: var(--ink-2); margin: 0; }
+  .real-head span { font-size: 12.5px; color: var(--muted); }
+  .real-strip { display: grid; grid-template-columns: repeat(3,1fr); gap: 3mm; flex: 1; min-height: 0; }
+  .real-strip figure { border-radius: 12px; overflow: hidden; min-height: 0; }
+  .real-strip img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   .deptmap-spread { padding: 16mm 16mm 20mm; height: 100%; display: flex; flex-direction: column; }
   .deptmap-svg-wrap { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; }
-  .deptmap-svg-wrap svg { height: 100%; width: auto; max-width: 100%; font-family: "Inter", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .deptmap-svg-wrap svg { height: 100%; width: auto; max-width: 100%; font-family: "Inter", Arial, sans-serif; }
   .dept { fill: var(--paper); stroke: #c3cac6; stroke-width: 1; }
-  .dept.active { fill: var(--amber); fill-opacity: .55; stroke: var(--ink-2); stroke-width: 1.4; }
+  .dept.active { fill: var(--amber-hot); fill-opacity: .6; stroke: var(--ink-2); stroke-width: 1.4; }
   .dept-label { font-size: 8.5px; fill: #a6b2ae; text-anchor: middle; }
-  .dept-label.active { fill: #5a3814; font-weight: 700; }
-  .deptmap-legend { display: flex; gap: 10mm; justify-content: center; margin-top: 6mm; }
-  .deptmap-legend-col { flex: none; max-width: 55mm; }
-  .deptmap-legend-col h4 { margin: 0 0 3px; font-size: 11.5px; color: var(--ink-2); display: flex; align-items: center; gap: 6px; }
-  .deptmap-legend-col h4 i { width: 10px; height: 10px; border-radius: 3px; background: var(--amber); opacity: .7; display: inline-block; flex: none; }
-  .deptmap-legend-col p { margin: 0; font-size: 9.5px; color: #6b7a76; line-height: 1.4; }
+  .dept-label.active { fill: #4a2d0f; font-weight: 700; font-size: 10px; }
+  .deptmap-legend { display: flex; gap: 10mm; justify-content: center; margin-top: 5mm; }
+  .deptmap-legend-col { flex: none; max-width: 58mm; }
+  .deptmap-legend-col h4 { margin: 0 0 3px; font-size: 15px; color: var(--ink-2); display: flex; align-items: center; gap: 7px; }
+  .deptmap-legend-col h4 i { width: 12px; height: 12px; border-radius: 3px; background: var(--amber-hot); opacity: .75; display: inline-block; flex: none; }
+  .deptmap-legend-col p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.4; }
 
-  /* ---------- section divider ---------- */
-  .divider { background: var(--ink-2); color: #fff; }
-  .divider-photo { position: absolute; inset: 0; }
-  .divider-photo img { width: 100%; height: 100%; object-fit: cover; }
-  .divider-scrim { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8,47,55,.97) 0%, rgba(8,47,55,.86) 46%, rgba(8,47,55,.62) 100%); }
-  .divider-content { position: absolute; left: 20mm; bottom: 30mm; right: 20mm; }
-  .divider-num { font-family: "Gelasio", "Iowan Old Style", Georgia, serif; font-size: 90px; color: var(--amber-hot); line-height: 1; opacity: .9; }
-  .divider h1 { font-family: "Gelasio", "Iowan Old Style", Georgia, serif; font-size: 36px; margin: 4px 0 10px; }
-  .divider p { font-size: 12.5px; color: #d7e6e3; max-width: 120mm; }
+  /* ---------- séparateurs de section ---------- */
+  .divider { background: var(--ink); color: #fff; }
+  .divider-photo { position: absolute; left: 0; right: 0; top: 0; height: calc(188mm + var(--bleed)); }
+  .divider-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .divider-panel-bg { position: absolute; left: 0; right: 0; top: calc(188mm + var(--bleed)); bottom: 0; background: var(--ink); }
+  .divider-content { position: absolute; left: 18mm; right: 18mm; top: 188mm; bottom: 14mm; display: flex; gap: 9mm; align-items: flex-start; padding-top: 12mm; }
+  .divider-num { font-family: "Gelasio", Georgia, serif; font-size: 84px; color: var(--amber-hot); line-height: .9; flex: none; }
+  .divider h1 { font-size: 36px; line-height: 1.12; margin: 0 0 4mm; font-weight: 700; }
+  .divider p { font-size: 16px; color: #dbe9e6; margin: 0; max-width: 125mm; line-height: 1.55; }
 
-  /* ---------- product spread ---------- */
-  .spread { padding: 16mm 16mm 22mm; height: 100%; display: flex; flex-direction: column; }
-  .spread-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 7mm; border-bottom: 2px solid var(--amber); padding-bottom: 6mm; }
-  .spread-head h1 { font-family: "Gelasio", "Iowan Old Style", Georgia, serif; font-size: 24px; margin: 4px 0 0; color: var(--ink-2); }
-  .spread-head .cat-n { font-family: "Gelasio", "Iowan Old Style", Georgia, serif; font-size: 34px; color: var(--amber); }
-  .spread-lead { font-size: 11.5px; color: #4c5b57; max-width: 170mm; margin-bottom: 7mm; }
+  /* ---------- pages produit ---------- */
+  .spread { padding: 15mm 16mm 21mm; height: 100%; display: flex; flex-direction: column; }
+  .spread-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 5mm; border-bottom: 2px solid var(--amber); padding-bottom: 4mm; }
+  .spread-head h1 { font-size: 28px; line-height: 1.15; margin: 4px 0 0; color: var(--ink-2); }
+  .spread-head .cat-n { font-family: "Gelasio", Georgia, serif; font-size: 40px; line-height: 1; color: var(--amber); }
+  .spread-lead { font-size: 15px; color: var(--muted); margin: 0 0 5mm; }
 
-  .gallery { display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: 1fr 1fr; gap: 6px; flex: 1; min-height: 0; margin-bottom: 7mm; }
-  .gallery figure { margin: 0; border-radius: 10px; overflow: hidden; position: relative; }
+  .gallery { display: grid; grid-template-columns: 1.35fr 1fr; grid-template-rows: 1fr 1fr; gap: 3mm; flex: 1; min-height: 0; margin-bottom: 5mm; }
+  .gallery figure { border-radius: 10px; overflow: hidden; position: relative; min-height: 0; }
   .gallery figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .gallery .main { grid-row: 1 / 3; }
-  .gallery figcaption { position: absolute; left: 8px; bottom: 8px; background: rgba(8,47,55,.82); color: #fff; font-size: 9px; padding: 3px 9px; border-radius: 999px; }
-  .gallery-duo { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr; }
-  .gallery-duo .main { grid-row: auto; }
-  .gallery-quad { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
-  .gallery-quad .main { grid-row: auto; }
-  .gallery-stack { grid-template-columns: 1fr; grid-template-rows: auto minmax(0,1fr); }
-  .gallery-stack .wide { aspect-ratio: 1600 / 814; }
-  .fit-contain { background: #fff; }
-  .fit-contain img { object-fit: contain !important; padding: 10px; }
+  .gallery-stack { grid-template-columns: 1fr; grid-template-rows: 1.25fr 1fr; }
+  .gallery-stack .main { grid-row: auto; }
+  .fit-contain { background: #fff; border: 1px solid var(--line); }
+  .fit-contain img { object-fit: contain !important; padding: 5mm; }
 
-  .feat-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; }
-  .feat-cols h2.sec { font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: var(--ink-2); margin: 0 0 8px; padding-bottom: 5px; border-bottom: 1px solid var(--line); }
+  .feat-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 7mm; }
+  .feat-cols h2.sec { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: var(--ink-2); margin: 0 0 4px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
   .feat-list { list-style: none; margin: 0; padding: 0; }
-  .feat-list li { position: relative; padding: 4px 0 4px 17px; font-size: 11px; color: #3c4a46; }
-  .feat-list li::before { content: "•"; color: var(--amber); font-weight: 800; position: absolute; left: 2px; }
-  .devis-box { margin-top: 8px; background: var(--sand); border: 1px solid var(--line); border-radius: 10px; padding: 10px 13px; font-size: 10.5px; color: #55635f; }
-  .devis-box b { color: var(--ink-2); }
+  .feat-list li { position: relative; padding: 3px 0 3px 16px; font-size: 14px; line-height: 1.42; color: var(--text); }
+  .feat-list li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--amber); position: absolute; left: 2px; top: 10px; }
+  .devis-box { margin-top: 6px; background: var(--sand); border: 1px solid var(--line); border-radius: 10px; padding: 9px 13px; font-size: 13.5px; line-height: 1.45; color: var(--muted); }
+  .dim-chips { display: flex; flex-wrap: wrap; gap: 5px; margin: 4px 0 6px; }
+  .dim-chips span { background: var(--sand); border: 1px solid var(--line); border-radius: 6px; padding: 3px 8px; font-size: 13px; color: var(--ink-2); font-weight: 600; }
 
-  .dim-chips { display: flex; flex-wrap: wrap; gap: 5px; margin: 2px 0 8px; }
-  .dim-chips span { background: var(--sand); border: 1px solid var(--line); border-radius: 6px; padding: 3px 8px; font-size: 10px; color: var(--ink-2); font-weight: 600; }
+  /* ---------- nuancier ---------- */
+  .nu-list { display: flex; flex-direction: column; gap: 3mm; }
+  .nu-band { display: grid; grid-template-columns: 44mm 1fr; gap: 5mm; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); padding: 3.5mm 4mm; align-items: start; }
+  .nu-band h3 { margin: 0; font-size: 16px; line-height: 1.25; color: var(--ink-2); }
+  .nu-band h3 b { color: var(--amber); font-weight: 800; }
+  .nu-band p { margin: 1.5mm 0 0; font-size: 12.5px; line-height: 1.45; color: var(--muted); }
+  .sw-grid { display: grid; grid-template-columns: repeat(7, 15.6mm); gap: 2.5mm 1.8mm; }
+  .sw { margin: 0; }
+  .sw img { width: 15.6mm; height: 15.6mm; object-fit: cover; display: block; border-radius: 4px; box-shadow: 0 0 0 1px rgba(0,0,0,.08); }
+  .sw figcaption { font-size: 10.5px; line-height: 1.2; color: var(--text); margin-top: 1.3mm; }
+  .nu-note { margin-top: 4mm; font-size: 12.5px; color: var(--muted); display: flex; gap: 8px; align-items: flex-start; }
+  .nu-note i { flex: none; width: 15px; height: 15px; border-radius: 50%; border: 1.5px solid var(--amber); color: var(--amber); font-style: normal; font-weight: 800; font-size: 10px; line-height: 12px; text-align: center; margin-top: 1px; }
+  .nu-amb { display: grid; grid-template-columns: repeat(3,1fr); gap: 3mm; flex: 1; min-height: 0; margin-top: 3.5mm; }
+  .nu-amb figure { position: relative; border-radius: 10px; overflow: hidden; min-height: 0; }
+  .nu-amb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  /* ---------- nuancier (gammes de panneaux) ---------- */
-  .nuancier-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; flex: 1; min-height: 0; }
-  .nuancier-grid > * { min-height: 0; }
-  .nuancier-card { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; background: var(--paper); }
-  .nuancier-head { padding: 8px 12px 6px; }
-  .nuancier-head h3 { margin: 0; font-size: 13px; color: var(--ink-2); }
-  .nuancier-head h3 b { color: var(--amber); font-weight: 800; }
-  .nuancier-head p { margin: 2px 0 0; font-size: 9.5px; color: #6b7a76; }
-  .nuancier-swatch { flex: 1; min-height: 0; background: #fff; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: center; padding: 6px; }
-  .nuancier-swatch img { width: 100%; height: 100%; object-fit: contain; }
-  .nuancier-span2 { grid-column: 1 / 3; }
-
-  /* ---------- contact / closing ---------- */
+  /* ---------- 4e de couverture ---------- */
   .closing { background: var(--ink); color: #fff; }
-  .closing-photo { position: absolute; inset: 0; }
-  .closing-photo img { width: 100%; height: 100%; object-fit: cover; }
-  .closing-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,47,55,.72), rgba(8,47,55,.98)); }
-  .closing-content { position: absolute; left: 20mm; right: 20mm; top: 26mm; bottom: 28mm; display: flex; flex-direction: column; }
-  .closing-gallery { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 14mm; }
-  .closing-gallery figure { margin: 0; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,.2); }
-  .closing-gallery img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .closing h1 { font-family: "Gelasio", "Iowan Old Style", Georgia, serif; font-size: 32px; margin: 8px 0 12px; max-width: 140mm; }
-  .closing p.lead { font-size: 12.5px; color: #d7e6e3; max-width: 130mm; }
-  .contact-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 10mm; }
-  .contact-item { border: 1px solid rgba(255,255,255,.25); border-radius: 12px; padding: 14px 16px; }
-  .contact-item .k { font-size: 9.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--amber-hot); font-weight: 700; }
-  .contact-item .v { font-size: 13px; margin-top: 4px; font-weight: 600; }
-  .nw { white-space: nowrap; }
+  .closing-photo { position: absolute; left: 0; right: 0; top: 0; height: calc(66mm + var(--bleed)); }
+  .closing-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; display: block; }
+  .closing-fade { position: absolute; left: 0; right: 0; top: calc(30mm + var(--bleed)); height: 37mm; background: linear-gradient(180deg, rgba(8,47,55,0), var(--ink)); }
+  .closing-content { position: absolute; left: 16mm; right: 16mm; top: 60mm; bottom: 11mm; display: flex; flex-direction: column; }
+  .closing h1 { font-size: 30px; line-height: 1.18; margin: 2mm 0 3mm; }
+  .closing p.lead { font-size: 15px; color: #dbe9e6; margin: 0; max-width: 165mm; }
+  .contact-grid { display: grid; grid-template-columns: 1.15fr 1.3fr 1fr; gap: 3mm; margin-top: 6mm; }
+  .contact-item { border: 1px solid rgba(255,255,255,.3); border-radius: 12px; padding: 10px 14px; }
+  .contact-item .k { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--amber-hot); font-weight: 700; }
+  .contact-item .v { font-size: 16px; margin-top: 3px; font-weight: 700; }
+  .contact-item.tel .v { font-size: 20px; font-family: "Gelasio", Georgia, serif; }
+  .zones { font-size: 13px; color: #cfe1de; margin-top: 3mm; }
+  .zones b { color: #fff; }
 
-  /* ---------- encart conseiller (4e de couverture) ---------- */
-  .rdv-card { margin-top: auto; background: var(--paper); color: var(--ink); border-radius: 14px; padding: 6mm 8mm 7mm; box-shadow: 0 0 0 1px rgba(255,255,255,.35); }
-  .rdv-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 8mm; padding-bottom: 4mm; margin-bottom: 4mm; border-bottom: 2px solid var(--amber); }
-  .rdv-head .eyebrow { font-size: 10px; }
-  .rdv-head h2 { font-family: "Gelasio", "Iowan Old Style", Georgia, serif; font-size: 21px; color: var(--ink-2); margin: 3px 0 0; line-height: 1.15; }
-  .rdv-head p { margin: 0; font-size: 10.5px; color: #55635f; max-width: 62mm; text-align: right; line-height: 1.45; }
-  .rdv-body { display: grid; grid-template-columns: 1fr 85mm; gap: 8mm; align-items: start; }
-  .rdv-field { display: block; padding-top: 2.2mm; }
-  .rdv-field label { display: block; font-size: 9px; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; color: var(--ink-2); }
-  .rdv-field .line { display: block; height: 7.2mm; border-bottom: 1px solid #a9b4b1; }
-  .rdv-next { padding-top: 4mm; }
-  .rdv-next label { display: block; font-size: 9px; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; color: var(--ink-2); margin-bottom: 2.5mm; }
-  .rdv-next .opts { display: flex; flex-wrap: wrap; gap: 2mm 5mm; font-size: 10.5px; color: #3c4a46; }
-  .rdv-next .opts span::before { content: ""; display: inline-block; width: 3.4mm; height: 3.4mm; border: 1.2px solid var(--ink-2); border-radius: 1mm; margin-right: 1.6mm; vertical-align: -0.7mm; background: #fff; }
-  .rdv-slot { width: 85mm; height: 55mm; border: 1.4px dashed #a9b4b1; border-radius: 3mm; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 2mm; color: #7d8b87; font-size: 10px; line-height: 1.4; margin-top: 2.2mm; }
-  .rdv-slot b { color: var(--ink-2); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; }
-  .legal { position: absolute; left: 20mm; right: 20mm; bottom: 14mm; font-size: 9px; color: #9fb6b2; border-top: 1px solid rgba(255,255,255,.2); padding-top: 8px; }
+  .rdv-card { margin-top: 7mm; background: var(--paper); color: var(--ink); border-radius: 14px; padding: 5mm 7mm 6mm; }
+  .rdv-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 8mm; padding-bottom: 3mm; margin-bottom: 1mm; border-bottom: 2px solid var(--amber-hot); }
+  .rdv-head .eyebrow { font-size: 11px; }
+  .rdv-head h2 { font-family: "Gelasio", Georgia, serif; font-size: 22px; color: var(--ink-2); margin: 2px 0 0; line-height: 1.15; }
+  .rdv-head p { margin: 0; font-size: 12.5px; color: var(--muted); max-width: 72mm; text-align: right; line-height: 1.4; }
+  .rdv-body { display: grid; grid-template-columns: 1fr 1fr; gap: 0 9mm; }
+  .rdv-field { padding-top: 2.6mm; }
+  .rdv-field label, .rdv-next label { display: block; font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; color: var(--ink-2); }
+  .rdv-field .line { display: block; height: 10mm; border-bottom: 1px solid #9aa6a3; }
+  .rdv-wide { grid-column: 1 / 3; }
+  .rdv-next { grid-column: 1 / 3; padding-top: 4mm; display: flex; align-items: center; gap: 6mm; }
+  .rdv-next .opts { display: flex; flex-wrap: wrap; gap: 2mm 7mm; font-size: 13.5px; color: var(--text); }
+  .rdv-next .opts span::before { content: ""; display: inline-block; width: 3.8mm; height: 3.8mm; border: 1.3px solid var(--ink-2); border-radius: 1mm; margin-right: 1.8mm; vertical-align: -0.8mm; background: #fff; }
+  .legal { margin-top: auto; font-size: 11px; line-height: 1.5; color: #a9c0bc; border-top: 1px solid rgba(255,255,255,.2); padding-top: 3mm; }
+  .legal b { color: #e3eeeb; font-weight: 600; }
 </style>
 </head>
 <body>
 
 <!-- 1. COUVERTURE -->
 <div class="page cover">
-  <div class="cover-photo"><img src="media/avant-apres-marbre.jpg" alt=""></div>
-  <div class="cover-scrim"></div>
+  <div class="cover-photo bl"><img src="media/couv-slim-blanc-alpin.jpg" alt=""></div>
+  <div class="cover-fade bl"></div>
+  <div class="cover-panel-bg bl"></div>
   <div class="cover-top">
     <div class="brandmark">
-      <svg width="36" height="36" viewBox="0 0 44 44" fill="none">
-        <rect x="2" y="2" width="40" height="40" rx="12" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-opacity="0.4"/>
+      <svg width="38" height="38" viewBox="0 0 44 44" fill="none">
+        <rect x="2" y="2" width="40" height="40" rx="12" fill="#082f37" fill-opacity="0.35" stroke="#ffffff" stroke-opacity="0.6"/>
         <path d="M12 23 L22 13 L32 23" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M22 19c-3.2 3.6-5 5.6-5 8.2a5 5 0 0 0 10 0c0-2.6-1.8-4.6-5-8.2Z" fill="#e7a551"/>
         <rect x="14" y="24" width="16" height="9" rx="2.4" fill="none" stroke="#fff" stroke-width="2" opacity=".55"/>
       </svg>
       <span class="lt">Adom<b>senior</b></span>
     </div>
-    <span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#cfe1de;">adomsenior.fr</span>
+    <span class="site">adomsenior.fr</span>
   </div>
-  <div class="cover-bottom">
-    <span class="cover-tag">Catalogue produits · 2026</span>
+  <div class="cover-panel">
+    <span class="cover-tag">Catalogue produits</span>
     <h1>La salle de bain sécurisée,<br><em>sans jamais renoncer au beau.</em></h1>
-    <p class="lead">Receveurs, revêtements muraux, parois, accessoires et travaux annexes : l'ensemble des équipements posés par ADOM SENIOR pour transformer une baignoire en douche contemporaine, en une seule journée.</p>
+    <p class="lead">Receveurs, revêtements muraux, parois, accessoires et travaux annexes : l'ensemble des équipements posés par ADOM SENIOR pour transformer une baignoire en douche contemporaine, posée dans la journée.</p>
     <div class="cover-meta">
       <div><b>3 000+</b>transformations réalisées</div>
-      <div><b>1 jour</b>de pose</div>
+      <div><b>1 jour</b>pour poser votre douche</div>
       <div><b>10 ans</b>de garantie matériaux</div>
-      <div><b>SS4</b>équipes formées amiante</div>
+      <div><b class="nw">07 43 72 07 64</b>conseil &amp; rendez-vous</div>
     </div>
   </div>
 </div>
@@ -262,11 +273,11 @@
     <div class="toc-main">
       <div class="toc-head">
         <div class="eyebrow">Sommaire</div>
-        <h1 class="serif">Ce que contient<br>ce catalogue.</h1>
+        <h1>Ce que contient<br>ce catalogue.</h1>
       </div>
       <div class="toc-list">
-        <div class="toc-row"><span class="n">—</span><span class="t">Présentation d'ADOM SENIOR</span><span class="p">03</span></div>
-        <div class="toc-row"><span class="n">—</span><span class="t">Notre activité &amp; nos secteurs d'intervention</span><span class="p">04</span></div>
+        <div class="toc-row"><span class="n">—</span><span class="t">Qui sommes-nous</span><span class="p">03</span></div>
+        <div class="toc-row"><span class="n">—</span><span class="t">Notre activité &amp; nos réalisations</span><span class="p">04</span></div>
         <div class="toc-row"><span class="n">—</span><span class="t">Nos zones d'intervention</span><span class="p">05</span></div>
         <div class="toc-row"><span class="n">01</span><span class="t">Receveurs de douche</span><span class="p">06</span></div>
         <div class="toc-row"><span class="n">02</span><span class="t">Revêtement mural &amp; nuancier</span><span class="p">08</span></div>
@@ -274,31 +285,30 @@
         <div class="toc-row"><span class="n">04</span><span class="t">Accessoires — barres, siège, robinetterie</span><span class="p">14</span></div>
         <div class="toc-row"><span class="n">05</span><span class="t">Travaux complémentaires — lavabo, WC</span><span class="p">16</span></div>
         <div class="toc-row"><span class="n">06</span><span class="t">Sols</span><span class="p">18</span></div>
-        <div class="toc-row"><span class="n">—</span><span class="t">Contact &amp; prise de rendez-vous</span><span class="p">20</span></div>
+        <div class="toc-row"><span class="n">—</span><span class="t">Contact &amp; votre conseiller</span><span class="p">20</span></div>
       </div>
-      <div class="toc-note">Les équipements présentés sont ceux réellement posés par les équipes ADOM SENIOR, en partenariat avec notre fournisseur LT&nbsp;Showertec. Chaque produit est recoupé et ajusté sur mesure, au millimètre, à la configuration réelle de votre salle de bain — ce support vous accompagne pour visualiser et composer votre projet.</div>
+      <div class="toc-note">Les équipements présentés sont ceux réellement posés par les équipes ADOM SENIOR. Chaque produit est recoupé et ajusté sur mesure, au millimètre, à la configuration réelle de votre salle de bain : ce catalogue vous aide à visualiser et composer votre projet.</div>
     </div>
-    <figure class="toc-photo"><img src="media/toc-photo-marble.jpg" alt=""><figcaption>Rendu LT Showertec</figcaption></figure>
+    <figure class="toc-photo"><img src="media/sommaire-slim-olive.jpg" alt=""></figure>
   </div>
-  <div class="folio" style="left:20mm;right:auto;width:calc(56% - 20mm);"><span>ADOM SENIOR · Catalogue produits</span><b>02</b></div>
+  <div class="folio" style="right:auto;width:calc(57.4% - 28mm);"><span>Catalogue produits</span><span class="r"><b>02</b></span></div>
 </div>
 
-<!-- 3. PRESENTATION -->
+<!-- 3. QUI SOMMES-NOUS -->
 <div class="page">
   <div class="pres">
     <div class="pres-head">
       <div class="eyebrow">Qui sommes-nous</div>
-      <h1 class="serif">Retrouver l'aisance.<br><em style="color:var(--amber);font-style:italic;">Sans tout refaire.</em></h1>
-      <p class="pres-lead">ADOM SENIOR transforme la baignoire en une douche contemporaine et sécurisée, sans casser ni recarreler. Pour une douche seule, une journée de 8&nbsp;h suffit : le matin, l'équipe dépose l'ancienne baignoire ; le soir, la nouvelle douche est posée. Pour une rénovation complète — sol, WC, lavabo — comptez 2 jours.</p>
+      <h1>Retrouver l'aisance.<br><em>Sans tout refaire.</em></h1>
+      <p class="pres-lead">ADOM SENIOR transforme la baignoire en une douche contemporaine et sécurisée, sans casser ni recarreler. Pour une douche seule, une journée suffit : le matin, l'équipe dépose l'ancienne baignoire ; le soir, la nouvelle douche est posée. Pour une rénovation complète — sol, WC, lavabo — comptez 2 jours.</p>
     </div>
     <div class="stat-row">
-      <div class="stat"><b>1 jour</b><span>pour une douche seule (journée de 8 h)</span></div>
+      <div class="stat"><b>1 jour</b><span>pour poser une douche, du matin au soir</span></div>
       <div class="stat"><b>2 jours</b><span>pour une rénovation complète (sol, WC, lavabo…)</span></div>
-      <div class="stat"><b>36 h</b><span>de séchage avant la première utilisation</span></div>
       <div class="stat"><b>10 ans</b><span>de garantie sur les matériaux posés</span></div>
     </div>
     <div class="two-col">
-      <div style="display:flex;flex-direction:column;">
+      <div>
         <ul class="method-list">
           <li><b class="num">01</b><div><h3>La baignoire s'en va</h3><p>Dépose méthodique, protection des circulations, adaptation des réseaux sans chantier lourd.</p></div></li>
           <li><b class="num">02</b><div><h3>Les murs restent</h3><p>Pas de carrelage à arracher : des panneaux étanches habillent et protègent le support existant.</p></div></li>
@@ -306,45 +316,51 @@
         </ul>
         <div class="badge-row">
           <span class="badge">Sans casser, sans carreler</span>
-          <span class="badge">Protocole amiante SS4</span>
           <span class="badge">Sur mesure, au millimètre</span>
+          <span class="badge">Protocole amiante SS4</span>
         </div>
-        <figure class="pres-photo" style="margin-top:8mm;flex:1;min-height:0;"><img src="media/ambiance-bois-hd.jpg" alt=""></figure>
       </div>
-      <figure class="pres-photo"><img src="media/ambiance-mosaique-hd.jpg" alt=""></figure>
+      <div class="ba">
+        <figure><img src="media/chantier-avant.jpg" alt="Salle de bain avant travaux, avec baignoire"><span class="tagba">Avant</span></figure>
+        <figure><img src="media/chantier-apres.jpg" alt="La même salle de bain après travaux, douche de plain-pied"><span class="tagba after">Après</span></figure>
+        <p>Une baignoire remplacée par une douche sécurisée — chantier réalisé par ADOM SENIOR.</p>
+      </div>
     </div>
   </div>
-  <div class="folio"><span>ADOM SENIOR · Catalogue produits</span><b>03</b></div>
+  <div class="folio"><span>Qui sommes-nous</span><span class="r"><span class="nw">07 43 72 07 64</span><b>03</b></span></div>
 </div>
 
 <!-- 4. ACTIVITE / SECTEURS -->
 <div class="page">
   <div class="pres">
     <div class="pres-head">
-      <div class="eyebrow">Notre activité &amp; nos secteurs d'intervention</div>
-      <h1 class="serif">À chaque projet,<br><em style="color:var(--amber);font-style:italic;">le bon accompagnement.</em></h1>
-      <p class="pres-lead">ADOM SENIOR intervient dans trois grandes régions — Nord-Ouest, Sud-Ouest et Sud-Est —, pour les particuliers comme pour les organismes qui gèrent un parc de logements. Les contraintes d'un programme multi-logements ne sont pas celles d'un domicile : notre méthode s'adapte à chaque réalité.</p>
+      <div class="eyebrow">Notre activité &amp; nos réalisations</div>
+      <h1>À chaque projet,<br><em>le bon accompagnement.</em></h1>
+      <p class="pres-lead">ADOM SENIOR intervient dans trois grandes régions — Nord-Ouest, Sud-Ouest et Sud-Est —, pour les particuliers comme pour les organismes qui gèrent un parc de logements. Notre méthode s'adapte à chaque réalité.</p>
     </div>
     <div class="audience-grid">
       <div class="audience-card"><span class="tag">Particuliers</span><h3>Rester chez soi, en toute sécurité</h3><p>Une solution sur mesure, contemporaine et non stigmatisante, avec un premier éclairage sur les aides MaPrimeAdapt'.</p></div>
       <div class="audience-card"><span class="tag">Aidants &amp; familles</span><h3>Accompagner un proche</h3><p>Conseils adaptés à la personne, finitions choisies pour l'intérieur, sans transformer la salle de bain en espace médicalisé.</p></div>
-      <div class="audience-card"><span class="tag">Bailleurs sociaux</span><h3>Des programmes suivis logement par logement</h3><p>Équipes formées SS4, méthode documentée, suivi numérique avec portail client InterFast — et un parc adapté éligible au dégrèvement de TFPB.</p></div>
+      <div class="audience-card"><span class="tag">Bailleurs sociaux</span><h3>Des programmes suivis logement par logement</h3><p>Équipes formées SS4, méthode documentée, suivi numérique avec portail client — et un parc adapté éligible au dégrèvement de TFPB.</p></div>
       <div class="audience-card"><span class="tag">Collectivités &amp; EHPAD</span><h3>Adapter un patrimoine, à grande échelle</h3><p>Réponse aux marchés publics comme aux besoins ponctuels, intervention en site occupé, réception tracée et documentée.</p></div>
     </div>
-    <div class="devis-box" style="margin-top:10mm;max-width:170mm;">
-      <b>Patrimoine ancien &amp; amiante :</b> nos opérateurs et encadrants sont formés à la sous-section&nbsp;4 (SS4). Nous disposons de modes opératoires permettant des interventions en SS4, niveau d'empoussièrement&nbsp;1. Le recouvrement des supports existants, sans démolition, réduit fortement les opérations génératrices de poussières et permet de traiter les logements anciens dans un cadre maîtrisé.
+    <div class="note-box"><b>Patrimoine ancien &amp; amiante :</b> nos opérateurs et encadrants sont formés à la sous-section&nbsp;4 (SS4). Le recouvrement des supports existants, sans démolition, réduit fortement les poussières et permet de traiter les logements anciens dans un cadre maîtrisé.</div>
+    <div class="real-head"><h2>Quelques chantiers réalisés</h2><span>Photos de nos équipes, chez nos clients</span></div>
+    <div class="real-strip">
+      <figure><img src="media/chantier-bois.jpg" alt="Douche avec panneaux effet bois, chantier ADOM SENIOR"></figure>
+      <figure><img src="media/chantier-gris.jpg" alt="Douche avec panneaux gris et paroi dépolie, chantier ADOM SENIOR"></figure>
+      <figure><img src="media/chantier-depoli.jpg" alt="Douche avec paroi à bande dépolie et barre d'appui, chantier ADOM SENIOR"></figure>
     </div>
-    <div class="devis-box" style="margin-top:8mm;max-width:170mm;">Le détail de nos zones d'intervention actuelles (Nord-Ouest, Sud-Ouest, Sud-Est) est présenté page suivante.</div>
   </div>
-  <div class="folio"><span>ADOM SENIOR · Catalogue produits</span><b>04</b></div>
+  <div class="folio"><span>Notre activité</span><span class="r"><span class="nw">07 43 72 07 64</span><b>04</b></span></div>
 </div>
 
-<!-- 4b ZONES D'INTERVENTION -->
+<!-- 5. ZONES D'INTERVENTION -->
 <div class="page">
   <div class="deptmap-spread">
-    <div class="pres-head" style="margin-bottom:5mm;">
+    <div class="pres-head" style="margin-bottom:4mm;">
       <div class="eyebrow">Zones d'intervention</div>
-      <h1 class="serif">Où nous intervenons</h1>
+      <h1>Où nous intervenons</h1>
       <p class="pres-lead">Trois bassins d'intervention, chacun organisé autour d'une équipe locale. Départements actuellement couverts par ADOM SENIOR.</p>
     </div>
     <div class="deptmap-svg-wrap">
@@ -549,17 +565,16 @@
       <div class="deptmap-legend-col"><h4><i></i>Sud-Est</h4><p>Provence-Alpes-Côte d'Azur<br>04 · 05 · 06 · 13 · 83 · 84</p></div>
     </div>
   </div>
-  <div class="folio"><span>Zones d'intervention</span><b>05</b></div>
+  <div class="folio"><span>Zones d'intervention</span><span class="r"><span class="nw">07 43 72 07 64</span><b>05</b></span></div>
 </div>
 
 <!-- DIVIDER 01 -->
 <div class="page divider">
-  <div class="divider-photo"><img src="media/receveur-futura.jpg" alt=""></div>
-  <div class="divider-scrim"></div>
+  <div class="divider-photo bl"><img src="media/div-receveurs.jpg" alt="" style="object-position:62% 60%;"></div>
+  <div class="divider-panel-bg bl"></div>
   <div class="divider-content">
     <div class="divider-num">01</div>
-    <h1 class="serif">Receveurs de douche</h1>
-    <p>Une large surface stable, extra-plate et antidérapante, découpée sur mesure selon les contraintes d'évacuation de chaque salle de bain.</p>
+    <div><h1>Receveurs de douche</h1><p>Une large surface stable, extra-plate et antidérapante, découpée sur mesure selon les contraintes d'évacuation de chaque salle de bain.</p></div>
   </div>
 </div>
 
@@ -567,47 +582,45 @@
 <div class="page">
   <div class="spread">
     <div class="spread-head">
-      <div><div class="eyebrow">Équipement 01</div><h1 class="serif">Receveurs de douche</h1></div>
+      <div><div class="eyebrow">Équipement 01</div><h1>Receveurs de douche</h1></div>
       <span class="cat-n">01</span>
     </div>
-    <p class="spread-lead">Le receveur est l'élément fondateur de la douche sécurisée : posé bas, il facilite le passage du pied et limite le risque de chute, tout en conservant une esthétique proche d'une vraie salle de bain contemporaine.</p>
-    <div class="gallery gallery-duo">
-      <figure class="main"><img src="media/receveur-futura.jpg" alt="Receveur FUTURA PN24, rendu LT Showertec"><figcaption>Gamme Futura</figcaption></figure>
-      <figure><img src="media/receveur-moderna.jpg" alt="Receveur MODERNA, rendu LT Showertec"><figcaption>Gamme Moderna</figcaption></figure>
+    <p class="spread-lead">Le receveur est l'élément fondateur de la douche sécurisée : posé bas, il facilite le passage du pied et limite le risque de chute, tout en conservant l'esthétique d'une vraie salle de bain contemporaine.</p>
+    <div class="gallery">
+      <figure class="main"><img src="media/receveur-situation.jpg" alt="Receveur extra-plat posé dans une douche de plain-pied" style="object-position:50% 80%;"><figcaption class="cap">Receveur extra-plat, posé sur mesure</figcaption></figure>
+      <figure><img src="media/receveur-walkin.jpg" alt="Grande douche de plain-pied avec receveur blanc" style="object-position:45% 60%;"><figcaption class="cap">Grande douche de plain-pied</figcaption></figure>
+      <figure><img src="media/receveur-grille.jpg" alt="Receveur Moderna, surface antidérapante et grille"><figcaption class="cap">Receveur Moderna · grille</figcaption></figure>
     </div>
     <div class="feat-cols">
       <div>
         <h2 class="sec">Caractéristiques</h2>
         <ul class="feat-list">
           <li>Receveur extra-plat, affleurant ou à seuil très réduit</li>
-          <li>Surface antidérapante <b>PN24</b>, antibactérienne et hautement résistante — conçue pour un usage intensif</li>
-          <li>Gammes fournisseur LT Showertec : Futura, Moderna</li>
-          <li>Coloris blanc, gris ou minéral selon l'ambiance choisie</li>
+          <li>Surface antidérapante <b>PN24</b>, antibactérienne et très résistante</li>
+          <li>Receveurs <b>Futura Néo</b> et <b>Moderna</b></li>
+          <li>Coloris blanc, gris ou minéral selon l'ambiance</li>
         </ul>
       </div>
       <div>
         <h2 class="sec">Sur mesure, au millimètre</h2>
         <div class="dim-chips"><span>80×80</span><span>90×90</span><span>100×100</span><span>120×100</span><span>140×100</span><span>160×100</span><span>180×90</span><span>200×100</span></div>
         <ul class="feat-list">
-          <li>8 dimensions de base (en cm), recoupables de 15 cm de chaque côté — hors face avant — pour une adaptation parfaite à l'existant</li>
+          <li>8 dimensions de base (cm), recoupables pour s'adapter parfaitement à l'existant</li>
           <li>Posé sur plots réglables, raccordé à l'évacuation existante</li>
-          <li>Compatible avec l'ensemble des parois et panneaux muraux du catalogue</li>
         </ul>
-        <div class="devis-box">Ce n'est pas une simple cabine posée : chaque receveur est ajusté sur mesure lors de la visite technique, pour une finition parfaitement intégrée.</div>
       </div>
     </div>
   </div>
-  <div class="folio"><span>Receveurs de douche</span><b>07</b></div>
+  <div class="folio"><span>Receveurs de douche</span><span class="r"><span class="nw">07 43 72 07 64</span><b>07</b></span></div>
 </div>
 
 <!-- DIVIDER 02 -->
 <div class="page divider">
-  <div class="divider-photo"><img src="media/panneau-relief-beton.jpg" alt=""></div>
-  <div class="divider-scrim"></div>
+  <div class="divider-photo bl"><img src="media/div-murs.jpg" alt="" style="object-position:58% 50%;"></div>
+  <div class="divider-panel-bg bl"></div>
   <div class="divider-content">
     <div class="divider-num">02</div>
-    <h1 class="serif">Revêtement mural</h1>
-    <p>Des panneaux étanches qui recouvrent les murs existants, sans démolition ni recarrelage, dans une large palette de finitions.</p>
+    <div><h1>Revêtement mural</h1><p>Des panneaux étanches qui recouvrent les murs existants, sans démolition ni recarrelage, dans une large palette de finitions.</p></div>
   </div>
 </div>
 
@@ -615,99 +628,111 @@
 <div class="page">
   <div class="spread">
     <div class="spread-head">
-      <div><div class="eyebrow">Équipement 02</div><h1 class="serif">Revêtement mural</h1></div>
+      <div><div class="eyebrow">Équipement 02</div><h1>Revêtement mural</h1></div>
       <span class="cat-n">02</span>
     </div>
-    <p class="spread-lead">Les murs existants sont conservés, puis recouverts de panneaux étanches, découpés sur place à la mesure exacte de la pièce. Fini la poussière et les nuisances d'un chantier de carrelage : le résultat est net, lumineux et facile d'entretien.</p>
+    <p class="spread-lead">Les murs existants sont conservés, puis recouverts de panneaux étanches, découpés sur place à la mesure exacte de la pièce. Fini la poussière d'un chantier de carrelage : le résultat est net, lumineux et facile d'entretien.</p>
     <div class="gallery">
-      <figure class="main"><img src="media/panneau-relief-beton.jpg" alt="Panneaux RELIEF finition carrelage métro, LT Showertec"><figcaption>Finition carrelage métro</figcaption></figure>
-      <figure><img src="media/panneau-relief-metro-bois.jpg" alt="Panneaux RELIEF finition carrelage, LT Showertec"><figcaption>Finition carrelage</figcaption></figure>
-      <figure><img src="media/dalle-murale-carrelage.jpg" alt="Dalles murales effet carrelage, LT Showertec"><figcaption>Dalles murales clipsables</figcaption></figure>
+      <figure class="main"><img src="media/mur-slim-olive.jpg" alt="Panneaux muraux Slim vert olive" style="object-position:45% 50%;"><figcaption class="cap">Panneau Slim · vert olive</figcaption></figure>
+      <figure><img src="media/mur-relief-metro.jpg" alt="Panneaux muraux Relief métro blanc" style="object-position:55% 50%;"><figcaption class="cap">Panneau Relief · métro blanc</figcaption></figure>
+      <figure><img src="media/mur-dalles-marbre.jpg" alt="Dalles murales sans joints, marbre blanc" style="object-position:85% 50%;"><figcaption class="cap">Dalles sans joints · marbre blanc</figcaption></figure>
     </div>
-    <div class="feat-cols" style="grid-template-columns:1fr;">
+    <div class="feat-cols">
       <div>
         <h2 class="sec">Sur mesure, pas une simple cabine</h2>
         <ul class="feat-list">
-          <li>Panneaux fournis en format <b>2,50 m de hauteur × 1,20 m de largeur</b></li>
-          <li>Redécoupés sur place aux mesures exactes de votre salle de bain</li>
-          <li>Posés directement sur le support existant, sans démolition</li>
-          <li>Surface non poreuse, sans joint, facile à entretenir au quotidien</li>
-          <li>Résultat : des finitions optimales, ajustées pièce par pièce — voir le nuancier complet pages suivantes</li>
+          <li>Panneaux grand format (jusqu'à <b>2,50 m × 1,20 m</b>)</li>
+          <li>Redécoupés sur place aux mesures exactes de la pièce</li>
+          <li>Posés directement sur le support existant</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="sec">Au quotidien</h2>
+        <ul class="feat-list">
+          <li>Surface non poreuse, sans joint, facile à entretenir</li>
+          <li>Plus de 30 finitions : marbre, béton, bois, couleurs…</li>
+          <li>Nuancier complet pages suivantes</li>
         </ul>
       </div>
     </div>
   </div>
-  <div class="folio"><span>Revêtement mural</span><b>09</b></div>
+  <div class="folio"><span>Revêtement mural</span><span class="r"><span class="nw">07 43 72 07 64</span><b>09</b></span></div>
 </div>
 
-<!-- 02b NUANCIER PANNEAUX (1/2) -->
+<!-- 02b NUANCIER (1/2) -->
 <div class="page">
   <div class="spread">
     <div class="spread-head">
-      <div><div class="eyebrow">Équipement 02 · Nuancier</div><h1 class="serif">Nos gammes de panneaux</h1></div>
+      <div><div class="eyebrow">Équipement 02 · Nuancier</div><h1>Nos gammes de panneaux</h1></div>
       <span class="cat-n">02</span>
     </div>
-    <p class="spread-lead">Huit gammes de panneaux et de dalles muraux, présentées sur ces deux pages, chacune avec sa propre palette de finitions. Toutes se découpent sur mesure à l'espace disponible.</p>
-    <div class="nuancier-grid" style="grid-template-rows: repeat(3, 1fr);">
-      <div class="nuancier-card">
-        <div class="nuancier-head"><h3><b>Relief</b> — effet matière</h3><p>6,3 cm d'épaisseur, hauteur 2 ou 2,5 m. Idéale sur supports encombrés ou abîmés.</p></div>
-        <div class="nuancier-swatch"><img src="media/gamme-relief.jpg" alt="Nuancier panneaux Relief : blanc ardoise, marbre blanc, marbre gris clair, chêne blanchi, ciment gris, métro blanc, mosaïque blanche"></div>
+    <p class="spread-lead">Huit gammes de panneaux et de dalles muraux, présentées sur ces deux pages. Toutes se découpent sur mesure à l'espace disponible.</p>
+    <div class="nu-list" style="flex:1;justify-content:space-between;">
+      <div class="nu-band">
+        <div><h3>Panneaux <b>Relief</b></h3><p>Effet matière, hauteur 2 ou 2,5 m. Idéals sur supports encombrés ou abîmés.</p></div>
+        <div class="sw-grid"><figure class="sw"><img src="media/nuancier/relief_01.jpg" alt="Blanc ardoise"><figcaption>Blanc ardoise</figcaption></figure><figure class="sw"><img src="media/nuancier/relief_02.jpg" alt="Marbre blanc"><figcaption>Marbre blanc</figcaption></figure><figure class="sw"><img src="media/nuancier/relief_03.jpg" alt="Marbre gris clair"><figcaption>Marbre gris clair</figcaption></figure><figure class="sw"><img src="media/nuancier/relief_04.jpg" alt="Chêne blanchi"><figcaption>Chêne blanchi</figcaption></figure><figure class="sw"><img src="media/nuancier/relief_05.jpg" alt="Ciment gris"><figcaption>Ciment gris</figcaption></figure><figure class="sw"><img src="media/nuancier/relief_06.jpg" alt="Métro blanc"><figcaption>Métro blanc</figcaption></figure><figure class="sw"><img src="media/nuancier/relief_07.jpg" alt="Mosaïque blanche"><figcaption>Mosaïque blanche</figcaption></figure></div>
       </div>
-      <div class="nuancier-card">
-        <div class="nuancier-head"><h3><b>Moderna</b> — lisse &amp; contemporain</h3><p>Intérieur mousse évidable, intégration facile de la robinetterie.</p></div>
-        <div class="nuancier-swatch"><img src="media/gamme-moderna.jpg" alt="Nuancier panneaux Moderna : blanc ardoise, marbre gris foncé, marbre gris clair, gris ardoise"></div>
+      <div class="nu-band">
+        <div><h3>Panneaux <b>Moderna</b></h3><p>Lisses et contemporains, intérieur mousse évidable : intégration facile de la robinetterie.</p></div>
+        <div class="sw-grid"><figure class="sw"><img src="media/nuancier/moderna_01.jpg" alt="Blanc ardoise"><figcaption>Blanc ardoise</figcaption></figure><figure class="sw"><img src="media/nuancier/moderna_02.jpg" alt="Marbre gris foncé"><figcaption>Marbre gris foncé</figcaption></figure><figure class="sw"><img src="media/nuancier/moderna_03.jpg" alt="Marbre gris clair"><figcaption>Marbre gris clair</figcaption></figure><figure class="sw"><img src="media/nuancier/moderna_04.jpg" alt="Gris ardoise"><figcaption>Gris ardoise</figcaption></figure></div>
       </div>
-      <div class="nuancier-card">
-        <div class="nuancier-head"><h3><b>Futura</b> — aspect béton</h3><p>Panneaux creux en Gelcoat, fixation sur supports vissés, tuyauterie facilement déplaçable.</p></div>
-        <div class="nuancier-swatch"><img src="media/gamme-futura.jpg" alt="Nuancier panneaux Futura : gris aspect béton, blanc aspect béton, champagne aspect béton"></div>
+      <div class="nu-band">
+        <div><h3>Panneaux <b>Futura</b></h3><p>Aspect béton, panneaux creux en Gelcoat, tuyauterie facilement déplaçable.</p></div>
+        <div class="sw-grid"><figure class="sw"><img src="media/nuancier/futura_01.jpg" alt="Gris aspect béton"><figcaption>Gris aspect béton</figcaption></figure><figure class="sw"><img src="media/nuancier/futura_02.jpg" alt="Blanc aspect béton"><figcaption>Blanc aspect béton</figcaption></figure><figure class="sw"><img src="media/nuancier/futura_03.jpg" alt="Champagne aspect béton"><figcaption>Champagne aspect béton</figcaption></figure></div>
       </div>
-      <div class="nuancier-card">
-        <div class="nuancier-head"><h3><b>Design</b> polymères</h3><p>Mousse XPS (20 ou 60 mm) revêtue d'une feuille polymère 3 mm.</p></div>
-        <div class="nuancier-swatch"><img src="media/gamme-design-polymeres.jpg" alt="Nuancier panneaux Design polymères : blanc, mosaïque grise"></div>
+      <div class="nu-band">
+        <div><h3>Panneaux <b>Design</b> polymères</h3><p>Mousse XPS revêtue d'une feuille polymère 3 mm.</p></div>
+        <div class="sw-grid"><figure class="sw"><img src="media/nuancier/design-polymeres_01.jpg" alt="Blanc"><figcaption>Blanc</figcaption></figure><figure class="sw"><img src="media/nuancier/design-polymeres_02.jpg" alt="Mosaïque grise"><figcaption>Mosaïque grise</figcaption></figure></div>
       </div>
-      <div class="nuancier-card nuancier-span2">
-        <div class="nuancier-head"><h3><b>Design</b> ACP</h3><p>Revêtement aluminium composite, renforcé par des profilés porteurs — design moderne et non stigmatisant.</p></div>
-        <div class="nuancier-swatch"><img src="media/gamme-design-acp.jpg" alt="Nuancier panneaux Design ACP : gris, gris clair, taupe"></div>
+      <div class="nu-band">
+        <div><h3>Panneaux <b>Design</b> ACP</h3><p>Aluminium composite renforcé par des profilés porteurs.</p></div>
+        <div class="sw-grid"><figure class="sw"><img src="media/nuancier/design-acp_01.jpg" alt="Gris"><figcaption>Gris</figcaption></figure><figure class="sw"><img src="media/nuancier/design-acp_02.jpg" alt="Gris clair"><figcaption>Gris clair</figcaption></figure><figure class="sw"><img src="media/nuancier/design-acp_03.jpg" alt="Taupe"><figcaption>Taupe</figcaption></figure></div>
       </div>
     </div>
+    <div class="nu-note"><i>i</i><span>Couleurs non contractuelles : les teintes imprimées peuvent différer des finitions réelles. Les échantillons vous sont présentés lors de la visite technique.</span></div>
   </div>
-  <div class="folio"><span>Revêtement mural · Nuancier</span><b>10</b></div>
+  <div class="folio"><span>Revêtement mural · Nuancier</span><span class="r"><span class="nw">07 43 72 07 64</span><b>10</b></span></div>
 </div>
 
-<!-- 02c NUANCIER PANNEAUX (2/2) -->
+<!-- 02c NUANCIER (2/2) -->
 <div class="page">
   <div class="spread">
     <div class="spread-head">
-      <div><div class="eyebrow">Équipement 02 · Nuancier (suite)</div><h1 class="serif">Dalles murales &amp; gamme Slim</h1></div>
+      <div><div class="eyebrow">Équipement 02 · Nuancier (suite)</div><h1>Dalles murales &amp; gamme Slim</h1></div>
       <span class="cat-n">02</span>
     </div>
-    <p class="spread-lead">Les dalles murales offrent un rendu carrelage sans les joints à entretenir ; la gamme Slim, extra-fine (18 mm), maximise l'espace disponible.</p>
-    <div class="nuancier-grid" style="grid-template-rows: repeat(2, 1fr);">
-      <div class="nuancier-card">
-        <div class="nuancier-head"><h3>Dalles <b>sans joints apparents</b></h3><p>Clipsables entre elles, parfaitement étanches, découpables au cutter.</p></div>
-        <div class="nuancier-swatch"><img src="media/gamme-dalles-sans-joints.jpg" alt="Nuancier dalles murales sans joints apparents : marbre gris foncé, marbre blanc, travertin, ciment gris"></div>
+    <p class="spread-lead">Les dalles murales offrent un rendu carrelage sans joints à entretenir ; la gamme Slim, extra-fine (18 mm), préserve l'espace disponible.</p>
+    <div class="nu-list" style="flex:none;">
+      <div class="nu-band">
+        <div><h3>Dalles <b>sans joints apparents</b></h3><p>Clipsables entre elles, parfaitement étanches.</p></div>
+        <div class="sw-grid"><figure class="sw"><img src="media/nuancier/dalles-sans-joints_01.jpg" alt="Marbre gris foncé"><figcaption>Marbre gris foncé</figcaption></figure><figure class="sw"><img src="media/nuancier/dalles-sans-joints_02.jpg" alt="Marbre blanc"><figcaption>Marbre blanc</figcaption></figure><figure class="sw"><img src="media/nuancier/dalles-sans-joints_03.jpg" alt="Travertin"><figcaption>Travertin</figcaption></figure><figure class="sw"><img src="media/nuancier/dalles-sans-joints_04.jpg" alt="Ciment gris"><figcaption>Ciment gris</figcaption></figure></div>
       </div>
-      <div class="nuancier-card">
-        <div class="nuancier-head"><h3>Dalles <b>effet carrelage</b></h3><p>Épaisseur 4 mm, aspect faïence haut de gamme, pose collée possible sur l'existant.</p></div>
-        <div class="nuancier-swatch"><img src="media/gamme-dalles-carrelage.jpg" alt="Nuancier dalles murales effet carrelage : carrelage gris clair, carrelage gris foncé"></div>
+      <div class="nu-band">
+        <div><h3>Dalles <b>effet carrelage</b></h3><p>Épaisseur 4 mm, aspect faïence, pose collée sur l'existant.</p></div>
+        <div class="sw-grid"><figure class="sw"><img src="media/nuancier/dalles-carrelage_01.jpg" alt="Carrelage gris foncé"><figcaption>Carrelage gris foncé</figcaption></figure><figure class="sw"><img src="media/nuancier/dalles-carrelage_02.jpg" alt="Carrelage gris clair"><figcaption>Carrelage gris clair</figcaption></figure></div>
       </div>
-      <div class="nuancier-card nuancier-span2">
-        <div class="nuancier-head"><h3><b>Slim</b> R/L — 18 mm d'épaisseur</h3><p>Neuf finitions modernes, lisses ou avec relief. Installation par rainure languette, jonction pratiquement invisible.</p></div>
-        <div class="nuancier-swatch"><img src="media/gamme-slim-rl.jpg" alt="Nuancier panneaux Slim R/L : blanc alpin, bleu canard, ciment gris clair, ciment gris, marbre blanc, pêche, rose, vert olive, bois clair"></div>
+      <div class="nu-band">
+        <div><h3>Panneaux <b>Slim</b> R/L</h3><p>18 mm d'épaisseur, neuf finitions lisses ou avec relief. Jonction par rainure languette, pratiquement invisible.</p></div>
+        <div class="sw-grid"><figure class="sw"><img src="media/nuancier/slim-rl_01.jpg" alt="Blanc alpin"><figcaption>Blanc alpin</figcaption></figure><figure class="sw"><img src="media/nuancier/slim-rl_02.jpg" alt="Bleu canard"><figcaption>Bleu canard</figcaption></figure><figure class="sw"><img src="media/nuancier/slim-rl_03.jpg" alt="Ciment gris clair"><figcaption>Ciment gris clair</figcaption></figure><figure class="sw"><img src="media/nuancier/slim-rl_04.jpg" alt="Ciment gris"><figcaption>Ciment gris</figcaption></figure><figure class="sw"><img src="media/nuancier/slim-rl_05.jpg" alt="Marbre blanc"><figcaption>Marbre blanc</figcaption></figure><figure class="sw"><img src="media/nuancier/slim-rl_06.jpg" alt="Pêche"><figcaption>Pêche</figcaption></figure><figure class="sw"><img src="media/nuancier/slim-rl_07.jpg" alt="Rose"><figcaption>Rose</figcaption></figure><figure class="sw"><img src="media/nuancier/slim-rl_08.jpg" alt="Vert olive"><figcaption>Vert olive</figcaption></figure><figure class="sw"><img src="media/nuancier/slim-rl_09.jpg" alt="Bois clair"><figcaption>Bois clair</figcaption></figure></div>
       </div>
     </div>
+    <div class="nu-amb">
+      <figure><img src="media/slim-peche.jpg" alt="Panneaux Slim pêche en situation" style="object-position:28% 50%;"><figcaption class="cap">Slim · pêche</figcaption></figure>
+      <figure><img src="media/slim-bois-clair.jpg" alt="Panneaux Slim bois clair en situation" style="object-position:40% 50%;"><figcaption class="cap">Slim · bois clair</figcaption></figure>
+      <figure><img src="media/slim-rose.jpg" alt="Panneaux Slim rose en situation" style="object-position:12% 50%;"><figcaption class="cap">Slim · rose</figcaption></figure>
+    </div>
+    <div class="nu-note"><i>i</i><span>Couleurs non contractuelles : les teintes imprimées peuvent différer des finitions réelles. Les échantillons vous sont présentés lors de la visite technique.</span></div>
   </div>
-  <div class="folio"><span>Revêtement mural · Nuancier</span><b>11</b></div>
+  <div class="folio"><span>Revêtement mural · Nuancier</span><span class="r"><span class="nw">07 43 72 07 64</span><b>11</b></span></div>
 </div>
 
 <!-- DIVIDER 03 -->
 <div class="page divider">
-  <div class="divider-photo"><img src="media/paroi-pliante-mosaique.jpg" alt=""></div>
-  <div class="divider-scrim"></div>
+  <div class="divider-photo bl"><img src="media/div-parois.jpg" alt="" style="object-position:48% 50%;"></div>
+  <div class="divider-panel-bg bl"></div>
   <div class="divider-content">
     <div class="divider-num">03</div>
-    <h1 class="serif">Parois de douche</h1>
-    <p>Une paroi vitrée pensée pour l'usage quotidien : ouverture facile, verre sécurisé, options dépolies selon l'intimité recherchée.</p>
+    <div><h1>Parois de douche</h1><p>Une paroi vitrée pensée pour l'usage quotidien : ouverture facile, verre sécurisé, options dépolies selon l'intimité recherchée.</p></div>
   </div>
 </div>
 
@@ -715,47 +740,43 @@
 <div class="page">
   <div class="spread">
     <div class="spread-head">
-      <div><div class="eyebrow">Équipement 03</div><h1 class="serif">Parois de douche</h1></div>
+      <div><div class="eyebrow">Équipement 03</div><h1>Parois de douche</h1></div>
       <span class="cat-n">03</span>
     </div>
-    <p class="spread-lead">La paroi referme l'espace douche sans jamais l'enclaver. Composée d'une partie fixe et d'un volet rabattable ajoutable indépendamment, ou d'une paroi coulissante, elle se compose sur mesure selon l'ergonomie de la pièce et la facilité d'accès recherchée.</p>
+    <p class="spread-lead">La paroi referme l'espace douche sans jamais l'enclaver : partie fixe avec volet rabattable, ou paroi coulissante, composée sur mesure selon l'ergonomie de la pièce et la facilité d'accès recherchée.</p>
     <div class="gallery">
-      <figure class="main"><img src="media/paroi-pliante-mosaique.jpg" alt="Paroi fixe avec volet rabattable, finition mosaïque, LT Showertec"><figcaption>Paroi fixe + volet rabattable</figcaption></figure>
-      <figure><img src="media/paroi-pliante-intimity.jpg" alt="Paroi finition Intimity, LT Showertec"><figcaption>Finition Intimity</figcaption></figure>
-      <figure><img src="media/paroi-coulissante-hd.jpg" alt="Paroi coulissante, LT Showertec"><figcaption>Paroi coulissante</figcaption></figure>
+      <figure class="main"><img src="media/paroi-rabat.jpg" alt="Paroi fixe avec volet rabattable" style="object-position:50% 50%;"><figcaption class="cap">Paroi fixe + volet rabattable</figcaption></figure>
+      <figure><img src="media/paroi-intimity.jpg" alt="Paroi finition Intimity, bande dépolie" style="object-position:50% 45%;"><figcaption class="cap">Finition Intimity</figcaption></figure>
+      <figure><img src="media/paroi-coulissante.jpg" alt="Paroi coulissante à profilés noirs" style="object-position:50% 50%;"><figcaption class="cap">Paroi coulissante</figcaption></figure>
     </div>
     <div class="feat-cols">
       <div>
         <h2 class="sec">Composition sur mesure</h2>
         <ul class="feat-list">
-          <li>Hauteur 1,95 m — partie <b>fixe</b> : largeurs 40, 50, 60, 70, 80, 90, 100 ou 120 cm</li>
-          <li><b>Volet rabattable</b>, ajoutable indépendamment : largeurs 40, 60 ou 70 cm</li>
-          <li>Parois <b>coulissantes</b> également disponibles et adaptables (dimensions sur demande)</li>
-          <li>Dimensions ajustées à l'emprise réelle du receveur posé</li>
+          <li>Hauteur 1,95 m — partie <b>fixe</b> de 40 à 120 cm de large</li>
+          <li><b>Volet rabattable</b> ajoutable : 40, 60 ou 70 cm</li>
+          <li>Parois <b>coulissantes</b> (dimensions sur demande)</li>
         </ul>
       </div>
       <div>
-        <h2 class="sec">Finition Intimity &amp; options</h2>
+        <h2 class="sec">Finitions &amp; options</h2>
         <ul class="feat-list">
-          <li>Finition <b>Intimity</b> : une bande floutée au centre du fixe et du rabat, pour un sentiment d'intimité sans perdre en luminosité</li>
-          <li>Verre trempé sécurisé</li>
-          <li>Profilés disponibles en <b>chromé</b> ou <b>noir</b></li>
+          <li>Finition <b>Intimity</b> : bande dépolie pour l'intimité, sans perdre la lumière</li>
+          <li>Verre trempé sécurisé, profilés <b>chromés</b> ou <b>noirs</b></li>
         </ul>
-        <div class="devis-box">Configuration (fixe, rabat, coulissante) composée avec vous, selon le receveur et le mur associés.</div>
       </div>
     </div>
   </div>
-  <div class="folio"><span>Parois de douche</span><b>13</b></div>
+  <div class="folio"><span>Parois de douche</span><span class="r"><span class="nw">07 43 72 07 64</span><b>13</b></span></div>
 </div>
 
 <!-- DIVIDER 04 -->
 <div class="page divider">
-  <div class="divider-photo"><img src="media/ambiance-ergo-hd.jpg" alt=""></div>
-  <div class="divider-scrim"></div>
+  <div class="divider-photo bl"><img src="media/div-accessoires.jpg" alt="" style="object-position:38% 50%;"></div>
+  <div class="divider-panel-bg bl"></div>
   <div class="divider-content">
     <div class="divider-num">04</div>
-    <h1 class="serif">Accessoires</h1>
-    <p>Barres d'appui, siège de douche et robinetterie thermostatique : la sécurité intégrée dans les détails, jamais dans l'apparence.</p>
+    <div><h1>Accessoires</h1><p>Barres d'appui, siège de douche et robinetterie thermostatique : la sécurité intégrée dans les détails, jamais dans l'apparence.</p></div>
   </div>
 </div>
 
@@ -763,48 +784,44 @@
 <div class="page">
   <div class="spread">
     <div class="spread-head">
-      <div><div class="eyebrow">Équipement 04</div><h1 class="serif">Accessoires — barres, siège, robinetterie</h1></div>
+      <div><div class="eyebrow">Équipement 04</div><h1>Accessoires — barres, siège, robinetterie</h1></div>
       <span class="cat-n">04</span>
     </div>
-    <p class="spread-lead">La sécurité est intégrée dans les détails ; elle ne doit jamais définir l'apparence de la pièce. Barres, siège et robinetterie sont positionnés selon les besoins réels de la personne.</p>
-    <div class="gallery gallery-quad">
-      <figure class="fit-contain"><img src="media/colonne-ciel-de-pluie.jpg" alt="Colonne de douche avec ciel de pluie, robinet thermostatique et douchette, LT Showertec"><figcaption>Ciel de pluie</figcaption></figure>
-      <figure class="fit-contain"><img src="media/barre-droite-trio.jpg" alt="Barres droites, finitions chromé, noir et blanc, LT Showertec"><figcaption>Barres droites</figcaption></figure>
-      <figure class="fit-contain"><img src="media/barre-t-ergonomique.jpg" alt="Barre en T avec support de douchette, LT Showertec"><figcaption>Barre en T</figcaption></figure>
-      <figure class="fit-contain"><img src="media/siege-design.jpg" alt="Siège de douche rabattable Design, LT Showertec"><figcaption>Siège rabattable</figcaption></figure>
+    <p class="spread-lead">La sécurité est intégrée dans les détails, sans jamais définir l'apparence de la pièce. Barres, siège et robinetterie sont positionnés selon les besoins réels de la personne.</p>
+    <div class="gallery">
+      <figure class="main"><img src="media/acc-siege-barres.jpg" alt="Douche équipée d'un siège rabattable et de barres d'appui" style="object-position:40% 60%;"><figcaption class="cap">Siège rabattable &amp; barres d'appui</figcaption></figure>
+      <figure class="fit-contain"><img src="media/acc-colonne.jpg" alt="Colonne de douche thermostatique noire"><figcaption class="cap">Colonne thermostatique</figcaption></figure>
+      <figure class="fit-contain"><img src="media/acc-barre-t.jpg" alt="Barre en T chromée avec support de douchette"><figcaption class="cap">Barre en T</figcaption></figure>
     </div>
     <div class="feat-cols">
       <div>
         <h2 class="sec">Appuis &amp; assise</h2>
         <ul class="feat-list">
-          <li>Barres de maintien droites, en S, à 135° ou en T avec support de douchette</li>
-          <li>Toutes les barres disponibles en <b>chromé, noir ou blanc</b></li>
-          <li>Siège de douche rabattable, en <b>noir ou blanc</b>, avec version à accoudoirs disponible</li>
-          <li>Fixations ancrées dans les panneaux renforcés, jamais dans le mur seul</li>
+          <li>Barres droites, en S, à 135° ou en T avec support de douchette — <b>chromé, noir ou blanc</b></li>
+          <li>Siège rabattable <b>noir ou blanc</b>, version à accoudoirs</li>
+          <li>Fixations ancrées dans le mur, à travers les panneaux, pour une tenue sûre</li>
         </ul>
       </div>
       <div>
         <h2 class="sec">Robinetterie</h2>
         <ul class="feat-list">
-          <li>Colonne de douche complète : mitigeur thermostatique, <b>ciel de pluie</b> et douchette</li>
-          <li>Butée anti-brûlure, set de douche à hauteur et inclinaison réglables</li>
-          <li>Finitions chromées ou noir mat, assorties à la paroi</li>
+          <li>Colonne complète : mitigeur thermostatique, <b>ciel de pluie</b> et douchette</li>
+          <li>Butée anti-brûlure, douchette réglable en hauteur</li>
+          <li>Finitions chromées ou noir mat</li>
         </ul>
-        <div class="devis-box">Sélection et implantation des accessoires définies avec la personne concernée, pour un usage vraiment adapté au quotidien.</div>
       </div>
     </div>
   </div>
-  <div class="folio"><span>Accessoires</span><b>15</b></div>
+  <div class="folio"><span>Accessoires</span><span class="r"><span class="nw">07 43 72 07 64</span><b>15</b></span></div>
 </div>
 
 <!-- DIVIDER 05 -->
 <div class="page divider">
-  <div class="divider-photo"><img src="media/meuble-vasque.jpg" alt=""></div>
-  <div class="divider-scrim"></div>
+  <div class="divider-photo bl"><img src="media/div-travaux.jpg" alt="" style="object-position:30% 50%;"></div>
+  <div class="divider-panel-bg bl"></div>
   <div class="divider-content">
     <div class="divider-num">05</div>
-    <h1 class="serif">Travaux complémentaires</h1>
-    <p>Remplacement de lavabo, de meuble vasque ou de WC : les travaux qui achèvent la rénovation complète de la salle de bain.</p>
+    <div><h1>Travaux complémentaires</h1><p>Remplacement de lavabo, de meuble vasque ou de WC : les travaux qui achèvent la rénovation complète de la salle de bain.</p></div>
   </div>
 </div>
 
@@ -812,20 +829,20 @@
 <div class="page">
   <div class="spread">
     <div class="spread-head">
-      <div><div class="eyebrow">Équipement 05</div><h1 class="serif">Travaux complémentaires — lavabo, WC</h1></div>
+      <div><div class="eyebrow">Équipement 05</div><h1>Travaux complémentaires — lavabo, WC</h1></div>
       <span class="cat-n">05</span>
     </div>
-    <p class="spread-lead">Au-delà de la douche, ADOM SENIOR peut prendre en charge le remplacement des équipements attenants, pour une salle de bain cohérente du sol au plafond. Ces travaux prolongent l'intervention sur une seconde journée.</p>
+    <p class="spread-lead">Au-delà de la douche, ADOM SENIOR remplace les équipements attenants, pour une salle de bain cohérente du sol au plafond. Ces travaux prolongent l'intervention sur une seconde journée.</p>
     <div class="gallery">
-      <figure class="main"><img src="media/meuble-vasque.jpg" alt="Meuble vasque inox avec miroir et éclairage, LT Showertec"><figcaption>Meuble vasque</figcaption></figure>
-      <figure><img src="media/ambiance-travertin.jpg" alt="Salle de bain rénovée, finition travertin, rendu LT Showertec"><figcaption>Finition travertin</figcaption></figure>
-      <figure><img src="media/avant-apres-gris.jpg" alt="Douche et vasque après travaux, finition gris minéral, rendu LT Showertec"><figcaption>Résultat après travaux</figcaption></figure>
+      <figure class="main"><img src="media/trav-meuble.jpg" alt="Meuble vasque avec miroir lumineux" style="object-position:50% 60%;"><figcaption class="cap">Meuble vasque &amp; miroir</figcaption></figure>
+      <figure><img src="media/trav-vasque-pmr.jpg" alt="Plan vasque accessible" style="object-position:50% 70%;"><figcaption class="cap">Plan vasque accessible</figcaption></figure>
+      <figure><img src="media/trav-wc.jpg" alt="WC suspendu posé par ADOM SENIOR" style="object-position:60% 55%;"><figcaption class="cap">WC suspendu · chantier ADOM SENIOR</figcaption></figure>
     </div>
     <div class="feat-cols">
       <div>
         <h2 class="sec">Lavabo &amp; meuble vasque</h2>
         <ul class="feat-list">
-          <li>Remplacement du lavabo par un meuble vasque suspendu ou sur pied</li>
+          <li>Meuble vasque suspendu ou sur pied</li>
           <li>Mitigeur assorti à la robinetterie de douche</li>
           <li>Miroir et éclairage intégrés, sur demande</li>
         </ul>
@@ -834,24 +851,22 @@
         <h2 class="sec">WC</h2>
         <ul class="feat-list">
           <li>WC surélevé, pour faciliter les transferts assis-debout</li>
-          <li>WC suspendu, pour un entretien facilité et un gain d'espace</li>
-          <li>Petits travaux de plomberie associés (évacuation, alimentation)</li>
+          <li>WC suspendu : entretien facilité, gain d'espace</li>
+          <li>Petits travaux de plomberie associés</li>
         </ul>
-        <div class="devis-box">Travaux proposés en complément de la douche, composés avec vous selon le besoin identifié lors de la visite.</div>
       </div>
     </div>
   </div>
-  <div class="folio"><span>Travaux complémentaires</span><b>17</b></div>
+  <div class="folio"><span>Travaux complémentaires</span><span class="r"><span class="nw">07 43 72 07 64</span><b>17</b></span></div>
 </div>
 
 <!-- DIVIDER 06 -->
 <div class="page divider">
-  <div class="divider-photo"><img src="media/sol-antiderapant-texture.jpg" alt=""></div>
-  <div class="divider-scrim"></div>
+  <div class="divider-photo bl"><img src="media/div-sols.jpg" alt="" style="object-position:55% 65%;"></div>
+  <div class="divider-panel-bg bl"></div>
   <div class="divider-content">
     <div class="divider-num">06</div>
-    <h1 class="serif">Sols</h1>
-    <p>Un revêtement de sol antidérapant, chaleureux ou contemporain, pensé pour compléter la sécurité de toute la salle de bain.</p>
+    <div><h1>Sols</h1><p>Un revêtement de sol antidérapant, chaleureux ou contemporain, pensé pour compléter la sécurité de toute la salle de bain.</p></div>
   </div>
 </div>
 
@@ -859,70 +874,69 @@
 <div class="page">
   <div class="spread">
     <div class="spread-head">
-      <div><div class="eyebrow">Équipement 06</div><h1 class="serif">Sols</h1></div>
+      <div><div class="eyebrow">Équipement 06</div><h1>Sols</h1></div>
       <span class="cat-n">06</span>
     </div>
-    <p class="spread-lead">Partie intégrante du confort et de la sécurité de la salle de bain, le revêtement de sol SPC complète la douche sécurisée sur l'ensemble de la pièce, sans altérer son esthétique.</p>
+    <p class="spread-lead">Partie intégrante du confort et de la sécurité, le sol SPC antidérapant prolonge la douche sécurisée sur toute la pièce, sans altérer son esthétique.</p>
     <div class="gallery gallery-stack">
-      <figure class="wide"><img src="media/sol-chene-blanchi-situation.jpg" alt="Sol clipsable chêne blanchi installé devant une douche, LT Showertec"><figcaption>Intégration en situation · chêne blanchi</figcaption></figure>
-      <figure><img src="media/sol-antiderapant-texture.jpg" alt="Sol SPC antidérapant, finition chêne blanchi, LT Showertec"><figcaption>Sol SPC · détail chêne blanchi</figcaption></figure>
+      <figure class="main"><img src="media/sol-ambiance.jpg" alt="Sol effet bois clair dans une salle de bain avec douche" style="object-position:50% 78%;"><figcaption class="cap">Un sol continu, jusqu'au pied de la douche</figcaption></figure>
+      <figure><img src="media/sol-chene-blanchi-situation.jpg" alt="Sol chêne blanchi installé devant une douche" style="object-position:50% 70%;"><figcaption class="cap">Sol SPC · chêne blanchi</figcaption></figure>
     </div>
     <div class="feat-cols">
       <div>
         <h2 class="sec">Caractéristiques</h2>
         <ul class="feat-list">
-          <li>Sol SPC composite, antidérapant <b>PN18</b>, épaisseur 5 mm</li>
-          <li>Clipsable, étanche, sous-couche EVA intégrée</li>
-          <li>Isolant thermique, phonique et antifongique</li>
-          <li>Résistant aux impacts, aux rayures, au feu et à l'eau</li>
-          <li>Sans formaldéhyde, non toxique, antistatique, 100 % recyclable</li>
+          <li>Sol SPC antidérapant <b>PN18</b>, épaisseur 5 mm</li>
+          <li>Clipsable, étanche, sous-couche intégrée</li>
+          <li>Isolant thermique et phonique</li>
+          <li>Résistant aux chocs, aux rayures et à l'eau</li>
         </ul>
       </div>
       <div>
         <h2 class="sec">Finitions &amp; pose</h2>
         <ul class="feat-list">
-          <li>2 finitions : chêne blanchi ou ciment gris</li>
-          <li>Plinthes assorties disponibles en finition chêne blanchi</li>
-          <li>Facilité de mise en œuvre, adapté à toutes les pièces de la maison</li>
+          <li>3 finitions : <b>chêne blanchi</b>, <b>gris ciment</b> ou <b>travertin</b></li>
+          <li>Plinthe et quart-de-rond assortis (chêne blanchi)</li>
+          <li>Surface et raccords ajustés lors de la visite technique</li>
         </ul>
-        <div class="devis-box">Surface et raccords ajustés à votre salle de bain lors de la visite technique.</div>
       </div>
     </div>
   </div>
-  <div class="folio"><span>Sols</span><b>19</b></div>
+  <div class="folio"><span>Sols</span><span class="r"><span class="nw">07 43 72 07 64</span><b>19</b></span></div>
 </div>
 
-<!-- CONTACT -->
+<!-- 20. CONTACT / 4e DE COUVERTURE -->
 <div class="page closing">
-  <div class="closing-photo"><img src="media/avant-apres-marbre.jpg" alt=""></div>
-  <div class="closing-scrim"></div>
+  <div class="closing-photo bl"><img src="media/dos-terrazzo.jpg" alt=""></div>
+  <div class="closing-fade bl"></div>
   <div class="closing-content">
-    <div class="eyebrow">Étudier votre projet</div>
-    <h1 class="serif">Commençons par regarder<br>ce qui est possible chez vous.</h1>
+    <div class="eyebrow" style="color:var(--amber-hot);">Étudier votre projet</div>
+    <h1>Commençons par regarder ce qui est possible chez vous.</h1>
     <p class="lead">Un premier échange suffit pour qualifier le besoin, préparer une visite technique et confirmer les équipements adaptés à votre salle de bain.</p>
     <div class="contact-grid">
+      <div class="contact-item tel"><div class="k">Téléphone</div><div class="v nw">07 43 72 07 64</div></div>
       <div class="contact-item"><div class="k">E-mail</div><div class="v">contact@adomsenior.fr</div></div>
       <div class="contact-item"><div class="k">Site web</div><div class="v">adomsenior.fr</div></div>
-      <div class="contact-item"><div class="k">Zone d'intervention</div><div class="v"><span class="nw">Nord-Ouest</span> · <span class="nw">Sud-Ouest</span> · <span class="nw">Sud-Est</span></div></div>
     </div>
+    <div class="zones">Zones d'intervention : <b class="nw">Nord-Ouest</b> · <b class="nw">Sud-Ouest</b> · <b class="nw">Sud-Est</b></div>
+
     <div class="rdv-card">
       <div class="rdv-head">
         <div><div class="eyebrow">Votre conseiller ADOM SENIOR</div><h2>Votre contact direct</h2></div>
         <p>Coordonnées laissées lors de notre rendez-vous, pour toute question sur votre projet.</p>
       </div>
       <div class="rdv-body">
-        <div>
-          <div class="rdv-field"><label>Nom &amp; prénom</label><span class="line"></span></div>
-          <div class="rdv-field"><label>Téléphone</label><span class="line"></span></div>
-          <div class="rdv-field"><label>E-mail</label><span class="line"></span></div>
-          <div class="rdv-field"><label>Rendez-vous du</label><span class="line"></span></div>
-          <div class="rdv-next"><label>Prochaine étape</label><div class="opts"><span>Visite technique</span><span>Envoi du devis</span><span>Rappel</span></div></div>
-        </div>
-        <div class="rdv-slot"><b>Carte de visite</b>ou cachet du conseiller<br>(85 × 55 mm)</div>
+        <div class="rdv-field"><label>Nom &amp; prénom</label><span class="line"></span></div>
+        <div class="rdv-field"><label>Téléphone</label><span class="line"></span></div>
+        <div class="rdv-field"><label>E-mail</label><span class="line"></span></div>
+        <div class="rdv-field"><label>Rendez-vous du</label><span class="line"></span></div>
+        <div class="rdv-field rdv-wide"><label>Notes</label><span class="line"></span><span class="line"></span></div>
+        <div class="rdv-next"><label>Prochaine étape</label><div class="opts"><span>Visite technique</span><span>Envoi du devis</span><span>Rappel</span></div></div>
       </div>
     </div>
+
+    <div class="legal"><b>ADOM SENIOR</b> — Lyes Ouhaddad, entrepreneur individuel (EI) · 2 impasse Joliot-Curie, 64110 Jurançon · SIRET <span class="nw">849 109 558 00023</span> · RCS Pau <span class="nw">849 109 558</span>.<br>Visuels : rendus LT Showertec, fournisseur partenaire, et photos de chantiers ADOM SENIOR. Catalogue non contractuel : équipements, finitions et couleurs confirmés lors de la visite technique. © ADOM SENIOR — tous droits réservés.</div>
   </div>
-  <div class="legal">© 2026 ADOM SENIOR — Tous droits réservés. Visuels : rendus et photographies produit LT Showertec, fournisseur partenaire d'ADOM SENIOR. Catalogue non contractuel, équipements et finitions confirmés lors de la visite technique.</div>
 </div>
 
 <script>

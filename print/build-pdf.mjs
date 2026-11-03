@@ -17,15 +17,16 @@ async function render(out, bleed) {
   if (bleed) {
     await p.addStyleTag({ content: `
       @page { size: ${210 + 2 * BLEED_MM}mm ${297 + 2 * BLEED_MM}mm; margin: 0; }
+      :root { --bleed: ${BLEED_MM}mm; }
       .page { width: ${210 + 2 * BLEED_MM}mm; height: ${297 + 2 * BLEED_MM}mm; }
       .trim { position: absolute; left: ${BLEED_MM}mm; top: ${BLEED_MM}mm; width: 210mm; height: 297mm; }
       /* la photo du sommaire touche les bords haut, droit et bas : elle déborde dans le fond perdu */
       .toc-photo { margin: -${BLEED_MM}mm -${BLEED_MM}mm -${BLEED_MM}mm 0; }
     ` });
-    // Les fonds pleine page (photos + voiles de couleur) couvrent tout le format avec fonds perdus ;
+    // Les calques .bl (photos et aplats de couleur pleine page) couvrent tout le format avec fonds perdus ;
     // tout le reste est replacé dans la zone de coupe A4.
     await p.evaluate(() => {
-      const FULL = '.cover-photo, .cover-scrim, .divider-photo, .divider-scrim, .closing-photo, .closing-scrim';
+      const FULL = '.bl'; // calques pleine page (photos, aplats) : restent hors zone de coupe
       document.querySelectorAll('.page').forEach((page) => {
         const trim = document.createElement('div');
         trim.className = 'trim';

@@ -28,32 +28,20 @@ Structure du catalogue PDF (20 pages — la version web n'a pas encore été syn
 
 Un fichier `SITE-WEB-BRIEF.md` à la racine du repo résume l'intégralité du contenu du catalogue (textes, gammes, coordonnées) dans un format pensé pour être transmis directement à ChatGPT afin de reproduire le catalogue sur adomsenior.fr.
 
-## Visuels : source unique, le catalogue fournisseur LT Showertec
+## Visuels du catalogue PDF
 
-Sur demande explicite, **aucune photo du site adomsenior.fr n'est réutilisée** (ni les vraies photos de chantiers, ni les rendus 3D déjà publiés en ligne), pour éviter tout doublon entre le catalogue produits et le reste du site.
+Sur demande (avec autorisation), les visuels proviennent désormais de deux sources :
 
-Tous les visuels (21 images) proviennent du **catalogue fournisseur LT Showertec** que vous avez transmis (`Catalogue_LT_SHOWERTEC.pdf`) : photos produit détourées (robinetterie, barre en T, siège) et rendus d'ambiance de salle de bain (receveurs Futura/Moderna/Slim, panneaux Relief, dalles murales, parois pliantes, meuble vasque). Chaque image a été extraite proprement du PDF fournisseur (fond blanc restitué, pas de fond noir parasite) puis réutilisée une seule fois dans tout le document — zéro répétition.
+- **ltshowertec.com** (fournisseur) : ambiances haute définition (2 000 à 2 500 px) par finition — Slim, Relief, dalles murales, parois, receveurs — et photos produit sur fond blanc (colonne de douche, barre en T).
+- **adomsenior.fr** : vraies photos de chantiers ADOM SENIOR (avant/après en page 3, réalisations en page 4, WC suspendu en page 17).
 
-Les gammes citées (Slim, Futura, Moderna, Design pour les receveurs ; Relief et dalles clipsables pour les murs ; parois pliantes Intimity ; barres en T ; sièges Design) sont les gammes réellement commercialisées par LT Showertec, telles que documentées dans leur catalogue.
-
-**Netteté des visuels** : certaines photos sources sont plus petites que la zone qu'elles remplissent dans la mise en page (notamment les fonds pleine page des séparateurs de section). `print/prepare-media.py` reprend chaque photo, l'agrandit en Lanczos jusqu'à 3200 px de long côté (~300 dpi sur une page A4 pleine) puis applique un renforcement de netteté (unsharp mask) pour compenser le flou inhérent à l'agrandissement — sans recadrer ni modifier le contenu. Export en `.jpg` qualité 96. Cela reste un agrandissement algorithmique : sur les textures très douces (ex. béton ciré en fond de page de garde), un zoom extrême (>250 %) dans le PDF peut encore laisser deviner un léger flou — c'est la limite physique de la photo source (max ~1300 px de large dans le catalogue LT fourni), pas un réglage à corriger. Pour une netteté parfaite à très fort zoom sur ces images précises, il faudrait un fichier source encore plus défini auprès de LT Showertec.
-
-**Bugs corrigés** :
-- Page « Qui sommes-nous » : les deux photos débordaient parfois sur le bas de page à cause d'un souci de calcul de hauteur en grille CSS — corrigé.
-- Séparateurs de section et page de contact : les images de fond utilisaient une transparence (`opacity`) directement sur la photo, ce que certains lecteurs PDF mobiles ne savent pas restituer et qui les rendait invisibles à l'écran (l'assombrissement se fait maintenant uniquement via le calque de couleur superposé, la photo elle-même reste pleinement opaque — plus fiable sur tous les lecteurs).
-- Page Accessoires : le set de douche et la barre en T étaient recadrés/tronqués par le format de la vignette ; ils s'affichent maintenant en entier (sur fond blanc, sans recadrage).
-- Page Sommaire : la photo verticale (trop pixélisée, mauvais choix de source) a été remplacée après revue de la netteté native de tous les visuels 3D disponibles dans le catalogue LT.
-
-**Ajouts (nuancier, carte, configurations)** :
-- **Nuancier des panneaux muraux** (2 pages, après la page Revêtement mural) : les 9 gammes réelles LT Showertec (Relief, Moderna, Futura, Design polymères, Design ACP, Dalles sans joints apparents, Dalles effet carrelage, Slim R/L, Slim profilés) avec leurs 36 finitions, images extraites du document `Nos_panneaux_2_1.pdf` que vous avez transmis.
-- **Carte des zones d'intervention** (page Activité) : carte de France stylisée (SVG, dans la charte graphique) avec 3 points — Bretagne, Pyrénées-Atlantiques (64), Nice — chacun entouré d'un cercle à l'échelle représentant un rayon de 250 km. Remplace l'ancienne galerie de 2 photos génériques sur cette page.
-- **Configurations de parois** (nouvelle page après la page Parois de douche) : 6 schémas vus de dessus (parois fixes, avec paroi latérale, porte coulissante simple, ouverture centrale, parois pliantes, portes basses avec rideau), redessinés en SVG dans nos couleurs à partir du visuel fournisseur que vous avez transmis — pas une reprise telle quelle de l'image d'origine (qui était en bleu/blanc).
+Les images sont utilisées à leur résolution d'origine, sans agrandissement artificiel ; aucune ne porte de filigrane. Les pastilles du nuancier (pages 10–11) ont été découpées une à une dans les planches fournisseur et légendées dans la typographie du catalogue (le « Blanc alpin », gris dans la planche fournisseur, est prélevé sur l'ambiance réelle). Le crédit fournisseur n'apparaît plus qu'une fois, dans les mentions de la 4e de couverture.
 
 ## 1. Version PDF (`print/`)
 
 - `catalogue-print.html` : la mise en page complète (20 pages A4), avec les images embarquées dans `print/media/`.
 - `build-pdf.mjs` : script Playwright qui reproduit exactement la méthode déjà utilisée par ADOM SENIOR pour ses autres documents (`documents/gen.mjs` dans le repo du site).
-- `prepare-media.py` : à relancer depuis `print/media/` après avoir ajouté ou remplacé une photo source (`.png`), avant de régénérer le PDF.
+- `set-print-boxes.py` : appelé par `build-pdf.mjs`, renseigne la zone de coupe (TrimBox) du PDF imprimeur.
 
 Pour régénérer le PDF après une modification :
 
