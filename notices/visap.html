@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Dossier VISAP 3 volets — ADOM SENIOR — Rév. F</title>
+<link rel="stylesheet" href="commun.css">
+<style>
+  /* Feuille ouverte 624 x 297 mm + 3 mm de fonds perdus = 630 x 303 mm.
+     Pli roulé : volets 206 / 208 / 210 mm (le volet de 206 mm se replie à l'intérieur).
+     Recto (extérieur) : rabat 206 | dos 208 | couverture 210
+     Verso (intérieur) : fiche terrain 1 (210) | fiche terrain 2 (208) | fiche produit (206) */
+  @page { size: 630mm 303mm; margin: 0; }
+  .sheet { position: relative; width: 630mm; height: 303mm; overflow: hidden; }
+  .sheet + .sheet { page-break-before: always; }
+  .recto { background: var(--cream); }
+  .verso { background: #fff; }
+
+  .panel { position: absolute; top: 3mm; height: 297mm; padding: 10mm 11mm 0; display: flex; flex-direction: column; }
+  .panel .folio { position: absolute; left: 11mm; right: 11mm; bottom: 7mm; }
+
+  /* repères de pli, dans la zone de fonds perdus uniquement */
+  .fold { position: absolute; width: 0; height: 2.6mm; border-left: .25mm dashed #555; }
+  .fold.t { top: 0; } .fold.b { bottom: 0; }
+
+  /* ---------- RECTO ---------- */
+  .deco { position: absolute; border-radius: 50%; }
+
+  .cover h1 { font-size: 46px; margin-top: 16mm; }
+  .cover .lead { font-size: 17px; margin-top: 2mm; }
+  .cover .photo { margin-top: 9mm; height: 160mm; border-radius: 6mm; overflow: hidden; }
+  .cover .photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; display: block; }
+  .cover .ids { margin-top: 7mm; background: #fff; border-radius: 5mm; padding: 3mm 5mm 4mm; display: grid; grid-template-columns: 1.4fr 1.4fr 1fr; gap: 0 5mm; }
+  .cover .ids .box { border: 0; padding: 0; height: 19mm; border-radius: 0; }
+  .cover .ids .box + .box { border-left: 1.5px solid var(--line); padding-left: 4mm; }
+  .cover .ids .lines { height: 14mm; margin-top: 1mm; }
+  .cover .logo { height: 12mm; }
+
+  .back { align-items: center; justify-content: center; text-align: center; }
+  .back .card { width: 150mm; background: #fffdf9; border-radius: 8mm; padding: 22mm 10mm 20mm; }
+  .back .card img { height: 17mm; }
+  .back .card .claim { font-family: "Iowan Old Style", Georgia, serif; font-size: 30px; color: var(--teal); font-weight: 700; margin: 14mm 0 5mm; }
+  .back .card hr { width: 60mm; border: 0; border-top: 2px solid var(--amber); margin: 0 auto 8mm; }
+  .back .card p { margin: 0 0 3mm; font-size: 17px; color: var(--ink); }
+  .back .card p b { color: var(--teal); }
+  .back .code { position: absolute; left: 0; right: 0; bottom: 12mm; font-size: 11px; color: #5d6b69; letter-spacing: .03em; }
+
+  .flap { justify-content: center; padding-bottom: 20mm !important; }
+  .flap h2 { font-size: 30px; margin: 0 0 3mm; display: block; font-family: "Iowan Old Style", Georgia, serif; }
+  .flap .intro { font-size: 15px; color: var(--muted); margin: 0 0 9mm; }
+  .flap ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 6mm; }
+  .flap li { display: flex; gap: 5mm; align-items: flex-start; background: #fffdf9; border-radius: 5mm; padding: 5mm; }
+  .flap li .n { flex: none; width: 11mm; height: 11mm; border-radius: 50%; background: var(--teal); color: #fff; font-weight: 700; font-size: 20px; display: grid; place-items: center; }
+  .flap li b { display: block; font-size: 18px; color: var(--teal); margin-bottom: 1mm; }
+  .flap li span { font-size: 15px; color: var(--muted); }
+
+  /* ---------- VERSO ---------- */
+  .verso .head img { height: 9mm; }
+  .verso h1 { font-size: 22px; margin: 4mm 0 3mm; }
+  .verso h1 small { display: block; font-family: "Atkinson", sans-serif; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); margin-bottom: 1mm; }
+  .verso section { margin-top: 4mm; }
+  .fields { display: grid; gap: 0 5mm; }
+
+  .acces { display: grid; grid-template-columns: 1fr 1fr; border: 1.5px solid var(--line); border-radius: 3mm; overflow: hidden; }
+  .acces > div { padding: 2.4mm 3mm 3mm; border-bottom: 1px solid var(--line); min-height: 14mm; }
+  .acces > div:nth-child(odd) { border-right: 1px solid var(--line); }
+  .acces > div:nth-last-child(-n+2) { border-bottom: 0; }
+  .acces h3 { margin-bottom: 1.6mm; }
+  .acces .inline { display: inline-flex; align-items: flex-end; gap: 1.5mm; white-space: nowrap; }
+  .acces .inline i { display: inline-block; width: 14mm; border-bottom: 1.2px solid var(--write); height: 1px; }
+
+  .ctrl td { height: 8.6mm; }
+  .ctrl td:first-child { font-weight: 700; color: var(--ink); width: 46mm; }
+  .ctrl .opts { gap: 1mm 4mm; }
+  .blank { display: inline-block; width: 24mm; border-bottom: 1.2px solid var(--write); height: 1px; }
+
+  .cotes { border: 1.5px solid var(--line); border-radius: 3mm; }
+  .cotes > div { padding: 2.4mm 3mm; }
+  .cotes > div + div { border-top: 1px solid var(--line); }
+  .cotes .lbl { font-weight: 700; color: var(--ink); margin-bottom: 1.5mm; }
+  .cotes .lbl small { font-weight: 400; color: var(--muted); }
+  .cotes .row { display: flex; gap: 5mm; align-items: flex-end; flex-wrap: wrap; }
+  .cotes .row > span { display: inline-flex; align-items: flex-end; gap: 1.5mm; white-space: nowrap; }
+  .cotes .row i { display: inline-block; width: 16mm; border-bottom: 1.2px solid var(--write); height: 1px; }
+
+  .grid { position: relative; border: 1.5px solid var(--teal); border-radius: 3mm; overflow: hidden; }
+  .grid svg { display: block; }
+  .grid .tag { position: absolute; top: 2.5mm; left: 3mm; background: #fff; padding: 1mm 2.5mm; border-radius: 2mm; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--teal); }
+
+  .obs .lines { height: 32mm; }
+  .by { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 2mm; }
+  .by .box { height: 14mm; }
+
+  .h2bar { display: flex; align-items: center; gap: 2.5mm; font-size: 15px; color: var(--teal); margin: 0 0 2mm; font-weight: 700; }
+  .h2bar::before { content: ""; width: 1.4mm; height: 5mm; background: var(--amber); border-radius: 1mm; }
+
+  .config { border: 1.5px solid var(--line); border-radius: 3mm; }
+  .config > div { padding: 2.2mm 3mm; display: flex; gap: 2mm 4mm; flex-wrap: wrap; align-items: flex-end; }
+  .config > div + div { border-top: 1px solid var(--line); }
+  .config b { color: var(--ink); min-width: 23mm; }
+  .config .inline { display: inline-flex; align-items: flex-end; gap: 1.5mm; white-space: nowrap; }
+  .config .inline i { display: inline-block; width: 16mm; border-bottom: 1.2px solid var(--write); height: 1px; }
+
+  .prod { font-size: 11.5px; line-height: 1.1; table-layout: fixed; }
+  .prod th { font-size: 9.5px; padding: 1.4mm 1.6mm; }
+  .prod td { height: 6.5mm; padding: 0 1.6mm; border-right: 1px solid var(--line); }
+  .prod td.p { color: var(--ink); font-weight: 700; background: var(--teal-soft); }
+  .prod tr:nth-child(even) td { background: #fff; }
+  .prod tr:nth-child(even) td.p { background: #dfeae7; }
+  .prod td.sep, .prod th.sep { border-left: 2px solid var(--teal); }
+  .prec { height: 24mm; }
+</style>
+</head>
+<body>
+
+<!-- ================= RECTO : extérieur ================= -->
+<div class="sheet recto">
+  <span class="fold t" style="left:209mm"></span><span class="fold b" style="left:209mm"></span>
+  <span class="fold t" style="left:417mm"></span><span class="fold b" style="left:417mm"></span>
+
+  <!-- décor (déborde dans les fonds perdus) -->
+  <span class="deco" style="width:90mm;height:90mm;left:-38mm;top:-40mm;background:#dbe6e4"></span>
+  <span class="deco" style="width:44mm;height:44mm;left:150mm;top:272mm;background:var(--amber);opacity:.9"></span>
+  <span class="deco" style="width:96mm;height:96mm;left:557mm;top:-38mm;background:var(--teal)"></span>
+  <span class="deco" style="width:52mm;height:52mm;left:592mm;top:-20mm;background:var(--amber)"></span>
+  <span class="deco" style="width:70mm;height:70mm;left:370mm;top:262mm;background:#dbe6e4"></span>
+
+  <!-- Rabat (206 mm) : visible à l'ouverture de la couverture -->
+  <div class="panel flap" style="left:3mm;width:206mm;padding:10mm 16mm 0">
+    <h2>Dans ce dossier</h2>
+    <p class="intro">Trois fiches à remplir sur place, avant les travaux.</p>
+    <ol>
+      <li><span class="n">1</span><div><b>Fiche terrain — Relevé avant travaux</b><span>Accès et usage · Contrôles rapides · Cotes essentielles</span></div></li>
+      <li><span class="n">2</span><div><b>Fiche terrain — Croquis et observations</b><span>Implantation avant / après travaux · Observations · Signature</span></div></li>
+      <li><span class="n">3</span><div><b>Fiche produit — Produits à commander</b><span>Configuration retenue · Liste des produits · Précisions</span></div></li>
+    </ol>
+  </div>
+
+  <!-- Dos (208 mm) -->
+  <div class="panel back" style="left:209mm;width:208mm">
+    <div class="card">
+      <img src="media/logo-adomsenior.svg" alt="ADOM SENIOR">
+      <div class="claim">Bien chez soi</div>
+      <hr>
+      <p><b>adomsenior.fr</b></p>
+      <p>contact@adomsenior.fr</p>
+    </div>
+    <div class="code">TEC-VISAP-TRIPTYQUE-01 · Rév. F · Modèle terrain</div>
+  </div>
+
+  <!-- Couverture (210 mm) -->
+  <div class="panel cover" style="left:417mm;width:210mm;padding:14mm 12mm 0">
+    <img class="logo" src="media/logo-adomsenior.svg" alt="ADOM SENIOR" style="align-self:flex-start">
+    <h1>Dossier VISAP</h1>
+    <p class="lead">Relevé terrain et préparation du chantier</p>
+    <div class="photo"><img src="media/visap-couverture.jpg" alt=""></div>
+    <div class="ids">
+      <div class="box"><label>Bénéficiaire</label><div class="lines"></div></div>
+      <div class="box"><label>Bailleur</label><div class="lines"></div></div>
+      <div class="box"><label>Date</label><div class="lines"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= VERSO : intérieur ================= -->
+<div class="sheet verso">
+  <span class="fold t" style="left:213mm"></span><span class="fold b" style="left:213mm"></span>
+  <span class="fold t" style="left:421mm"></span><span class="fold b" style="left:421mm"></span>
+
+  <!-- Volet 1 (210 mm) -->
+  <div class="panel" style="left:3mm;width:210mm;padding-left:12mm">
+    <div class="head"><img src="media/logo-adomsenior.svg" alt="ADOM SENIOR"><div class="doc"><b>VISAP · RELEVÉ TERRAIN</b>TEC-VISAP-01 · Modèle terrain</div></div>
+    <h1><small>Fiche terrain</small>Relevé avant travaux</h1>
+    <div class="fields" style="grid-template-columns:1.3fr 1fr">
+      <div class="field"><label>Bénéficiaire</label><i></i></div>
+      <div class="field"><label>Téléphone</label><i></i></div>
+      <div class="field" style="grid-column:1/-1"><label>Bailleur / donneur d’ordre</label><i></i></div>
+      <div class="field"><label>Adresse</label><i></i></div>
+      <div class="field"><label>Ville</label><i></i></div>
+    </div>
+
+    <section>
+      <h2><span class="num">1</span>Accès et usage</h2>
+      <div class="acces">
+        <div><h3>Logement</h3><div class="opts"><span><span class="cb"></span>Maison</span><span><span class="cb"></span>Appartement</span><span class="inline">Étage&nbsp;:<i></i></span></div></div>
+        <div><h3>Ascenseur</h3><div class="opts"><span><span class="cb"></span>Oui</span><span><span class="cb"></span>Non</span><span class="inline">Cabine L × P (cm)&nbsp;:<i></i></span></div></div>
+        <div><h3>Stationnement</h3><div class="opts"><span><span class="cb"></span>Facile</span><span><span class="cb"></span>À prévoir</span><span><span class="cb"></span>Impossible</span></div></div>
+        <div><h3>Passages</h3><div class="opts"><span class="inline">Porte entrée (cm)&nbsp;:<i></i></span><span class="inline">Porte SDB (cm)&nbsp;:<i></i></span></div></div>
+        <div><h3>Usage</h3><div class="opts"><span><span class="cb"></span>Debout</span><span><span class="cb"></span>Assis</span><span><span class="cb"></span>Avec aidant</span></div></div>
+        <div><h3>Transfert</h3><div class="opts"><span><span class="cb"></span>Côté droit</span><span><span class="cb"></span>Côté gauche</span><span><span class="cb"></span>Fauteuil</span></div></div>
+        <div><h3>Appui</h3><div class="opts"><span><span class="cb"></span>Droite</span><span><span class="cb"></span>Gauche</span><span><span class="cb"></span>Deux côtés</span></div></div>
+        <div><h3>Point particulier</h3></div>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="num">2</span>Contrôles rapides</h2>
+      <table class="ctrl">
+        <thead><tr><th>Point</th><th>Constat</th></tr></thead>
+        <tbody>
+          <tr><td>Diagnostics disponibles</td><td><div class="opts"><span><span class="cb"></span>Oui</span><span><span class="cb"></span>Non</span><span><span class="cb"></span>À demander</span></div></td></tr>
+          <tr><td>Coupure d’eau repérée</td><td><div class="opts"><span><span class="cb"></span>Oui</span><span><span class="cb"></span>Non</span><span>Emplacement&nbsp;: <span class="blank"></span></span></div></td></tr>
+          <tr><td>Arrivées EF / EC testées</td><td><div class="opts"><span><span class="cb"></span>Oui</span><span><span class="cb"></span>Non</span></div></td></tr>
+          <tr><td>Évacuation testée</td><td><div class="opts"><span><span class="cb"></span>Oui</span><span><span class="cb"></span>Non</span></div></td></tr>
+          <tr><td>VMC / ventilation</td><td><div class="opts"><span><span class="cb"></span>Fonctionne</span><span><span class="cb"></span>Aspiration faible</span><span><span class="cb"></span>Absente</span></div></td></tr>
+          <tr><td>Mur pour appuis</td><td><div class="opts"><span><span class="cb"></span>Plein</span><span><span class="cb"></span>Creux</span><span><span class="cb"></span>À identifier</span></div></td></tr>
+          <tr><td>Désordre existant photographié</td><td><div class="opts"><span><span class="cb"></span>Oui</span><span><span class="cb"></span>Non</span></div></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2><span class="num">3</span>Cotes essentielles</h2>
+      <div class="cotes">
+        <div><div class="lbl">Fenêtre / allège</div>
+          <div class="row"><span>Largeur&nbsp;:<i></i>cm</span><span>Hauteur&nbsp;:<i></i>cm</span><span>Allège&nbsp;:<i></i>cm</span></div></div>
+        <div><div class="lbl">VMC proche d’un angle <small>— relever jusqu’aux 2 murs</small></div>
+          <div class="row"><span><span class="cb"></span>Oui</span><span><span class="cb"></span>Non</span><span>Distance mur 1&nbsp;:<i></i>cm</span><span>Distance mur 2&nbsp;:<i></i>cm</span></div></div>
+      </div>
+    </section>
+
+    <div class="folio"><span><b>ADOM SENIOR</b> · TEC-VISAP-01 · Rév. I · Modèle terrain</span><b>Page 1 / 2</b></div>
+  </div>
+
+  <!-- Volet 2 (208 mm) -->
+  <div class="panel" style="left:213mm;width:208mm">
+    <div class="head"><img src="media/logo-adomsenior.svg" alt="ADOM SENIOR"><div class="doc"><b>VISAP · RELEVÉ TERRAIN</b>TEC-VISAP-01 · Modèle terrain</div></div>
+    <h1><small>Fiche terrain</small>Croquis et observations</h1>
+
+    <section style="margin-top:1mm">
+      <h2><span class="num">4</span>Croquis d’implantation</h2>
+      <div class="grid" style="margin-bottom:3mm">
+        <svg viewBox="0 0 186 75" width="100%" style="height:75mm"><use href="#quadrillage"/></svg>
+        <span class="tag">Avant travaux</span>
+      </div>
+      <div class="grid">
+        <svg viewBox="0 0 186 75" width="100%" style="height:75mm"><use href="#quadrillage"/></svg>
+        <span class="tag">Après travaux</span>
+      </div>
+    </section>
+
+    <section class="obs">
+      <h2><span class="num">5</span>Observations</h2>
+      <div class="box"><div class="lines"></div></div>
+    </section>
+
+    <section>
+      <div class="h2bar">VISAP réalisée par</div>
+      <div class="by">
+        <div class="box"><label>Nom et prénom</label></div>
+        <div class="box"><label>Fonction</label></div>
+        <div class="box"><label>Date</label></div>
+      </div>
+    </section>
+
+    <div class="folio"><span><b>ADOM SENIOR</b> · TEC-VISAP-01 · Rév. I · Modèle terrain</span><b>Page 2 / 2</b></div>
+  </div>
+
+  <!-- Volet 3 (206 mm) -->
+  <div class="panel" style="left:421mm;width:206mm;padding-right:12mm">
+    <div class="head"><img src="media/logo-adomsenior.svg" alt="ADOM SENIOR"><div class="doc"><b>FICHE PRODUIT VISAP</b>TEC-PRODUIT-01 · Modèle terrain</div></div>
+    <h1><small>Fiche produit</small>Produits à commander</h1>
+    <div class="fields" style="grid-template-columns:1.5fr 1fr 1fr">
+      <div class="field"><label>Bénéficiaire</label><i></i></div>
+      <div class="field"><label>Date</label><i></i></div>
+      <div class="field"><label>Établie par</label><i></i></div>
+      <div class="field" style="grid-column:span 2"><label>Bailleur / donneur d’ordre</label><i></i></div>
+      <div class="field"><label>Téléphone</label><i></i></div>
+      <div class="field"><label>Adresse chantier</label><i></i></div>
+      <div class="field"><label>Ville</label><i></i></div>
+      <div class="field"><label>Étage</label><i></i></div>
+    </div>
+
+    <section>
+      <div class="h2bar">Configuration retenue</div>
+      <div class="config">
+        <div><b>Receveur</b><span class="inline">L × P&nbsp;:<i style="width:24mm"></i></span><span class="inline">Coloris&nbsp;:<i style="width:30mm"></i></span></div>
+        <div><b>Accès</b><span><span class="cb"></span>Frontal</span><span><span class="cb"></span>Latéral</span><span><span class="cb"></span>Angle</span><span class="inline">Autre&nbsp;:<i style="width:28mm"></i></span></div>
+        <div><b>Paroi</b><span><span class="cb"></span>Fixe</span><span><span class="cb"></span>Pivotante</span><span><span class="cb"></span>Coulissante</span><span><span class="cb"></span>Rabattable</span></div>
+        <div><b>Équipements</b><span><span class="cb"></span>Siège</span><span><span class="cb"></span>Barres</span><span><span class="cb"></span>Mitigeur</span><span><span class="cb"></span>VMC</span><span class="inline">Autre&nbsp;:<i style="width:18mm"></i></span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="h2bar">Produits à commander</div>
+      <table class="prod">
+        <colgroup><col style="width:23%"><col style="width:6%"><col style="width:21%"><col style="width:23%"><col style="width:6%"><col style="width:21%"></colgroup>
+        <thead><tr><th>Produit</th><th class="c">Qté</th><th>Réf. / dim. / coloris</th><th class="sep">Produit</th><th class="c">Qté</th><th>Réf. / dim. / coloris</th></tr></thead>
+        <tbody id="prod"></tbody>
+      </table>
+    </section>
+
+    <section>
+      <div class="h2bar">Précisions / produits spécifiques</div>
+      <div class="box prec"><div class="lines" style="height:21mm"></div></div>
+    </section>
+
+    <div class="folio"><span><b>ADOM SENIOR</b> · TEC-PRODUIT-01 · Rév. D · Modèle terrain</span><b>Page 1 / 1</b></div>
+  </div>
+</div>
+
+<!-- quadrillage 5 mm / 25 mm (vectoriel) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="p5" width="5" height="5" patternUnits="userSpaceOnUse"><path d="M5 0V5H0" fill="none" stroke="#cfe0dd" stroke-width=".18"/></pattern>
+    <pattern id="p25" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M25 0V25H0" fill="none" stroke="#9fbdb8" stroke-width=".3"/></pattern>
+    <symbol id="quadrillage" viewBox="0 0 186 75"><rect width="186" height="75" fill="url(#p5)"/><rect width="186" height="75" fill="url(#p25)"/></symbol>
+  </defs>
+</svg>
+
+<script>
+  const L = ["Receveur","Panneaux muraux (grand / bas)","Profilé d’angle","Profilé de jonction / H","Profilé finition / U / tablette","Komacel / habillage","Paroi / porte (type à préciser)","Paroi basse","Meuble lavabo complet","Lavabo ergonomique + miroir","Miroir + éclairage LED","Revêtement de sol","Plinthes / barre de seuil","Siège de douche","Accoudoirs","VMC","Divers"];
+  const R = ["Mitigeur douche (type à préciser)","Mitigeur lavabo","Set de douche","Siphon douche","Siphon lavabo","Barre d’appui (type à préciser)","Silicone blanc","Silicone transparent","Plots / cales","Pack WC surélevé","Pompe de relevage","Revêtement mural","Lavabo sur colonne","Kit magnétique","Fixations / Starfix","Plinthe PVC receveur","Divers"];
+  document.getElementById('prod').innerHTML = L.map((l, i) =>
+    `<tr><td class="p">${l}</td><td></td><td></td><td class="p sep">${R[i]}</td><td></td><td></td></tr>`).join('');
+</script>
+</body>
+</html>

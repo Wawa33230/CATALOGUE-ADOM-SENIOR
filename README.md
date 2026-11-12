@@ -94,7 +94,9 @@ Chaque bloc `[data-catalogue-story]` peut accueillir une vidéo à la place d'un
 - **Carte des zones d'intervention** : silhouette de la France simplifiée (approximative, à visée illustrative) et points positionnés à partir de repères géographiques usuels (Pau pour le 64, Rennes pour la Bretagne, Nice) — dites-moi si vous voulez des points plus précis (adresse exacte de vos équipes/agences).
 - **Version web** : les ajouts de cette session (nuancier, carte, configurations de parois) n'ont pour l'instant été appliqués qu'à la version PDF, comme les demandes précédentes qui ne concernaient que le PDF. Dites-moi si vous voulez que je les répercute aussi dans `web/catalogue.html`.
 
-## 5. Notice client « Utilisation et entretien de la douche » (`notices/`)
+## 5. Documents clients et terrain (`notices/`)
+
+### Notice client « Utilisation et entretien de la douche »
 
 Refonte de la fiche CLI-NOTICE-01 (passage de la Rév. C à la **Rév. D**), avec le même contenu mais une mise en page pensée pour des lecteurs seniors :
 
@@ -114,3 +116,15 @@ Deux fichiers sont produits dans `dist/` :
 
 - `fiche-entretien-douche-adomsenior.pdf` — A4 (210 × 297 mm), pour l'envoi par e-mail et l'impression au bureau ;
 - `fiche-entretien-douche-adomsenior-IMPRIMEUR.pdf` — A4 avec **3 mm de fonds perdus** (216 × 303 mm), à envoyer à l'imprimeur. Format fini : A4 recto-verso (page 1 au recto, page 2 au verso). Polices incorporées, images ≥ 330 dpi, marges de sécurité ≥ 13 mm. Fichier en RVB : l'imprimeur fait la conversion CMJN.
+
+### PV de réception (CLI-RECEPTION-01, Rév. C) et dossier VISAP (dépliant 3 volets)
+
+Même charte que la notice (police Atkinson Hyperlegible, couleurs ADOM SENIOR, styles partagés dans `notices/commun.css`), contenu inchangé :
+
+- `pv-reception.html` : PV d'une page A4, colonnes Oui / Non / N.A. séparées, grandes cases à cocher, zones d'écriture et de signature plus grandes.
+- `visap.html` : dépliant 3 volets en pli roulé (portefeuille), une feuille recto-verso de 624 × 297 mm une fois coupée (volets 206 / 208 / 210 mm), 210 × 297 mm plié. Fichier à 630 × 303 mm avec 3 mm de fonds perdus et repères de pli dans la zone de fonds perdus.
+  - Recto (extérieur) : rabat « Dans ce dossier » | dos | couverture (TEC-VISAP-TRIPTYQUE-01, Rév. F)
+  - Verso (intérieur) : fiche terrain relevé avant travaux | fiche terrain croquis et observations (TEC-VISAP-01, Rév. I) | fiche produit (TEC-PRODUIT-01, Rév. D)
+  - Corrections : la section 4 manquait (numérotation 1-2-3-5) ; le bloc « VISAP réalisée par » chevauchait le pied de page.
+
+`node build-pdf.mjs` produit aussi `dist/pv-reception-adomsenior.pdf`, `dist/pv-reception-adomsenior-IMPRIMEUR.pdf` et `dist/visap-depliant-adomsenior-IMPRIMEUR.pdf`.

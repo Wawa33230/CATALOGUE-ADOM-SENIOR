@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>CLI-RECEPTION-01 - PV de réception ADOM SENIOR - MODÈLE - Rév. C</title>
+<link rel="stylesheet" href="commun.css">
+<style>
+  @page { size: A4; margin: 0; }
+  body { font-size: 14px; }
+  .page { position: relative; width: 210mm; height: 297mm; padding: 0 13mm; overflow: hidden; display: flex; flex-direction: column; }
+  .topbar { position: absolute; top: 0; left: 0; right: 0; height: 4mm; background: var(--teal); }
+  .topbar::after { content: ""; position: absolute; right: 0; top: 0; width: 46mm; height: 100%; background: var(--amber); }
+  .head { padding-top: 8mm; }
+  .title { padding: 3mm 0 2.5mm; }
+  section { margin-bottom: 2.8mm; }
+
+  .ids { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2mm; }
+  .ids .box { height: 11.5mm; }
+  .ids .addr { grid-column: 1 / -1; }
+
+  .install { background: var(--teal-soft); border-radius: 3mm; padding: 2.6mm 3.5mm; font-size: 14px; }
+  .install .opts { gap: 2.2mm 5.5mm; }
+  .install .autre { display: inline-flex; align-items: flex-end; gap: 1.5mm; }
+  .install .autre i { display: inline-block; width: 30mm; border-bottom: 1.2px solid var(--write); height: 1px; }
+
+  .checks td { height: 6.4mm; font-size: 14px; }
+  .checks td:first-child { font-weight: 700; color: var(--ink); }
+  .checks th.c, .checks td.c { width: 19mm; padding: 0; }
+  .checks td.c .cb { margin: 0; width: 5mm; height: 5mm; }
+  .checks td.na { color: #b5bdbb; font-size: 12px; }
+
+  .decision { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5mm; }
+  .decision div { border: 2px solid var(--teal); border-radius: 3mm; padding: 2.6mm 3mm; font-weight: 700; font-size: 14.5px; color: var(--ink); display: flex; align-items: center; justify-content: center; }
+  .decision .cb { width: 5mm; height: 5mm; margin-right: 2.5mm; }
+
+  .reserves { height: 23mm; }
+  .reserves .lines { height: 16mm; margin-top: .5mm; }
+
+  .docsec { display: flex; align-items: center; gap: 7mm; }
+  .docsec h2 { margin: 0; }
+  .docs { display: flex; gap: 7mm; font-size: 14px; }
+
+  .sign { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+  .sign .box { height: 25mm; }
+  .sign .box small { display: block; font-size: 11.5px; color: var(--muted); margin-top: .5mm; }
+
+  .folio { position: absolute; left: 13mm; right: 13mm; bottom: 7mm; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar"></div>
+  <div class="head">
+    <img src="media/logo-adomsenior.svg" alt="ADOM SENIOR">
+    <div class="doc"><b>PV DE RÉCEPTION</b>CLI-RECEPTION-01 · Modèle terrain</div>
+  </div>
+
+  <div class="title">
+    <h1>Procès-verbal de réception</h1>
+    <p class="lead">À compléter avec le bénéficiaire dès la fin de l’installation.</p>
+  </div>
+
+  <section class="ids">
+    <div class="box"><label>Référence chantier</label></div>
+    <div class="box"><label>Date de réception</label></div>
+    <div class="box"><label>Nom du poseur</label></div>
+    <div class="box"><label>Bénéficiaire</label></div>
+    <div class="box"><label>Téléphone</label></div>
+    <div class="box"><label>Bailleur / donneur d’ordre</label></div>
+    <div class="box addr"><label>Adresse du chantier</label></div>
+  </section>
+
+  <section>
+    <h2><span class="num">1</span>Installation réalisée</h2>
+    <div class="install opts">
+      <span><span class="cb"></span>Receveur</span>
+      <span><span class="cb"></span>Panneaux</span>
+      <span><span class="cb"></span>Paroi</span>
+      <span><span class="cb"></span>Siège</span>
+      <span><span class="cb"></span>Barres</span>
+      <span><span class="cb"></span>Robinetterie</span>
+      <span><span class="cb"></span>Lavabo</span>
+      <span><span class="cb"></span>WC</span>
+      <span><span class="cb"></span>Sol</span>
+      <span class="autre"><span><span class="cb"></span>Autre&nbsp;:</span><i></i></span>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">2</span>Contrôles avec le bénéficiaire</h2>
+    <table class="checks">
+      <thead><tr><th>Point contrôlé</th><th class="c">Oui</th><th class="c">Non</th><th class="c">N.A.</th></tr></thead>
+      <tbody>
+        <tr><td>Absence de fuite</td><td class="c"><span class="cb"></span></td><td class="c"><span class="cb"></span></td><td class="c na">—</td></tr>
+        <tr><td>Écoulement correct</td><td class="c"><span class="cb"></span></td><td class="c"><span class="cb"></span></td><td class="c na">—</td></tr>
+        <tr><td>Robinetterie testée</td><td class="c"><span class="cb"></span></td><td class="c"><span class="cb"></span></td><td class="c na">—</td></tr>
+        <tr><td>Paroi stable et fonctionnelle</td><td class="c"><span class="cb"></span></td><td class="c"><span class="cb"></span></td><td class="c"><span class="cb"></span></td></tr>
+        <tr><td>Siège et barres stables</td><td class="c"><span class="cb"></span></td><td class="c"><span class="cb"></span></td><td class="c"><span class="cb"></span></td></tr>
+        <tr><td>Finitions et joints contrôlés</td><td class="c"><span class="cb"></span></td><td class="c"><span class="cb"></span></td><td class="c na">—</td></tr>
+        <tr><td>Chantier propre</td><td class="c"><span class="cb"></span></td><td class="c"><span class="cb"></span></td><td class="c na">—</td></tr>
+        <tr><td>Démonstration effectuée</td><td class="c"><span class="cb"></span></td><td class="c"><span class="cb"></span></td><td class="c na">—</td></tr>
+        <tr><td>Photos de fin de chantier envoyées</td><td class="c"><span class="cb"></span></td><td class="c"><span class="cb"></span></td><td class="c na">—</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2><span class="num">3</span>Décision</h2>
+    <div class="decision">
+      <div><span class="cb"></span>SANS RÉSERVE</div>
+      <div><span class="cb"></span>AVEC RÉSERVES</div>
+      <div><span class="cb"></span>RÉCEPTION REPORTÉE</div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">4</span>Réserves / travaux à reprendre</h2>
+    <div class="box reserves"><label>Zone réservée au bénéficiaire</label><div class="lines"></div></div>
+  </section>
+
+  <section class="docsec">
+    <h2><span class="num">5</span>Documents remis</h2>
+    <div class="docs">
+      <span><span class="cb"></span>Fiche d’entretien</span>
+      <span><span class="cb"></span>Consignes avant première utilisation</span>
+    </div>
+  </section>
+
+  <section class="sign">
+    <div class="box"><label>Bénéficiaire / représentant</label><small>Nom, date et signature</small></div>
+    <div class="box"><label>Poseur</label><small>Nom, date et signature</small></div>
+  </section>
+
+  <div class="folio"><span><b>ADOM SENIOR</b> · CLI-RECEPTION-01 · Rév. C · Modèle terrain</span><b>Page 1 / 1</b></div>
+</div>
+</body>
+</html>
