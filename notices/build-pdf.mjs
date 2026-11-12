@@ -6,7 +6,7 @@ const { chromium } = pkg;
 //  - *-adomsenior.pdf           A4 (210 x 297 mm) : envoi par e-mail, impression au bureau
 //  - *-adomsenior-IMPRIMEUR.pdf avec 3 mm de fonds perdus : à envoyer à l'imprimeur
 // Le dossier VISAP (dépliant 3 volets) n'existe qu'en version imprimeur : son fichier
-// intègre déjà les fonds perdus (630 x 303 mm, soit 624 x 297 mm une fois coupé).
+// intègre déjà les fonds perdus (633 x 303 mm, soit 627 x 297 mm une fois coupé).
 
 // Ajoute 3 mm de fonds perdus à une page A4 (216 x 303 mm)
 const A4_BLEED = `

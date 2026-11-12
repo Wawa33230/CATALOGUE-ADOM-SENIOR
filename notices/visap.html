@@ -5,12 +5,13 @@
 <title>Dossier VISAP 3 volets — ADOM SENIOR — Rév. F</title>
 <link rel="stylesheet" href="commun.css">
 <style>
-  /* Feuille ouverte 624 x 297 mm + 3 mm de fonds perdus = 630 x 303 mm.
-     Pli roulé : volets 206 / 208 / 210 mm (le volet de 206 mm se replie à l'intérieur).
-     Recto (extérieur) : rabat 206 | dos 208 | couverture 210
-     Verso (intérieur) : fiche terrain 1 (210) | fiche terrain 2 (208) | fiche produit (206) */
-  @page { size: 630mm 303mm; margin: 0; }
-  .sheet { position: relative; width: 630mm; height: 303mm; overflow: hidden; }
+  /* Format standard « dépliant A4 3 volets » : ouvert 627 x 297 mm, fermé 210 x 297 mm.
+     + 3 mm de fonds perdus = 633 x 303 mm.
+     Pli roulé : volets 207 / 210 / 210 mm (le volet de 207 mm se replie à l'intérieur).
+     Recto (extérieur) : rabat 207 | dos 210 | couverture 210
+     Verso (intérieur) : fiche terrain 1 (210) | fiche terrain 2 (210) | fiche produit (207) */
+  @page { size: 633mm 303mm; margin: 0; }
+  .sheet { position: relative; width: 633mm; height: 303mm; overflow: hidden; }
   .sheet + .sheet { page-break-before: always; }
   .recto { background: var(--cream); }
   .verso { background: #fff; }
@@ -114,18 +115,18 @@
 
 <!-- ================= RECTO : extérieur ================= -->
 <div class="sheet recto">
-  <span class="fold t" style="left:209mm"></span><span class="fold b" style="left:209mm"></span>
-  <span class="fold t" style="left:417mm"></span><span class="fold b" style="left:417mm"></span>
+  <span class="fold t" style="left:210mm"></span><span class="fold b" style="left:210mm"></span>
+  <span class="fold t" style="left:420mm"></span><span class="fold b" style="left:420mm"></span>
 
   <!-- décor (déborde dans les fonds perdus) -->
   <span class="deco" style="width:90mm;height:90mm;left:-38mm;top:-40mm;background:#dbe6e4"></span>
   <span class="deco" style="width:44mm;height:44mm;left:150mm;top:272mm;background:var(--amber);opacity:.9"></span>
-  <span class="deco" style="width:96mm;height:96mm;left:557mm;top:-38mm;background:var(--teal)"></span>
-  <span class="deco" style="width:52mm;height:52mm;left:592mm;top:-20mm;background:var(--amber)"></span>
-  <span class="deco" style="width:70mm;height:70mm;left:370mm;top:262mm;background:#dbe6e4"></span>
+  <span class="deco" style="width:96mm;height:96mm;left:560mm;top:-38mm;background:var(--teal)"></span>
+  <span class="deco" style="width:52mm;height:52mm;left:595mm;top:-20mm;background:var(--amber)"></span>
+  <span class="deco" style="width:70mm;height:70mm;left:373mm;top:262mm;background:#dbe6e4"></span>
 
-  <!-- Rabat (206 mm) : visible à l'ouverture de la couverture -->
-  <div class="panel flap" style="left:3mm;width:206mm;padding:10mm 16mm 0">
+  <!-- Rabat (207 mm) : visible à l'ouverture de la couverture -->
+  <div class="panel flap" style="left:3mm;width:207mm;padding:10mm 16mm 0">
     <h2>Dans ce dossier</h2>
     <p class="intro">Trois fiches à remplir sur place, avant les travaux.</p>
     <ol>
@@ -135,8 +136,8 @@
     </ol>
   </div>
 
-  <!-- Dos (208 mm) -->
-  <div class="panel back" style="left:209mm;width:208mm">
+  <!-- Dos (210 mm) -->
+  <div class="panel back" style="left:210mm;width:210mm">
     <div class="card">
       <img src="media/logo-adomsenior.svg" alt="ADOM SENIOR">
       <div class="claim">Bien chez soi</div>
@@ -148,7 +149,7 @@
   </div>
 
   <!-- Couverture (210 mm) -->
-  <div class="panel cover" style="left:417mm;width:210mm;padding:14mm 12mm 0">
+  <div class="panel cover" style="left:420mm;width:210mm;padding:14mm 12mm 0">
     <img class="logo" src="media/logo-adomsenior.svg" alt="ADOM SENIOR" style="align-self:flex-start">
     <h1>Dossier VISAP</h1>
     <p class="lead">Relevé terrain et préparation du chantier</p>
@@ -164,7 +165,7 @@
 <!-- ================= VERSO : intérieur ================= -->
 <div class="sheet verso">
   <span class="fold t" style="left:213mm"></span><span class="fold b" style="left:213mm"></span>
-  <span class="fold t" style="left:421mm"></span><span class="fold b" style="left:421mm"></span>
+  <span class="fold t" style="left:423mm"></span><span class="fold b" style="left:423mm"></span>
 
   <!-- Volet 1 (210 mm) -->
   <div class="panel" style="left:3mm;width:210mm;padding-left:12mm">
@@ -221,19 +222,19 @@
     <div class="folio"><span><b>ADOM SENIOR</b> · TEC-VISAP-01 · Rév. I · Modèle terrain</span><b>Page 1 / 2</b></div>
   </div>
 
-  <!-- Volet 2 (208 mm) -->
-  <div class="panel" style="left:213mm;width:208mm">
+  <!-- Volet 2 (210 mm) -->
+  <div class="panel" style="left:213mm;width:210mm">
     <div class="head"><img src="media/logo-adomsenior.svg" alt="ADOM SENIOR"><div class="doc"><b>VISAP · RELEVÉ TERRAIN</b>TEC-VISAP-01 · Modèle terrain</div></div>
     <h1><small>Fiche terrain</small>Croquis et observations</h1>
 
     <section style="margin-top:1mm">
       <h2><span class="num">4</span>Croquis d’implantation</h2>
       <div class="grid" style="margin-bottom:3mm">
-        <svg viewBox="0 0 186 75" width="100%" style="height:75mm"><use href="#quadrillage"/></svg>
+        <svg viewBox="0 0 188 75" width="100%" style="height:75mm"><use href="#quadrillage"/></svg>
         <span class="tag">Avant travaux</span>
       </div>
       <div class="grid">
-        <svg viewBox="0 0 186 75" width="100%" style="height:75mm"><use href="#quadrillage"/></svg>
+        <svg viewBox="0 0 188 75" width="100%" style="height:75mm"><use href="#quadrillage"/></svg>
         <span class="tag">Après travaux</span>
       </div>
     </section>
@@ -255,8 +256,8 @@
     <div class="folio"><span><b>ADOM SENIOR</b> · TEC-VISAP-01 · Rév. I · Modèle terrain</span><b>Page 2 / 2</b></div>
   </div>
 
-  <!-- Volet 3 (206 mm) -->
-  <div class="panel" style="left:421mm;width:206mm;padding-right:12mm">
+  <!-- Volet 3 (207 mm) -->
+  <div class="panel" style="left:423mm;width:207mm;padding-right:12mm">
     <div class="head"><img src="media/logo-adomsenior.svg" alt="ADOM SENIOR"><div class="doc"><b>FICHE PRODUIT VISAP</b>TEC-PRODUIT-01 · Modèle terrain</div></div>
     <h1><small>Fiche produit</small>Produits à commander</h1>
     <div class="fields" style="grid-template-columns:1.5fr 1fr 1fr">
@@ -303,7 +304,7 @@
   <defs>
     <pattern id="p5" width="5" height="5" patternUnits="userSpaceOnUse"><path d="M5 0V5H0" fill="none" stroke="#cfe0dd" stroke-width=".18"/></pattern>
     <pattern id="p25" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M25 0V25H0" fill="none" stroke="#9fbdb8" stroke-width=".3"/></pattern>
-    <symbol id="quadrillage" viewBox="0 0 186 75"><rect width="186" height="75" fill="url(#p5)"/><rect width="186" height="75" fill="url(#p25)"/></symbol>
+    <symbol id="quadrillage" viewBox="0 0 188 75"><rect width="188" height="75" fill="url(#p5)"/><rect width="188" height="75" fill="url(#p25)"/></symbol>
   </defs>
 </svg>
 

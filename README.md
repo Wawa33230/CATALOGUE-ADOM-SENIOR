@@ -122,7 +122,7 @@ Deux fichiers sont produits dans `dist/` :
 Même charte que la notice (police Atkinson Hyperlegible, couleurs ADOM SENIOR, styles partagés dans `notices/commun.css`), contenu inchangé :
 
 - `pv-reception.html` : PV d'une page A4, colonnes Oui / Non / N.A. séparées, grandes cases à cocher, zones d'écriture et de signature plus grandes.
-- `visap.html` : dépliant 3 volets en pli roulé (portefeuille), une feuille recto-verso de 624 × 297 mm une fois coupée (volets 206 / 208 / 210 mm), 210 × 297 mm plié. Fichier à 630 × 303 mm avec 3 mm de fonds perdus et repères de pli dans la zone de fonds perdus.
+- `visap.html` : dépliant 3 volets en pli roulé (portefeuille), une feuille recto-verso de 627 × 297 mm une fois coupée (volets 207 / 210 / 210 mm, format standard des imprimeurs), 210 × 297 mm plié. Fichier à 633 × 303 mm avec 3 mm de fonds perdus et repères de pli dans la zone de fonds perdus.
   - Recto (extérieur) : rabat « Dans ce dossier » | dos | couverture (TEC-VISAP-TRIPTYQUE-01, Rév. F)
   - Verso (intérieur) : fiche terrain relevé avant travaux | fiche terrain croquis et observations (TEC-VISAP-01, Rév. I) | fiche produit (TEC-PRODUIT-01, Rév. D)
   - Corrections : la section 4 manquait (numérotation 1-2-3-5) ; le bloc « VISAP réalisée par » chevauchait le pied de page.
