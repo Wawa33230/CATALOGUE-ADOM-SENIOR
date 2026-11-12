@@ -93,3 +93,24 @@ Chaque bloc `[data-catalogue-story]` peut accueillir une vidéo à la place d'un
 - **Mentions légales** : SIRET, adresse, téléphone n'apparaissent nulle part sur le site actuel (seul `contact@adomsenior.fr` est public). Je ne les ai donc pas ajoutés au catalogue — à compléter si vous voulez qu'ils apparaissent en pied du PDF.
 - **Carte des zones d'intervention** : silhouette de la France simplifiée (approximative, à visée illustrative) et points positionnés à partir de repères géographiques usuels (Pau pour le 64, Rennes pour la Bretagne, Nice) — dites-moi si vous voulez des points plus précis (adresse exacte de vos équipes/agences).
 - **Version web** : les ajouts de cette session (nuancier, carte, configurations de parois) n'ont pour l'instant été appliqués qu'à la version PDF, comme les demandes précédentes qui ne concernaient que le PDF. Dites-moi si vous voulez que je les répercute aussi dans `web/catalogue.html`.
+
+## 5. Notice client « Utilisation et entretien de la douche » (`notices/`)
+
+Refonte de la fiche CLI-NOTICE-01 (passage de la Rév. C à la **Rév. D**), avec le même contenu mais une mise en page pensée pour des lecteurs seniors :
+
+- police **Atkinson Hyperlegible** (conçue pour les personnes malvoyantes), embarquée dans `notices/fonts/` ;
+- texte courant à 12 pt minimum, consignes à 15 pt, titres à 19 pt et plus, contrastes renforcés ;
+- étapes numérotées, pictogrammes pour chaque geste, produits interdits barrés en rouge, alertes encadrées ;
+- photo d'ambiance reprise de adomsenior.fr (`/media/lt-catalogue/douche-siege-rabattable-barres.jpg`) ; photos des étapes reprises de la Rév. C, agrandies à ~300 dpi.
+
+Pour régénérer :
+
+```bash
+cd notices
+node build-pdf.mjs
+```
+
+Deux fichiers sont produits dans `dist/` :
+
+- `fiche-entretien-douche-adomsenior.pdf` — A4 (210 × 297 mm), pour l'envoi par e-mail et l'impression au bureau ;
+- `fiche-entretien-douche-adomsenior-IMPRIMEUR.pdf` — A4 avec **3 mm de fonds perdus** (216 × 303 mm), à envoyer à l'imprimeur. Format fini : A4 recto-verso (page 1 au recto, page 2 au verso). Polices incorporées, images ≥ 330 dpi, marges de sécurité ≥ 13 mm. Fichier en RVB : l'imprimeur fait la conversion CMJN.

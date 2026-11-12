@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="340" height="64" viewBox="0 0 340 64" fill="none">
+  <g transform="translate(2,10)">
+    <rect x="2" y="2" width="40" height="40" rx="12" fill="#0e4c5a"/>
+    <path d="M12 23 L22 13 L32 23" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M22 19c-3.2 3.6-5 5.6-5 8.2a5 5 0 0 0 10 0c0-2.6-1.8-4.6-5-8.2Z" fill="#d98a3d"/>
+    <rect x="14" y="24" width="16" height="9" rx="2.4" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.55"/>
+  </g>
+  <text x="56" y="41" font-family="Georgia, 'Times New Roman', serif" font-size="29" font-weight="600" fill="#16211f">Adom<tspan fill="#d98a3d" font-weight="700">senior</tspan></text>
+</svg>
