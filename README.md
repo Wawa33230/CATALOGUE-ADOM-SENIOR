@@ -128,3 +128,11 @@ Même charte que la notice (police Atkinson Hyperlegible, couleurs ADOM SENIOR, 
   - Corrections : la section 4 manquait (numérotation 1-2-3-5) ; le bloc « VISAP réalisée par » chevauchait le pied de page.
 
 `node build-pdf.mjs` produit aussi `dist/pv-reception-adomsenior.pdf`, `dist/pv-reception-adomsenior-IMPRIMEUR.pdf` et `dist/visap-depliant-adomsenior-IMPRIMEUR.pdf`.
+
+### VISAP d'origine corrigé (`dist/VISAP-corrige.pdf`)
+
+La version d'origine du VISAP (ReportLab, 624 × 297 mm + fonds perdus) a été conservée pour l'impression. Deux défauts y ont été corrigés directement dans le PDF, avec `notices/corriger-visap-original.py` :
+- « 4. » ajouté devant « FICHE TERRAIN - Croquis et observations » (la numérotation sautait de 3 à 5) ;
+- le bloc « VISAP réalisée par » remonté d'environ 7,5 mm : il chevauchait le pied de page. La zone « Observations » perd 6 mm en bas.
+
+Rien d'autre n'a été modifié (contrôle au pixel près).
