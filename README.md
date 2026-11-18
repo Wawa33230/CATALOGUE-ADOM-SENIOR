@@ -135,4 +135,7 @@ La version d'origine du VISAP (ReportLab, 624 × 297 mm + fonds perdus) a été 
 - « 4. » ajouté devant « FICHE TERRAIN - Croquis et observations » (la numérotation sautait de 3 à 5) ;
 - le bloc « VISAP réalisée par » remonté d'environ 7,5 mm : il chevauchait le pied de page. La zone « Observations » perd 6 mm en bas.
 
+- fiche produit : suppression des champs en doublon avec la fiche terrain (bénéficiaire, bailleur / donneur d'ordre, téléphone, adresse, ville), une seule ligne Date / Établie par / Étage, la place gagnée va au cadre « Précisions » (`notices/corriger-visap-original-2.py`) ;
+- « Coloris » éloigné de « Receveur — L × P » pour laisser la place de noter la dimension.
+
 Rien d'autre n'a été modifié (contrôle au pixel près).
